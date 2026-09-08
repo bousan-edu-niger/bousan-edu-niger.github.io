@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BOUSAN — BEPC 2025 Maths</title>
+
+    <style>
+        body {
+            font-family: 'Times New Roman', Times, serif;
+            margin: 0; padding: 0;
+            background-color: #f4f6f7;
+            color: #2c3e50;
+        }
+        /* En-tête fixe */
+        .top-header {
+            background-color: #ffffff;
+            border-bottom: 3px double #e67e22;
+            padding: 15px 20px;
+            text-align: center;
+        }
+        .top-header h1 { margin: 5px 0 0 0; font-size: 24px; color: #e67e22; }
+        
+        /* Barre d'outils avec les boutons cliquables */
+        .toolbar {
+            text-align: center;
+            margin: 15px 0;
+            padding: 0 10px;
+        }
+        .btn-mode {
+            background-color: #ffffff;
+            border: 2px solid #e67e22;
+            color: #e67e22;
+            padding: 8px 16px;
+            margin: 5px;
+            font-size: 14px;
+            font-weight: bold;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        .btn-mode:hover, .btn-mode.active {
+            background-color: #e67e22;
+            color: white;
+        }
+
+        /* Espace de travail dynamique */
+        .workspace {
+            display: grid;
+            grid-template-columns: 1fr 1fr; /* Mode côte à côte par défaut pour ordinateur */
+            gap: 20px;
+            padding: 0 20px;
+            max-width: 1600px;
+            margin: 0 auto;
+        }
+
+        /* Classes dynamiques pour le plein écran */
+        .workspace.only-sujet { grid-template-columns: 1fr; }
+        .workspace.only-sujet .panel-corrige { display: none; }
+
+        .workspace.only-corrige { grid-template-columns: 1fr; }
+        .workspace.only-corrige .panel-sujet { display: none; }
+
+        /* Style des panneaux */
+        .panel {
+            background: #ffffff;
+            padding: 25px;
+            border: 2px solid #bdc3c7;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            min-height: 400px;
+            box-sizing: border-box;
+        }
+        .panel-sujet { border-top: 5px solid #d35400; }
+        .panel-corrige { border-top: 5px solid #27ae60; }
+        .panel h2 { margin-top: 0; padding-bottom: 10px; border-bottom: 1px dashed #bdc3c7; }
+        .panel-sujet h2 { color: #d35400; }
+        .panel-corrige h2 { color: #27ae60; }
+        
+        .exercice-title { font-weight: bold; margin-top: 20px; font-size: 1.2rem; color: #2c3e50; }
+        .footer-credit { text-align: center; padding: 20px; font-size: 12px; color: #7f8c8d; }
+
+        /* 📱 DESIGN ADAPTATIF MOBILE */
+        @media (max-width: 900px) {
+            .workspace {
+                grid-template-columns: 1fr; /* 1 colonne sur téléphone */
+                padding: 0 10px;
+            }
+            .panel {
+                padding: 15px;
+                min-height: auto;
+            }
+            .top-header h1 { font-size: 20px; }
+            .btn-mode { padding: 6px 12px; font-size: 13px; }
+        }
+    </style>
+
+    <!-- Intégration de KaTeX pour le rendu des formules au collège -->
+    <link rel="stylesheet" href="https://jsdelivr.net">
+    <script defer src="https://jsdelivr.net"></script>
+    <script defer src="https://jsdelivr.net" 
+            onload="renderMathInElement(document.body, {
+                delimiters: [
+                    {left: '$$', right: '$$', display: true},
+                    {left: '$', right: '$', display: false}
+                ],
+                throwOnError : false
+            });">
+    </script>
+</head>
+<body>
+
+    <div class="top-header">
+        <h1>BOUSAN — SUJETS & CORRIGÉS</h1>
+        <div style="color:#7f8c8d; font-style:italic;">Brevet d'Études du Premier Cycle (BEPC 2025) — Niger</div>
+    </div>
+
+    <!-- Les 3 boutons d'affichage -->
+    <div class="toolbar">
+        <button class="btn-mode" onclick="changerAffichage('sujet', event)">📄 Sujet plein écran</button>
+        <button class="btn-mode active" id="btn-both" onclick="changerAffichage('both', event)">↔️ Côte à côte</button>
+        <button class="btn-mode" onclick="changerAffichage('corrige', event)">✅ Corrigé plein écran</button>
+    </div>
+
+    <!-- Grille de travail -->
+    <div class="workspace" id="zone-travail">
+        
+        <!-- ENONCE (PANNEAU GAUCHE) -->
+        <div class="panel panel-sujet">
+            <h2>ÉNONCÉ DU SUJET</h2>
+            <div class="exercice-title">Exercice 1 : Activités Numériques (4 points)</div>
+            <p>On donne les expressions réelles réelles suivantes :</p>
+            $$A = \sqrt{125} - 2\sqrt{20} + 3\sqrt{45}$$
+            $$B = (2\sqrt{5} - 3)(2\sqrt{5} + 3)$$
+            
+            <p>1) Simplifier l'écriture de $A$ pour l'écrire sous la forme $a\sqrt{5}$ où $a$ est un entier relatif.</p>
+            <p>2) Développer et calculer la valeur exacte de $B$. Que peut-on en déduire pour le nombre $B$ ?</p>
+        </div>
+
+        <!-- CORRIGE (PANNEAU DROIT) -->
+        <div class="panel panel-corrige">
+            <h2>CORRIGÉ DÉTAILLÉ</h2>
+            <div class="exercice-title">Correction de l'Exercice 1</div>
+            
+            <p><strong>1) Simplifions l'expression $A$ :</strong></p>
+            <p>Décomposons les nombres sous les racines carrées en produits de facteurs faisant apparaître des carrés parfaits :</p>
+            $$A = \sqrt{25 \times 5} - 2\sqrt{4 \times 5} + 3\sqrt{9 \times 5}$$
+            <p>En utilisant la propriété $\sqrt{x \times y} = \sqrt{x} \times \sqrt{y}$, on obtient :</p>
+            $$A = 5\sqrt{5} - 2(2\sqrt{5}) + 3(3\sqrt{5})$$
+            $$A = 5\sqrt{5} - 4\sqrt{5} + 9\sqrt{5}$$
+            <p>En factorisant par $\sqrt{5}$ :</p>
+            $$A = (5 - 4 + 9)\sqrt{5}$$
+            $$A = 10\sqrt{5}$$
+            <p>L'expression simplifiée est donc $\mathbf{A = 10\sqrt{5}}$ (avec $a = 10$).</p>
+
+            <p><strong>2) Développons et calculons $B$ :</strong></p>
+            <p>On reconnaît l'identité remarquable de la forme $(x - y)(x + y) = x^2 - y^2$ :</p>
+            $$B = (2\sqrt{5})^2 - 3^2$$
+            $$B = (4 \times 5) - 9$$
+            $$B = 20 - 9$$
+            $$B = 11$$
+            <p>La valeur exacte est $\mathbf{B = 11}$. Comme $11$ n'a plus de radical, on en déduit que <strong>$B$ est un nombre entier naturel</strong> (ou un nombre rationnel).</p>
+        </div>
+
+    </div>
+
+    <div class="footer-credit">SAMRI NAMATA BOUBACAR — Maison d'édition BOUSAN</div>
+
+    <!-- Logique Interactive de changement de mode -->
+    <script>
+        function changerAffichage(mode, event) {
+            var zone = document.getElementById('zone-trabail');
+            if(!zone) zone = document.getElementById('zone-travail');
+            
+            zone.classList.remove('only-sujet', 'only-corrige');
+            var boutons = document.querySelectorAll('.btn-mode');
+            boutons.forEach(btn => btn.classList.remove('active'));
+            
+            if (mode === 'sujet') {
+                zone.classList.add('only-sujet');
+            } else if (mode === 'corrige') {
+                zone.classList.add('only-corrige');
+            }
+            event.currentTarget.classList.add('active');
+        }
+    </script>
+</body>
+</html>
