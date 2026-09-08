@@ -38,9 +38,20 @@
             border-radius: 20px;
             cursor: pointer;
             transition: 0.3s;
+            text-decoration: none;
+            display: inline-block;
         }
         .btn-mode:hover, .btn-mode.active {
             background-color: #27ae60;
+            color: white;
+        }
+        /* Style spécial pour le bouton Retour */
+        .btn-back {
+            border-color: #7f8c8d;
+            color: #7f8c8d;
+        }
+        .btn-back:hover {
+            background-color: #7f8c8d;
             color: white;
         }
 
@@ -123,8 +134,9 @@
         <div style="color:#7f8c8d; font-style:italic;">Baccalauréat Niger — Session 1983 (Série D)</div>
     </div>
 
-    <!-- Les 3 boutons cliquables pour changer l'affichage instantanément -->
+    <!-- Barre d'outils avec les boutons d'affichage ET le bouton retour -->
     <div class="toolbar">
+        <a href="index.html" class="btn-mode btn-back">⬅️ Retour Menu</a>
         <button class="btn-mode" onclick="changerAffichage('sujet', event)">📄 Sujet plein écran</button>
         <button class="btn-mode active" id="btn-both" onclick="changerAffichage('both', event)">↔️ Côte à côte</button>
         <button class="btn-mode" onclick="changerAffichage('corrige', event)">✅ Corrigé plein écran</button>
@@ -165,8 +177,8 @@
             // On réinitialise toutes les classes
             zone.classList.remove('only-sujet', 'only-corrige');
             
-            // On retire la couleur active de tous les boutons
-            var boutons = document.querySelectorAll('.btn-mode');
+            // On retire la couleur active de tous les boutons (sauf le bouton retour)
+            var boutons = document.querySelectorAll('.btn-mode:not(.btn-back)');
             boutons.forEach(btn => btn.classList.remove('active'));
             
             // On applique le mode sélectionné
