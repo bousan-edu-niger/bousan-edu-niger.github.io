@@ -120,12 +120,23 @@
         }
     </style>
 
-    <!-- Outil KaTeX -->
-    <link rel="stylesheet" href="https://jsdelivr.net">
-    <script defer src="https://jsdelivr.net"></script>
-    <script defer src="https://jsdelivr.net" 
-            onload="renderMathInElement(document.body, {delimiters: [{left: '$$', right: '$$', display: true},{left: '$', right: '$', display: false}], throwOnError : false});">
+    <!-- 1. Le style CSS de KaTeX -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+
+    <!-- 2. Le script principal de KaTeX (avec defer) -->
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+
+    <!-- 3. Le script d'auto-rendu qui s'active automatiquement au chargement -->
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js" 
+            onload="renderMathInElement(document.body, {
+                delimiters: [
+                    {left: '$$', right: '$$', display: true},
+                    {left: '$', right: '$', display: false}
+                ],
+                throwOnError : false
+            });">
     </script>
+    
 </head>
 <body>
 
