@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BOUSAN — Enseignement Supérieur</title>
+    <style>
+        body {
+            font-family: 'Times New Roman', Times, serif;
+            margin: 0; padding: 0;
+            background-color: #f4f6f7;
+            color: #2c3e50;
+        }
+        .top-header {
+            background-color: #ffffff;
+            border-bottom: 3px double #9b59b6;
+            padding: 20px;
+            text-align: center;
+        }
+        .top-header h1 { margin: 0; font-size: 26px; color: #9b59b6; }
+        
+        .container {
+            max-width: 900px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+        .intro-p {
+            text-align: center;
+            font-size: 16px;
+            line-height: 1.6;
+            margin-bottom: 35px;
+        }
+
+        /* Style des blocs par Année */
+        .annee-block {
+            background: #ffffff;
+            border: 1px solid #e0e0e0;
+            border-top: 5px solid #9b59b6;
+            border-radius: 8px;
+            padding: 25px;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.02);
+        }
+        .annee-block h2 {
+            margin-top: 0;
+            font-size: 22px;
+            color: #9b59b6;
+            border-bottom: 2px solid #f4f6f7;
+            padding-bottom: 8px;
+        }
+
+        /* Grille des matières à l'intérieur d'une année */
+        .grid-matieres {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+            margin-top: 15px;
+        }
+        .matiere-item {
+            background: #f8f9fa;
+            border: 1px solid #e9ecef;
+            border-radius: 6px;
+            padding: 15px;
+        }
+        .matiere-item h3 {
+            margin: 0 0 8px 0;
+            font-size: 15px;
+            color: #2c3e50;
+        }
+        .matiere-item p {
+            margin: 0 0 10px 0;
+            font-size: 13px;
+            color: #7f8c8d;
+            line-height: 1.4;
+        }
+        .link-ressource {
+            font-size: 12px;
+            color: #9b59b6;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        .link-ressource:hover {
+            text-decoration: underline;
+        }
+
+        .back-btn {
+            display: inline-block;
+            margin-top: 20px;
+            color: #7f8c8d;
+            text-decoration: none;
+            text-align: center;
+            width: 100%;
+        }
+
+        /* 📱 DESIGN ADAPTATIF MOBILE */
+        @media (max-width: 768px) {
+            .grid-matieres { grid-template-columns: 1fr; }
+            .annee-block h2 { font-size: 19px; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="top-header">
+        <h1>BOUSAN — ENSEIGNEMENT SUPÉRIEUR</h1>
+        <div style="color:#7f8c8d; font-style:italic;">Sciences Exactes, Modélisation & Outils Numériques</div>
+    </div>
+
+    <div class="container">
+        <p class="intro-p">Espace universitaire de la Maison d'édition BOUSAN. Retrouvez les ressources de Licence classées par année, combinant la rigueur théorique des mathématiques et la puissance des logiciels scientifiques.</p>
+        
+        <!-- PREMIÈRE ANNÉE -->
+        <div class="annee-block">
+            <h2>🎓 Première Année (Licence 1)</h2>
+            <div class="grid-matieres">
+                <div class="matiere-item">
+                    <h3>📐 Mathématiques 1</h3>
+                    <p>Analyse réelle (Suites, fonctions), Algèbre linéaire de base et géométrie analytique.</p>
+                    <a href="#" class="link-ressource">Consulter →</a>
+                </div>
+                <div class="matiere-item">
+                    <h3>📊 Statistique Descriptive</h3>
+                    <p>Collecte, organisation des données, indicateurs de tendance centrale et de dispersion.</p>
+                    <a href="#" class="link-ressource">Consulter →</a>
+                </div>
+                <div class="matiere-item">
+                    <h3>💻 Informatique & Édition</h3>
+                    <p>Bases de l'algorithmique et initiation à la mise en page de documents scientifiques avec <strong>LaTeX</strong>.</p>
+                    <a href="#" class="link-ressource">Consulter →</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- DEUXIÈME ANNÉE -->
+        <div class="annee-block">
+            <h2>🎓 Deuxième Année (Licence 2)</h2>
+            <div class="grid-matieres">
+                <div class="matiere-item">
+                    <h3>📈 Mathématiques 2</h3>
+                    <p>Calcul matriciel, espaces vectoriels, séries numériques et équations différentielles.</p>
+                    <a href="#" class="link-ressource">Consulter →</a>
+                </div>
+                <div class="matiere-item">
+                    <h3>🎲 Probabilités de Base</h3>
+                    <p>Variables aléatoires discrètes et continues, lois usuelles et dénombrement.</p>
+                    <a href="#" class="link-ressource">Consulter →</a>
+                </div>
+                <div class="matiere-item">
+                    <h3>🛠️ Logiciels de Calcul</h3>
+                    <p>Introduction au calcul numérique, matrices et simulations de scripts avec <strong>Matlab</strong>.</p>
+                    <a href="#" class="link-ressource">Consulter →</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- TROISIÈME ANNÉE -->
+        <div class="annee-block">
+            <h2>🎓 Troisième Année (Licence 3)</h2>
+            <div class="grid-matieres">
+                <div class="matiere-item">
+                    <h3>🔍 Mathématiques Appliquées</h3>
+                    <p>Analyse numérique, optimisation linéaire, modélisation et systèmes dynamiques.</p>
+                    <a href="#" class="link-ressource">Consulter →</a>
+                </div>
+                <div class="matiere-item">
+                    <h3>📉 Statistique Inférentielle</h3>
+                    <p>Théorie de l'échantillonnage, estimation ponctuelle/par intervalle et tests d'hypothèses.</p>
+                    <a href="#" class="link-ressource">Consulter →</a>
+                </div>
+                <div class="matiere-item">
+                    <h3>🐍 Programmation Python</h3>
+                    <p>Développement de scripts pour la résolution de problèmes mathématiques et traitement de données.</p>
+                    <a href="#" class="link-ressource">Consulter →</a>
+                </div>
+            </div>
+        </div>
+
+        <a href="../index.html" class="back-btn">⬅️ Retour à l'accueil général</a>
+    </div>
+
+</body>
+</html>
