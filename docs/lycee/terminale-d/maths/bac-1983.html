@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BOUSAN — BAC 1983</title>
+
+    <style>
+        body {
+            font-family: 'Times New Roman', Times, serif;
+            margin: 0; padding: 0;
+            background-color: #f4f6f7;
+            color: #2c3e50;
+        }
+        /* En-tête fixe */
+        .top-header {
+            background-color: #ffffff;
+            border-bottom: 3px double #27ae60;
+            padding: 15px 20px;
+            text-align: center;
+        }
+        .top-header h1 { margin: 5px 0 0 0; font-size: 24px; color: #27ae60; }
+        
+        /* Barre d'outils avec les boutons cliquables */
+        .toolbar {
+            text-align: center;
+            margin: 15px 0;
+            padding: 0 10px;
+        }
+        .btn-mode {
+            background-color: #ffffff;
+            border: 2px solid #27ae60;
+            color: #27ae60;
+            padding: 8px 16px;
+            margin: 5px;
+            font-size: 14px;
+            font-weight: bold;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        .btn-mode:hover, .btn-mode.active {
+            background-color: #27ae60;
+            color: white;
+        }
+
+        /* Espace de travail dynamique */
+        .workspace {
+            display: grid;
+            grid-template-columns: 1fr 1fr; /* Mode côte à côte par défaut pour ordinateur */
+            gap: 20px;
+            padding: 0 20px;
+            max-width: 1600px;
+            margin: 0 auto;
+        }
+
+        /* Classes dynamiques pour le plein écran style PDF */
+        .workspace.only-sujet { grid-template-columns: 1fr; }
+        .workspace.only-sujet .panel-corrige { display: none; }
+
+        .workspace.only-corrige { grid-template-columns: 1fr; }
+        .workspace.only-corrige .panel-sujet { display: none; }
+
+        /* Style des panneaux */
+        .panel {
+            background: #ffffff;
+            padding: 25px;
+            border: 2px solid #bdc3c7;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            min-height: 400px;
+            box-sizing: border-box; /* Évite que le panneau ne dépasse de l'écran */
+        }
+        .panel-sujet { border-top: 5px solid #2980b9; }
+        .panel-corrige { border-top: 5px solid #27ae60; }
+        .panel h2 { margin-top: 0; padding-bottom: 10px; border-bottom: 1px dashed #bdc3c7; }
+        .panel-sujet h2 { color: #2980b9; }
+        .panel-corrige h2 { color: #27ae60; }
+        .exercice-title { font-weight: bold; margin-top: 20px; font-size: 1.2rem; }
+        .footer-credit { text-align: center; padding: 20px; font-size: 12px; color: #7f8c8d; }
+
+        /* 📱 DESIGN ADAPTATIF (MEDIA QUERY POUR TÉLÉPHONES ET TABLETTES) */
+        @media (max-width: 900px) {
+            .workspace {
+                grid-template-columns: 1fr; /* Force l'affichage sur une seule colonne sur mobile */
+                padding: 0 10px;
+            }
+            .panel {
+                padding: 15px; /* Réduit un peu l'espace interne pour gagner de la place */
+                min-height: auto; /* Laisse le panneau s'adapter à la hauteur du texte */
+            }
+            .top-header h1 {
+                font-size: 20px; /* Réduit légèrement le titre sur petit écran */
+            }
+            .btn-mode {
+                padding: 6px 12px;
+                font-size: 13px; /* Boutons légèrement plus compacts */
+            }
+        }
+    </style>
+
+    <!-- 1. Le style CSS de KaTeX -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+
+    <!-- 2. Le script principal de KaTeX (avec defer) -->
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+
+    <!-- 3. Le script d'auto-rendu qui s'active automatiquement au chargement -->
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js" 
+            onload="renderMathInElement(document.body, {
+                delimiters: [
+                    {left: '$$', right: '$$', display: true},
+                    {left: '$', right: '$', display: false}
+                ],
+                throwOnError : false
+            });">
+    </script>
+</head>
+<body>
+
+    <div class="top-header">
+        <h1>BOUSAN — SUJETS & CORRIGÉS</h1>
+        <div style="color:#7f8c8d; font-style:italic;">Baccalauréat Niger — Session 1983 (Série D)</div>
+    </div>
+
+    <!-- Les 3 boutons cliquables pour changer l'affichage instantanément -->
+    <div class="toolbar">
+        <button class="btn-mode" onclick="changerAffichage('sujet', event)">📄 Sujet plein écran</button>
+        <button class="btn-mode active" id="btn-both" onclick="changerAffichage('both', event)">↔️ Côte à côte</button>
+        <button class="btn-mode" onclick="changerAffichage('corrige', event)">✅ Corrigé plein écran</button>
+    </div>
+
+    <!-- Grille de travail -->
+    <div class="workspace" id="zone-travail">
+        
+        <!-- LE SUJET (PANNEAU GAUCHE) -->
+        <div class="panel panel-sujet">
+            <h2>ÉNONCÉ DU SUJET</h2>
+            <div class="exercice-title">Exercice 1</div>
+            <p>Soit $F$ la transformation du plan $\mathcal{P}$ associée à l’application $f$ définie de la manière suivante :</p>
+            $$f : \mathbb{C} \to \mathbb{C}$$
+            $$z \mapsto \frac{1}{2}(1-i)z + \frac{1}{2} + \frac{i}{2}$$
+            <p>1) Donner la nature et les éléments caractéristiques de la transformation $F$.</p>
+        </div>
+
+        <!-- LE CORRIGÉ (PANNEAU DROIT) -->
+        <div class="panel panel-corrige">
+            <h2>CORRIGÉ DÉTAILLÉ</h2>
+            <div class="exercice-title">Correction de l'Exercice 1</div>
+            <p>1) Donnons la nature et les éléments caractéristiques de la transformation $F$.</p>
+            <p>L’application complexe $f$ associée à $F$ est de la forme $f(z) = az+b$ avec :</p>
+            $$a = \frac{1}{2}(1-i) \quad \text{et} \quad b = \frac{1}{2} + \frac{1}{2}i$$
+            <p>Comme $a \in \mathbb{C}^*$, alors $F$ est une similitude plane directe.</p>
+        </div>
+
+    </div>
+
+    <div class="footer-credit">SAMRI NAMATA BOUBACAR — Maison d'édition BOUSAN</div>
+
+    <!-- LOGIQUE INTERACTIVE : Le script qui gère le mode d'affichage -->
+    <script>
+        function changerAffichage(mode, event) {
+            var zone = document.getElementById('zone-travail');
+            
+            // On réinitialise toutes les classes
+            zone.classList.remove('only-sujet', 'only-corrige');
+            
+            // On retire la couleur active de tous les boutons
+            var boutons = document.querySelectorAll('.btn-mode');
+            boutons.forEach(btn => btn.classList.remove('active'));
+            
+            // On applique le mode sélectionné
+            if (mode === 'sujet') {
+                zone.classList.add('only-sujet');
+            } else if (mode === 'corrige') {
+                zone.classList.add('only-corrige');
+            }
+            
+            // On met en valeur le bouton qui a été cliqué
+            event.currentTarget.classList.add('active');
+        }
+    </script>
+</body>
+</html>
