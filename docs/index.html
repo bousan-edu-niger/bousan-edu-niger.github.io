@@ -83,21 +83,26 @@
         .exercice-title { font-weight: bold; margin-top: 20px; font-size: 1.2rem; }
         .footer-credit { text-align: center; padding: 20px; font-size: 12px; color: #7f8c8d; }
     </style>
-    <!-- Charger le style visuel de KaTeX -->
+    <!-- Style visuel de KaTeX -->
 <link rel="stylesheet" href="https://jsdelivr.net">
 
-<!-- Charger le moteur principal KaTeX -->
-<script defer src="https://jsdelivr.net"></script>
+<!-- Scripts principaux de KaTeX -->
+<script src="https://jsdelivr.net"></script>
+<script src="https://jsdelivr.net"></script>
 
-<!-- Charger l'outil de rendu automatique qui cherche les symboles $ et $$ -->
-<script defer src="https://jsdelivr.net"
-    onload="renderMathInElement(document.body, {
-        delimiters: [
-            {left: '$$', right: '$$', display: true},
-            {left: '$', right: '$', display: false}
-        ],
-        throwOnError : false
-    });"></script>
+<!-- Script de sécurité : force l'attente du chargement complet de la page -->
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        renderMathInElement(document.body, {
+            delimiters: [
+                {left: '$$', right: '$$', display: true},
+                {left: '$', right: '$', display: false}
+            ],
+            throwOnError : false
+        });
+    });
+</script>
+
 
 </head>
 <body>
