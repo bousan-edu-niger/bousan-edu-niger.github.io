@@ -83,25 +83,30 @@
         .exercice-title { font-weight: bold; margin-top: 20px; font-size: 1.2rem; }
         .footer-credit { text-align: center; padding: 20px; font-size: 12px; color: #7f8c8d; }
     </style>
-    <!-- Style visuel de KaTeX -->
+    
+<!-- Style visuel de KaTeX hyper léger -->
 <link rel="stylesheet" href="https://jsdelivr.net">
 
-<!-- Scripts principaux de KaTeX -->
-<script src="https://jsdelivr.net"></script>
-<script src="https://jsdelivr.net"></script>
+<!-- Scripts principaux chargés en arrière-plan (async) pour ne pas bloquer l'ouverture de la page -->
+<script async src="https://jsdelivr.net"></script>
+<script async src="https://jsdelivr.net"></script>
 
-<!-- Script de sécurité : force l'attente du chargement complet de la page -->
 <script>
-    document.addEventListener("DOMContentLoaded", function() {
-        renderMathInElement(document.body, {
-            delimiters: [
-                {left: '$$', right: '$$', display: true},
-                {left: '$', right: '$', display: false}
-            ],
-            throwOnError : false
-        });
+    // Ce code attend patiemment que la page ET les scripts soient prêts
+    window.addEventListener("load", function() {
+        if (typeof renderMathInElement === "function") {
+            renderMathInElement(document.body, {
+                delimiters: [
+                    {left: '$$', right: '$$', display: true},
+                    {left: '$', right: '$', display: false}
+                ],
+                throwOnError : false
+            });
+        }
     });
 </script>
+
+
 
 
 </head>
