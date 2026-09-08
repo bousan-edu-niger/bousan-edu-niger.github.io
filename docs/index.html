@@ -3,162 +3,199 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BOUSAN-SITE ÉDUCATIF DU NIGER</title>
-
+    <title>BOUSAN — Portail Éducatif du Niger</title>
     <style>
         body {
             font-family: 'Times New Roman', Times, serif;
             margin: 0; padding: 0;
             background-color: #f4f6f7;
             color: #2c3e50;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
         }
-        /* En-tête fixe */
-        .top-header {
+        /* En-tête principal */
+        header {
             background-color: #ffffff;
             border-bottom: 3px double #27ae60;
-            padding: 10px 20px;
+            padding: 40px 20px;
             text-align: center;
         }
-        .top-header h1 { margin: 5px 0 0 0; font-size: 24px; color: #27ae60; }
-        
-        /* Barre d'outils avec les boutons cliquables */
-        .toolbar {
-            text-align: center;
-            margin: 15px 0;
-        }
-        .btn-mode {
-            background-color: #ffffff;
-            border: 2px solid #27ae60;
-            color: #27ae60;
-            padding: 8px 16px;
-            margin: 0 5px;
-            font-size: 14px;
-            font-weight: bold;
-            border-radius: 20px;
-            cursor: pointer;
-            transition: 0.3s;
-        }
-        .btn-mode:hover, .btn-mode.active {
-            background-color: #27ae60;
-            color: white;
-        }
+        header h1 { margin: 0; font-size: 32px; color: #27ae60; letter-spacing: 1px; }
+        header p { margin: 10px 0 0 0; font-size: 16px; color: #7f8c8d; font-style: italic; }
 
-        /* Espace de travail dynamique */
-        .workspace {
-            display: grid;
-            grid-template-columns: 1fr 1fr; /* Mode côte à côte par défaut */
-            gap: 20px;
+        /* Conteneur de sélection des niveaux */
+        .main-container {
+            flex: 1;
+            max-width: 1200px;
+            margin: 40px auto;
             padding: 0 20px;
-            max-width: 1600px;
-            margin: 0 auto;
+            box-sizing: border-box;
+        }
+        .intro-text {
+            font-size: 18px;
+            margin-bottom: 40px;
+            line-height: 1.6;
+            text-align: center;
         }
 
-        /* Classes dynamiques pour le plein écran style PDF */
-        .workspace.only-sujet { grid-template-columns: 1fr; }
-        .workspace.only-sujet .panel-corrige { display: none; }
+        /* Grille des boutons de niveau */
+        .grid-niveaux {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr); /* 3 colonnes sur ordinateur */
+            gap: 25px;
+            margin-bottom: 50px;
+        }
 
-        .workspace.only-corrige { grid-template-columns: 1fr; }
-        .workspace.only-corrige .panel-sujet { display: none; }
-
-        /* Style des panneaux */
-        .panel {
+        /* Style des cartes/boutons de niveau */
+        .card-niveau {
             background: #ffffff;
-            padding: 25px;
             border: 2px solid #bdc3c7;
-            border-radius: 8px;
+            border-radius: 12px;
+            padding: 30px 20px;
+            text-decoration: none;
+            color: #2c3e50;
             box-shadow: 0 4px 6px rgba(0,0,0,0.05);
-            min-height: 600px;
+            transition: all 0.3s ease;
+            text-align: center;
         }
-        .panel-sujet { border-top: 5px solid #2980b9; }
-        .panel-corrige { border-top: 5px solid #27ae60; }
-        .panel h2 { margin-top: 0; padding-bottom: 10px; border-bottom: 1px dashed #bdc3c7; }
-        .panel-sujet h2 { color: #2980b9; }
-        .panel-corrige h2 { color: #27ae60; }
-        .exercice-title { font-weight: bold; margin-top: 20px; font-size: 1.2rem; }
-        .footer-credit { text-align: center; padding: 20px; font-size: 12px; color: #7f8c8d; }
+        .card-niveau:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 15px rgba(0,0,0,0.1);
+        }
+        .card-college { border-top: 6px solid #e67e22; }
+        .card-lycee { border-top: 6px solid #2980b9; }
+        .card-universite { border-top: 6px solid #9b59b6; }
+
+        .card-niveau h2 { margin: 10px 0; font-size: 22px; }
+        .card-college h2 { color: #e67e22; }
+        .card-lycee h2 { color: #2980b9; }
+        .card-universite h2 { color: #9b59b6; }
+
+        .card-niveau p { font-size: 14px; color: #7f8c8d; line-height: 1.4; }
+
+        /* 👤 Section Présentation de l'Auteur */
+        .author-section {
+            background: #ffffff;
+            border: 1px solid #e0e0e0;
+            border-left: 5px solid #27ae60;
+            border-radius: 8px;
+            padding: 30px;
+            margin-top: 40px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.02);
+        }
+        .author-section h3 {
+            margin-top: 0;
+            color: #27ae60;
+            font-size: 22px;
+            border-bottom: 1px dashed #bdc3c7;
+            padding-bottom: 10px;
+        }
+        .author-grid {
+            display: flex;
+            gap: 20px;
+            align-items: center;
+            text-align: left;
+        }
+        .author-avatar {
+            font-size: 60px;
+            background: #f4f6f7;
+            padding: 15px;
+            border-radius: 50%;
+            border: 2px solid #27ae60;
+        }
+        .author-bio {
+            font-size: 16px;
+            line-height: 1.6;
+        }
+
+        /* Pied de page professionnel */
+        footer {
+            text-align: center;
+            padding: 25px 20px;
+            font-size: 14px;
+            color: #7f8c8d;
+            border-top: 1px solid #e0e0e0;
+            background-color: #ffffff;
+            line-height: 1.5;
+        }
+        footer strong { color: #2c3e50; }
+
+        /* 📱 DESIGN ADAPTATIF POUR MOBILE */
+        @media (max-width: 768px) {
+            header { padding: 25px 15px; }
+            header h1 { font-size: 26px; }
+            .main-container { margin: 20px auto; }
+            .intro-text { font-size: 16px; margin-bottom: 25px; }
+            .grid-niveaux {
+                grid-template-columns: 1fr; /* 1 seule colonne verticale sur téléphone */
+                gap: 15px;
+                margin-bottom: 30px;
+            }
+            .card-niveau { padding: 20px 15px; }
+            .author-grid {
+                flex-direction: column;
+                text-align: center;
+            }
+        }
     </style>
- <!-- 1. Le style CSS de KaTeX -->
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
-
-<!-- 2. Le script principal de KaTeX (avec defer) -->
-<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
-
-<!-- 3. Le script d'auto-rendu qui s'active automatiquement au chargement -->
-<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js" 
-        onload="renderMathInElement(document.body, {
-            delimiters: [
-                {left: '$$', right: '$$', display: true},
-                {left: '$', right: '$', display: false}
-            ],
-            throwOnError : false
-        });">
-</script>
-
-
 </head>
 <body>
 
-    <div class="top-header">
-        <h1>BOUSAN — SUJETS & CORRIGÉS</h1>
-        <div style="color:#7f8c8d; font-style:italic;">Baccalauréat Niger — Session 1983 (Série D)</div>
-    </div>
+    <header>
+        <h1>BOUSAN — PLATEFORME ÉDUCATIVE</h1>
+        <p>L'excellence numérique pour les sciences exactes au Niger</p>
+    </header>
 
-    <!-- Les 3 boutons cliquables pour changer l'affichage instantanément -->
-    <div class="toolbar">
-        <button class="btn-mode" onclick="changerAffichage('sujet')">📄 Sujet plein écran</button>
-        <button class="btn-mode active" id="btn-both" onclick="changerAffichage('both')">↔️ Côte à côte</button>
-        <button class="btn-mode" onclick="changerAffichage('corrige')">✅ Corrigé plein écran</button>
-    </div>
-
-    <!-- Grille de travail -->
-    <div class="workspace" id="zone-travail">
-        
-        <!-- LE SUJET (PANNEAU GAUCHE) -->
-        <div class="panel panel-sujet">
-            <h2>ÉNONCÉ DU SUJET</h2>
-            <div class="exercice-title">Exercice 1</div>
-            <p>Soit $F$ la transformation du plan $\mathcal{P}$ associée à l’application $f$ définie de la manière suivante :</p>
-            $$f : \mathbb{C} \to \mathbb{C}$$
-            $$z \mapsto \frac{1}{2}(1-i)z + \frac{1}{2} + \frac{i}{2}$$
-            <p>1) Donner la nature et les éléments caractéristiques de la transformation $F$.</p>
+    <div class="main-container">
+        <div class="intro-text">
+            Bienvenue sur l'espace officiel de la <strong>Maison d'édition BOUSAN</strong>. 
+            Sélectionnez votre niveau d'études pour accéder aux cours, exercices interactifs, quiz et annales corrigées.
         </div>
 
-        <!-- LE CORRIGÉ (PANNEAU DROIT) -->
-        <div class="panel panel-corrige">
-            <h2>CORRIGÉ DÉTAILLÉ</h2>
-            <div class="exercice-title">Correction de l'Exercice 1</div>
-            <p>1) Donnons la nature et les éléments caractéristiques de la transformation $F$.</p>
-            <p>L’application complexe $f$ associée à $F$ est de la forme $f(z) = az+b$ avec :</p>
-            $$a = \frac{1}{2}(1-i) \quad \text{et} \quad b = \frac{1}{2} + \frac{1}{2}i$$
-            <p>Comme $a \in \mathbb{C}^*$, alors $F$ est une similitude plane directe.</p>
+        <!-- Les 3 grands choix d'orientation -->
+        <div class="grid-niveaux">
+            
+            <!-- BOUTON COLLÈGE -->
+            <a href="college/index.html" class="card-niveau card-college">
+                <div style="font-size: 40px;">🎒</div>
+                <h2>Espace Collège</h2>
+                <p>Ressources complètes de la 6<sup>e</sup> à la 3<sup>e</sup> (Préparation approfondie au BEPC).</p>
+            </a>
+
+            <!-- BOUTON LYCÉE -->
+            <a href="lycee/index.html" class="card-niveau card-lycee">
+                <div style="font-size: 40px;">📐</div>
+                <h2>Espace Lycée</h2>
+                <p>Séries A, C, D, E, F. Cours théoriques et annales officielles du Baccalauréat nigérien.</p>
+            </a>
+
+            <!-- BOUTON UNIVERSITÉ -->
+            <a href="universite/index.html" class="card-niveau card-universite">
+                <div style="font-size: 40px;">🏛️</div>
+                <h2>Enseignement Supérieur</h2>
+                <p>Modules avancés de mathématiques, statistiques, informatique et démographie.</p>
+            </a>
+
         </div>
 
+        <!-- 👤 SECTION PRÉSENTATION DE L'AUTEUR -->
+        <div class="author-section">
+            <h3>À propos du fondateur</h3>
+            <div class="author-grid">
+                <div class="author-avatar">👨‍💻</div>
+                <div class="author-bio">
+                    <strong>Samri Namata Boubacar</strong> est un ingénieur mathématicien-démographe, enseignant et éditeur scientifique originaire de Niamey. Expert en typographie scientifique et passionné par la transmission des savoirs, il a fondé la <strong>Maison d'édition BOUSAN</strong> pour offrir aux élèves et étudiants nigériens des outils numériques modernes, rigoureux et adaptés aux exigences des examens nationaux.
+                </div>
+            </div>
+        </div>
     </div>
 
-    <div class="footer-credit">SAMRI NAMATA BOUBACAR — Maison d'édition BOUSAN</div>
+    <!-- PIED DE PAGE PROFESSIONNEL -->
+    <footer>
+        &copy; 2026 <strong>BOUSAN ÉDUCATION AU NIGER</strong> — Tous droits réservés.<br>
+        Conception et édition scientifique : <strong>Ing. Samri Namata Boubacar</strong>.
+    </footer>
 
-    <!-- LOGIQUE INTERACTIVE : Le script qui gère le mode d'affichage -->
-    <script>
-        function changerAffichage(mode) {
-            var zone = document.getElementById('zone-travail');
-            
-            // On réinitialise toutes les classes
-            zone.classList.remove('only-sujet', 'only-corrige');
-            
-            // On retire la couleur active de tous les boutons
-            var boutons = document.querySelectorAll('.btn-mode');
-            boutons.forEach(btn => btn.classList.remove('active'));
-            
-            // On applique le mode sélectionné
-            if (mode === 'sujet') {
-                zone.classList.add('only-sujet');
-            } else if (mode === 'corrige') {
-                zone.classList.add('only-corrige');
-            }
-            
-            // On met en valeur le bouton qui a été cliqué
-            event.currentTarget.classList.add('active');
-        }
-    </script>
 </body>
 </html>
