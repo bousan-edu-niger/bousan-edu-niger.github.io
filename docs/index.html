@@ -4,12 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>BOUSAN-SITE ÉDUCATIF DU NIGER</title>
-    
-    <!-- Moteur KaTeX pour les calculs -->
-    <link rel="stylesheet" href="https://jsdelivr.net">
-    <script defer src="https://jsdelivr.net"></script>
-    <script defer src="https://jsdelivr.net"
-        onload="renderMathInElement(document.body);"></script>
 
     <style>
         body {
@@ -83,30 +77,22 @@
         .exercice-title { font-weight: bold; margin-top: 20px; font-size: 1.2rem; }
         .footer-credit { text-align: center; padding: 20px; font-size: 12px; color: #7f8c8d; }
     </style>
-    
-<!-- Style visuel de KaTeX hyper léger -->
-<link rel="stylesheet" href="https://jsdelivr.net">
+ <!-- 1. Le style CSS de KaTeX -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
 
-<!-- Scripts principaux chargés en arrière-plan (async) pour ne pas bloquer l'ouverture de la page -->
-<script async src="https://jsdelivr.net"></script>
-<script async src="https://jsdelivr.net"></script>
+<!-- 2. Le script principal de KaTeX (avec defer) -->
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
 
-<script>
-    // Ce code attend patiemment que la page ET les scripts soient prêts
-    window.addEventListener("load", function() {
-        if (typeof renderMathInElement === "function") {
-            renderMathInElement(document.body, {
-                delimiters: [
-                    {left: '$$', right: '$$', display: true},
-                    {left: '$', right: '$', display: false}
-                ],
-                throwOnError : false
-            });
-        }
-    });
+<!-- 3. Le script d'auto-rendu qui s'active automatiquement au chargement -->
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js" 
+        onload="renderMathInElement(document.body, {
+            delimiters: [
+                {left: '$$', right: '$$', display: true},
+                {left: '$', right: '$', display: false}
+            ],
+            throwOnError : false
+        });">
 </script>
-
-
 
 
 </head>
