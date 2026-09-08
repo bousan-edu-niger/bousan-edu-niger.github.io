@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BOUSAN — Plateforme Éducative</title>
+    <style>
+        body {
+            font-family: 'Times New Roman', Times, serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f6f7;
+            color: #2c3e50;
+        }
+        /* Grand en-tête de la marque */
+        .hero-banner {
+            background-color: #ffffff;
+            border-bottom: 4px double #27ae60;
+            padding: 40px 20px;
+            text-align: center;
+        }
+        .hero-banner h1 {
+            margin: 0;
+            font-size: 36px;
+            color: #27ae60;
+            letter-spacing: 2px;
+        }
+        .hero-banner p {
+            font-style: italic;
+            color: #7f8c8d;
+            font-size: 18px;
+            margin-top: 10px;
+        }
+        
+        /* Conteneur principal */
+        .container {
+            max-width: 1000px;
+            margin: 30px auto;
+            padding: 20px;
+            background: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+        }
+
+        .presentation {
+            text-align: center;
+            line-height: 1.6;
+            font-size: 16px;
+            margin-bottom: 40px;
+            padding: 0 20px;
+        }
+
+        .section-title {
+            color: #27ae60;
+            border-bottom: 2px dashed #27ae60;
+            padding-bottom: 10px;
+            margin-bottom: 25px;
+            font-size: 22px;
+        }
+
+        /* Grille des années (Boutons cliquables) */
+        .grid-annees {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+            gap: 15px;
+        }
+
+        /* Style des boutons de chaque année */
+        .card-annee {
+            background-color: #ffffff;
+            border: 2px solid #27ae60;
+            color: #27ae60;
+            text-align: center;
+            padding: 15px;
+            font-size: 18px;
+            font-weight: bold;
+            text-decoration: none;
+            border-radius: 6px;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+        }
+
+        /* Effet au survol de la souris */
+        .card-annee:hover {
+            background-color: #27ae60;
+            color: #ffffff;
+            transform: translateY(-3px);
+            box-shadow: 0 4px 8px rgba(39, 174, 96, 0.2);
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 50px;
+            padding: 20px;
+            font-size: 14px;
+            color: #7f8c8d;
+            border-top: 1px solid #bdc3c7;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Bannière d'accueil -->
+    <div class="hero-banner">
+        <h1>💥 MAISON D'ÉDITION BOUSAN 💥</h1>
+        <p>Expertise en Édition Scientifique & Mathématiques</p>
+    </div>
+
+    <div class="container">
+        <!-- Présentation du projet solo -->
+        <div class="presentation">
+            <h2>Annales de Mathématiques — Baccalauréat Niger</h2>
+            <p>Bienvenue sur la plus grande base de données d'archives de mathématiques du Niger. Retrouvez en un clic l'intégralité des sujets officiels et des corrigés détaillés pour la <strong>Série D</strong>, rédigés avec la rigueur scientifique de <strong>Samri Namata Boubacar</strong>.</p>
+        </div>
+
+        <h3 class="section-title">Sélectionnez l'année de révision :</h3>
+        
+        <!-- Grille contenant les liens vers les fichiers de chaque année -->
+        <div class="grid-annees">
+            <!-- Liens vers le sous-dossier "sujets/" -->
+            <a href="sujets/bac-1983.html" class="card-annee">Session 1983</a>
+            <a href="sujets/bac-1984.html" class="card-annee">Session 1984</a>
+            <a href="sujets/bac-1985.html" class="card-annee">Session 1985</a>
+            <!-- Vous pourrez copier-coller ces lignes au fur et à mesure pour ajouter vos autres années -->
+            <a href="#" class="card-annee" style="opacity: 0.5; cursor: not-allowed;">1986 à 2025</a>
+            <a href="sujets/bac-2026.html" class="card-annee">Session 2026</a>
+        </div>
+    </div>
+
+    <div class="footer">
+        &copy; 2026 BOUSAN ÉDITION. Tous droits réservés. <br>
+        Conçu et développé en solo par <strong>Samri Namata Boubacar</strong>.
+    </div>
+
+</body>
+</html>
