@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BOUSAN — Terminale D Mathématiques</title>
+    <style>
+        body {
+            font-family: 'Times New Roman', Times, serif;
+            margin: 0; padding: 0;
+            background-color: #f4f6f7;
+            color: #2c3e50;
+        }
+        .top-header {
+            background-color: #ffffff;
+            border-bottom: 3px double #2980b9;
+            padding: 20px;
+            text-align: center;
+        }
+        .top-header h1 { margin: 0; font-size: 26px; color: #2980b9; }
+        
+        .container {
+            max-width: 900px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+
+        /* Style des 4 grandes sections */
+        .section-ressource {
+            background: #ffffff;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 25px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.02);
+        }
+        .section-ressource h2 {
+            margin-top: 0;
+            font-size: 20px;
+            padding-bottom: 8px;
+            border-bottom: 2px solid #f4f6f7;
+        }
+        .sec-cours h2 { color: #2c3e50; }
+        .sec-exercices h2 { color: #e67e22; }
+        .sec-quiz h2 { color: #9b59b6; }
+        .sec-annales h2 { color: #27ae60; }
+
+        /* Liste des liens dans chaque section */
+        .links-list {
+            list-style: none;
+            padding: 0;
+            margin: 15px 0 0 0;
+        }
+        .links-list li {
+            margin-bottom: 10px;
+        }
+        .links-list a {
+            color: #2980b9;
+            text-decoration: none;
+            font-size: 16px;
+            display: inline-block;
+        }
+        .links-list a:hover {
+            text-decoration: underline;
+        }
+        .empty-text {
+            color: #7f8c8d;
+            font-style: italic;
+            font-size: 14px;
+        }
+
+        .back-btn {
+            display: inline-block;
+            margin-top: 20px;
+            color: #7f8c8d;
+            text-decoration: none;
+            text-align: center;
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="top-header">
+        <h1>📐 MATHEMATIQUES — TERMINALE D</h1>
+        <div style="color:#7f8c8d; font-style:italic;">Bibliothèque des ressources de la Maison d'édition BOUSAN</div>
+    </div>
+
+    <div class="container">
+        
+        <!-- SECTION 1 : COURS -->
+        <div class="section-ressource sec-cours">
+            <h2>📘 Leçons & Résumés de Cours</h2>
+            <ul class="links-list">
+                <li class="empty-text">Bientôt disponible : fiches de cours sur les fonctions numériques, intégrales et probabilités.</li>
+            </ul>
+        </div>
+
+        <!-- SECTION 2 : EXERCICES -->
+        <div class="section-ressource sec-exercices">
+            <h2>📝 Séries d'Exercices d'Application</h2>
+            <ul class="links-list">
+                <li class="empty-text">Bientôt disponible : exercices d'entraînement par chapitre.</li>
+            </ul>
+        </div>
+
+        <!-- SECTION 3 : QUIZ -->
+        <div class="section-ressource sec-quiz">
+            <h2>❓ Quiz d'Évaluation Interactifs</h2>
+            <ul class="links-list">
+                <li class="empty-text">Bientôt disponible : tests de connaissances rapides avec correction automatique.</li>
+            </ul>
+        </div>
+
+        <!-- SECTION 4 : ANNALES (C'EST ICI !) -->
+        <div class="section-ressource sec-annales">
+            <h2>🎓 Annales du Baccalauréat Nigérien</h2>
+            <ul class="links-list">
+                <!-- LE LIEN VERS VOTRE PREMIER EXERCICE DE GÉOMÉTRIE -->
+                <li>
+                    <a href="bac-1983.html">👉 <strong>Session 1983 (Série D)</strong> — Exercice 1 : Nombres complexes & Transformations du plan (Sujet et Corrigé côte à côte)</a>
+                </li>
+                <li class="empty-text" style="margin-top: 10px;">D'autres sessions historiques et récentes seront ajoutées très prochainement.</li>
+            </ul>
+        </div>
+
+        <a href="../index.html" class="back-btn">⬅️ Retour au choix des matières</a>
+    </div>
+
+</body>
+</html>
