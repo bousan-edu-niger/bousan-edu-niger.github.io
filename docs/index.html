@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BOUSAN - BAC 1983 Dynamique</title>
+    
+    <!-- Moteur KaTeX pour les calculs -->
+    <link rel="stylesheet" href="https://jsdelivr.net">
+    <script defer src="https://jsdelivr.net"></script>
+    <script defer src="https://jsdelivr.net"
+        onload="renderMathInElement(document.body);"></script>
+
+    <style>
+        body {
+            font-family: 'Times New Roman', Times, serif;
+            margin: 0; padding: 0;
+            background-color: #f4f6f7;
+            color: #2c3e50;
+        }
+        /* En-tête fixe */
+        .top-header {
+            background-color: #ffffff;
+            border-bottom: 3px double #27ae60;
+            padding: 10px 20px;
+            text-align: center;
+        }
+        .top-header h1 { margin: 5px 0 0 0; font-size: 24px; color: #27ae60; }
+        
+        /* Barre d'outils avec les boutons cliquables */
+        .toolbar {
+            text-align: center;
+            margin: 15px 0;
+        }
+        .btn-mode {
+            background-color: #ffffff;
+            border: 2px solid #27ae60;
+            color: #27ae60;
+            padding: 8px 16px;
+            margin: 0 5px;
+            font-size: 14px;
+            font-weight: bold;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        .btn-mode:hover, .btn-mode.active {
+            background-color: #27ae60;
+            color: white;
+        }
+
+        /* Espace de travail dynamique */
+        .workspace {
+            display: grid;
+            grid-template-columns: 1fr 1fr; /* Mode côte à côte par défaut */
+            gap: 20px;
+            padding: 0 20px;
+            max-width: 1600px;
+            margin: 0 auto;
+        }
+
+        /* Classes dynamiques pour le plein écran style PDF */
+        .workspace.only-sujet { grid-template-columns: 1fr; }
+        .workspace.only-sujet .panel-corrige { display: none; }
+
+        .workspace.only-corrige { grid-template-columns: 1fr; }
+        .workspace.only-corrige .panel-sujet { display: none; }
+
+        /* Style des panneaux */
+        .panel {
+            background: #ffffff;
+            padding: 25px;
+            border: 2px solid #bdc3c7;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            min-height: 600px;
+        }
+        .panel-sujet { border-top: 5px solid #2980b9; }
+        .panel-corrige { border-top: 5px solid #27ae60; }
+        .panel h2 { margin-top: 0; padding-bottom: 10px; border-bottom: 1px dashed #bdc3c7; }
+        .panel-sujet h2 { color: #2980b9; }
+        .panel-corrige h2 { color: #27ae60; }
+        .exercice-title { font-weight: bold; margin-top: 20px; font-size: 1.2rem; }
+        .footer-credit { text-align: center; padding: 20px; font-size: 12px; color: #7f8c8d; }
+    </style>
+</head>
+<body>
+
+    <div class="top-header">
+        <h1>BOUSAN — SUJETS & CORRIGÉS</h1>
+        <div style="color:#7f8c8d; font-style:italic;">Baccalauréat Niger — Session 1983 (Série D)</div>
+    </div>
+
+    <!-- Les 3 boutons cliquables pour changer l'affichage instantanément -->
+    <div class="toolbar">
+        <button class="btn-mode" onclick="changerAffichage('sujet')">📄 Sujet plein écran</button>
+        <button class="btn-mode active" id="btn-both" onclick="changerAffichage('both')">↔️ Côte à côte</button>
+        <button class="btn-mode" onclick="changerAffichage('corrige')">✅ Corrigé plein écran</button>
+    </div>
+
+    <!-- Grille de travail -->
+    <div class="workspace" id="zone-travail">
+        
+        <!-- LE SUJET (PANNEAU GAUCHE) -->
+        <div class="panel panel-sujet">
+            <h2>ÉNONCÉ DU SUJET</h2>
+            <div class="exercice-title">Exercice 1</div>
+            <p>Soit $F$ la transformation du plan $\mathcal{P}$ associée à l’application $f$ définie de la manière suivante :</p>
+            $$f : \mathbb{C} \to \mathbb{C}$$
+            $$z \mapsto \frac{1}{2}(1-i)z + \frac{1}{2} + \frac{i}{2}$$
+            <p>1) Donner la nature et les éléments caractéristiques de la transformation $F$.</p>
+        </div>
+
+        <!-- LE CORRIGÉ (PANNEAU DROIT) -->
+        <div class="panel panel-corrige">
+            <h2>CORRIGÉ DÉTAILLÉ</h2>
+            <div class="exercice-title">Correction de l'Exercice 1</div>
+            <p>1) Donnons la nature et les éléments caractéristiques de la transformation $F$.</p>
+            <p>L’application complexe $f$ associée à $F$ est de la forme $f(z) = az+b$ avec :</p>
+            $$a = \frac{1}{2}(1-i) \quad \text{et} \quad b = \frac{1}{2} + \frac{1}{2}i$$
+            <p>Comme $a \in \mathbb{C}^*$, alors $F$ est une similitude plane directe.</p>
+        </div>
+
+    </div>
+
+    <div class="footer-credit">SAMRI NAMATA BOUBACAR — Maison d'édition BOUSAN</div>
+
+    <!-- LOGIQUE INTERACTIVE : Le script qui gère le mode d'affichage -->
+    <script>
+        function changerAffichage(mode) {
+            var zone = document.getElementById('zone-travail');
+            
+            // On réinitialise toutes les classes
+            zone.classList.remove('only-sujet', 'only-corrige');
+            
+            // On retire la couleur active de tous les boutons
+            var boutons = document.querySelectorAll('.btn-mode');
+            boutons.forEach(btn => btn.classList.remove('active'));
+            
+            // On applique le mode sélectionné
+            if (mode === 'sujet') {
+                zone.classList.add('only-sujet');
+            } else if (mode === 'corrige') {
+                zone.classList.add('only-corrige');
+            }
+            
+            // On met en valeur le bouton qui a été cliqué
+            event.currentTarget.classList.add('active');
+        }
+    </script>
+</body>
+</html>
