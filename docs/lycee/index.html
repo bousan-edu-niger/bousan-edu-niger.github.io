@@ -1,81 +1,111 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BOUSAN — Espace Lycée</title>
-    <style>
-        body {
-            font-family: 'Times New Roman', Times, serif;
-            margin: 0; padding: 0;
-            background-color: #f4f6f7;
-            color: #2c3e50;
-        }
-        .top-header {
-            background-color: #ffffff;
-            border-bottom: 3px double #2980b9;
-            padding: 20px;
-            text-align: center;
-        }
-        .top-header h1 { margin: 0; font-size: 26px; color: #2980b9; }
-        .container {
-            max-width: 800px;
-            margin: 40px auto;
-            padding: 0 20px;
-            text-align: center;
-        }
-        .grid-series {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 20px;
-            margin-top: 30px;
-        }
-        .btn-serie {
-            background-color: #ffffff;
-            border: 2px solid #2980b9;
-            color: #2980b9;
-            padding: 20px;
-            font-size: 18px;
-            font-weight: bold;
-            border-radius: 8px;
-            text-decoration: none;
-            transition: 0.3s;
-        }
-        .btn-serie:hover {
-            background-color: #2980b9;
-            color: white;
-        }
-        .back-btn {
-            display: inline-block;
-            margin-top: 30px;
-            color: #7f8c8d;
-            text-decoration: none;
-        }
-        @media (max-width: 600px) {
-            .grid-series { grid-template-columns: 1fr; }
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BOUSAN — Espace Lycée</title>
+  <link rel="stylesheet" href="lycee.css">
 </head>
 <body>
 
-    <div class="top-header">
-        <h1>BOUSAN — ESPACE LYCÉE</h1>
-        <div style="color:#7f8c8d; font-style:italic;">Sélectionnez votre Série d'études</div>
-    </div>
+  <!-- En-tête -->
+  <div class="top-header">
+    <h1>Espace Lycée</h1>
+    <p>Séries générales et professionnelles — de la Seconde à la Terminale</p>
+  </div>
 
-    <div class="container">
-        <p>Bienvenue dans l'espace Lycée. Choisissez votre série pour accéder aux classes, matières et ressources d'examens.</p>
-        
-        <div class="grid-series">
-            <a href="#" class="btn-serie">Série A (Littéraire)</a>
-            <a href="#" class="btn-serie">Série C (Mathématiques)</a>
-            <a href="terminale-d/index.html" class="btn-serie">Série D (Sciences Expérimentales)</a>
-            <a href="#" class="btn-serie">Série E (Technique)</a>
-            <a href="#" class="btn-serie">Série F (Technologique)</a>
+  <!-- Contenu principal -->
+  <div class="container">
+    <h2>Choisissez votre série</h2>
+
+    <!-- Grille des séries -->
+    <div class="grid-series">
+
+      <!-- Série A -->
+      <div class="serie-card blue">
+        <h3>Série A (Littéraire)</h3>
+        <div class="grid-classes">
+          <a href="serieA/seconde.html" class="btn-classe">Seconde A</a>
+          <a href="serieA/premiere.html" class="btn-classe">Première A</a>
+          <a href="serieA/terminale.html" class="btn-classe examen">Terminale A</a>
         </div>
+      </div>
 
-        <a href="../index.html" class="back-btn">⬅️ Retour à l'accueil général</a>
+      <!-- Série C -->
+      <div class="serie-card blue">
+        <h3>Série C (Maths-Physique)</h3>
+        <div class="grid-classes">
+          <a href="serieC/seconde.html" class="btn-classe">Seconde C</a>
+          <a href="serieC/premiere.html" class="btn-classe">Première C</a>
+          <a href="serieC/terminale.html" class="btn-classe examen">Terminale C</a>
+        </div>
+      </div>
+
+      <!-- Série D -->
+      <div class="serie-card blue">
+        <h3>Série D (Sciences naturelles)</h3>
+        <div class="grid-classes">
+          <a href="serieD/seconde.html" class="btn-classe">Seconde D</a>
+          <a href="serieD/premiere.html" class="btn-classe">Première D</a>
+          <a href="serieD/terminale.html" class="btn-classe examen">Terminale D</a>
+        </div>
+      </div>
+
+      <!-- Série E -->
+      <div class="serie-card blue">
+        <h3>Série E (Technique industrielle)</h3>
+        <div class="grid-classes">
+          <a href="serieE/seconde.html" class="btn-classe">Seconde E</a>
+          <a href="serieE/premiere.html" class="btn-classe">Première E</a>
+          <a href="serieE/terminale.html" class="btn-classe examen">Terminale E</a>
+        </div>
+      </div>
+
+      <!-- Série F -->
+      <div class="serie-card blue">
+        <h3>Série F (Technique tertiaire)</h3>
+        <div class="grid-classes">
+          <a href="serieF/seconde.html" class="btn-classe">Seconde F</a>
+          <a href="serieF/premiere.html" class="btn-classe">Première F</a>
+          <a href="serieF/terminale.html" class="btn-classe examen">Terminale F</a>
+        </div>
+      </div>
+
+      <!-- Série G -->
+      <div class="serie-card blue">
+        <h3>Série G (Gestion-Comptabilité)</h3>
+        <div class="grid-classes">
+          <a href="serieG/seconde.html" class="btn-classe">Seconde G</a>
+          <a href="serieG/premiere.html" class="btn-classe">Première G</a>
+          <a href="serieG/terminale.html" class="btn-classe examen">Terminale G</a>
+        </div>
+      </div>
+
+      <!-- Série H -->
+      <div class="serie-card blue">
+        <h3>Série H (Hôtellerie-Tourisme)</h3>
+        <div class="grid-classes">
+          <a href="serieH/seconde.html" class="btn-classe">Seconde H</a>
+          <a href="serieH/premiere.html" class="btn-classe">Première H</a>
+          <a href="serieH/terminale.html" class="btn-classe examen">Terminale H</a>
+        </div>
+      </div>
+
+      <!-- Série I -->
+      <div class="serie-card blue">
+        <h3>Série I (Informatique-Électronique)</h3>
+        <div class="grid-classes">
+          <a href="serieI/seconde.html" class="btn-classe">Seconde I</a>
+          <a href="serieI/premiere.html" class="btn-classe">Première I</a>
+          <a href="serieI/terminale.html" class="btn-classe examen">Terminale I</a>
+        </div>
+      </div>
+
     </div>
+
+    <!-- Bouton retour -->
+    <a href="../index.html" class="back-btn">⬅ Retour à l’accueil</a>
+  </div>
 
 </body>
 </html>
