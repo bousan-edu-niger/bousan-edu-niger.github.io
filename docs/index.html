@@ -1,92 +1,112 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BOUSAN — Plateforme Éducative du Niger</title>
-    <meta name="description" content="BOUSAN — Plateforme éducative du Niger : cours, exercices interactifs, quiz et annales corrigées pour collège, lycée et université.">
-    <link rel="stylesheet" href="style.css">
-    <link rel="icon" href="favicon.ico">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BOUSAN — Plateforme Éducative du Niger</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-    <!-- Navigation -->
-    <nav>
-        <ul>
-            <li><a href="index.html">Accueil</a></li>
-            <li><a href="college/index.html">Collège</a></li>
-            <li><a href="lycee/index.html">Lycée</a></li>
-            <li><a href="universite/index.html">Université</a></li>
-            <li><a href="contact.html">Contact</a></li>
-        </ul>
-    </nav>
+  <!-- Navigation -->
+  <nav>
+    <ul>
+      <li><a href="index.html">Accueil</a></li>
+      <li><a href="college/index.html">Collège</a></li>
+      <li><a href="lycee/index.html">Lycée</a></li>
+      <li><a href="universite/index.html">Université</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+  </nav>
 
-    <!-- Header -->
-    <header>
-        <h1>BOUSAN — PLATEFORME ÉDUCATIVE DU NIGER</h1>
-        <p>L'excellence numérique pour les sciences exactes au Niger</p>
-    </header>
+  <!-- Header -->
+  <header>
+    <h1>BOUSAN — Plateforme Éducative du Niger</h1>
+    <p>L'excellence numérique pour les sciences exactes au Niger</p>
+  </header>
 
-    <!-- Contenu principal -->
-    <main class="main-container">
-        <section class="intro-text">
-            Bienvenue sur l'espace officiel de la <strong>Maison d'édition BOUSAN</strong>. 
-            Sélectionnez votre niveau d'études pour accéder aux cours, exercices interactifs, quiz et annales corrigées.
-        </section>
+  <!-- Grille des espaces -->
+  <section class="grid-niveaux">
+    <a href="college/index.html" class="card-niveau card-college">
+      🎒
+      <h2>Collège</h2>
+      <p>De la 6e à la 3e, préparation au BEPC.</p>
+    </a>
 
-        <!-- Choix des niveaux -->
-        <section class="grid-niveaux">
-            <a href="college/index.html" class="card-niveau card-college">
-                <div style="font-size: 40px;">🎒</div>
-                <h2>Espace Collège</h2>
-                <p>Ressources complètes de la 6<sup>e</sup> à la 3<sup>e</sup> (Préparation approfondie au BEPC).</p>
-            </a>
+    <a href="lycee/index.html" class="card-niveau card-lycee">
+      📐
+      <h2>Lycée</h2>
+      <p>Séries A, C, D, E, F. Annales du Bac.</p>
+    </a>
 
-            <a href="lycee/index.html" class="card-niveau card-lycee">
-                <div style="font-size: 40px;">📐</div>
-                <h2>Espace Lycée</h2>
-                <p>Séries A, C, D, E, F. Cours théoriques et annales officielles du Baccalauréat nigérien.</p>
-            </a>
+    <a href="universite/index.html" class="card-niveau card-universite">
+      🏛️
+      <h2>Université</h2>
+      <p>Modules avancés en mathématiques et informatique.</p>
+    </a>
+  </section>
 
-            <a href="universite/index.html" class="card-niveau card-universite">
-                <div style="font-size: 40px;">🏛️</div>
-                <h2>Enseignement Supérieur</h2>
-                <p>Modules avancés de mathématiques, statistiques et informatique.</p>
-            </a>
-        </section>
+  <!-- Connexion -->
+  <div class="login-box">
+    <h3>Connexion</h3>
+    <form id="loginForm">
+      <input type="email" name="email" placeholder="Adresse email" required>
+      <input type="password" name="password" placeholder="Mot de passe" required>
+      <button type="submit">Se connecter</button>
+    </form>
+    <p><a href="#" id="forgotBtn">Mot de passe oublié ?</a></p>
+    <p><a href="#" id="registerBtn">Créer un compte</a></p>
+  </div>
 
-        <!-- À propos du fondateur -->
-        <section class="author-section">
-            <h3>À propos du fondateur</h3>
-            <div class="author-grid">
-                <!-- Avatar avec image JPEG -->
-                <div class="author-avatar">
-                    <img src="images/samri.jpeg" alt="Photo de Samri Namata Boubacar" class="avatar-img">
-                </div>
-                <div class="author-bio">
-                    <strong>Samri Namata Boubacar</strong>, fondateur et concepteur de la plateforme BOUSAN, 
-                    est un ingénieur mathématicien-démographe et éditeur scientifique originaire de Niamey. 
-                    Passionné par la transmission des savoirs, il combine expertise académique et innovation numérique 
-                    pour offrir aux élèves et étudiants des outils éducatifs modernes, interactifs et adaptés aux exigences nationales et internationales.<br><br>
-                    Ses domaines de compétence incluent : 
-                    typographie scientifique, statistiques appliquées, analyse de données en santé et développement social, 
-                    ainsi que la conception de contenus pédagogiques numériques.
-                </div>
-            </div>
-        </section>
-    </main>
+  <!-- Footer -->
+  <footer>
+    &copy; 2026 BOUSAN ÉDUCATION AU NIGER — Tous droits réservés.
+  </footer>
 
-    <!-- Footer -->
-    <footer>
-        &copy; 2026 <strong>BOUSAN ÉDUCATION AU NIGER</strong> — Tous droits réservés.<br>
-        Conception et édition scientifique : <strong>Ing. Samri Namata Boubacar</strong>.<br>
-        <a href="#top">⬆ Retour en haut</a>
-    </footer>
+  <!-- Firebase Auth -->
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+    import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword, sendPasswordResetEmail } 
+      from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
 
-    <!-- Bouton mode sombre -->
-    <button class="toggle-dark" onclick="document.body.classList.toggle('dark')">
-        🌙 Mode sombre
-    </button>
+    // ⚡ Remplace par tes infos Firebase
+    const firebaseConfig = {
+      apiKey: "TA_CLE_API",
+      authDomain: "ton-projet.firebaseapp.com",
+      projectId: "ton-projet",
+      appId: "APP_ID"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+
+    // Connexion
+    document.querySelector("#loginForm").addEventListener("submit", (e) => {
+      e.preventDefault();
+      const email = e.target.email.value;
+      const password = e.target.password.value;
+      signInWithEmailAndPassword(auth, email, password)
+        .then(() => alert("Connexion réussie"))
+        .catch(err => alert("Erreur : " + err.message));
+    });
+
+    // Création de compte
+    document.querySelector("#registerBtn").addEventListener("click", () => {
+      const email = prompt("Entrez votre email");
+      const password = prompt("Entrez votre mot de passe");
+      createUserWithEmailAndPassword(auth, email, password)
+        .then(() => alert("Compte créé"))
+        .catch(err => alert("Erreur : " + err.message));
+    });
+
+    // Mot de passe oublié
+    document.querySelector("#forgotBtn").addEventListener("click", () => {
+      const email = prompt("Entrez votre email pour réinitialiser");
+      sendPasswordResetEmail(auth, email)
+        .then(() => alert("Email de réinitialisation envoyé"))
+        .catch(err => alert("Erreur : " + err.message));
+    });
+  </script>
 
 </body>
 </html>
