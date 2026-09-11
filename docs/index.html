@@ -17,6 +17,7 @@
       <li><a href="universite/index.html">Université</a></li>
       <li><a href="contact.html">Contact</a></li>
     </ul>
+    <button class="toggle-dark" onclick="document.body.classList.toggle('dark')">🌙 Mode sombre</button>
   </nav>
 
   <!-- Header -->
@@ -36,7 +37,7 @@
     <a href="lycee/index.html" class="card-niveau card-lycee">
       📐
       <h2>Lycée</h2>
-      <p>Séries A, C, D, E, F. Annales du Bac.</p>
+      <p>Séries A, C, D, E, F, G, H, I.</p>
     </a>
 
     <a href="universite/index.html" class="card-niveau card-universite">
@@ -55,8 +56,27 @@
       <button type="submit">Se connecter</button>
     </form>
     <p><a href="#" id="forgotBtn">Mot de passe oublié ?</a></p>
-    <p><a href="#" id="registerBtn">Créer un compte</a></p>
   </div>
+
+  <!-- Inscription -->
+  <div class="register-box">
+    <h3>Créer un compte</h3>
+    <form id="registerForm">
+      <input type="email" name="email" placeholder="Adresse email" required>
+      <input type="password" name="password" placeholder="Mot de passe" required>
+      <button type="submit">Créer un compte</button>
+    </form>
+  </div>
+
+  <!-- À propos du fondateur -->
+  <section class="author-section">
+    <h3>À propos du fondateur</h3>
+    <div class="author-grid">
+      <img src="images/samri.jpeg" alt="Photo du fondateur" class="avatar-img">
+      <p><strong>Samri Namata Boubacar</strong>, fondateur de BOUSAN, 
+      œuvre pour la diffusion des sciences exactes et la modernisation de l’éducation au Niger.</p>
+    </div>
+  </section>
 
   <!-- Footer -->
   <footer>
@@ -91,11 +111,12 @@
     });
 
     // Création de compte
-    document.querySelector("#registerBtn").addEventListener("click", () => {
-      const email = prompt("Entrez votre email");
-      const password = prompt("Entrez votre mot de passe");
+    document.querySelector("#registerForm").addEventListener("submit", (e) => {
+      e.preventDefault();
+      const email = e.target.email.value;
+      const password = e.target.password.value;
       createUserWithEmailAndPassword(auth, email, password)
-        .then(() => alert("Compte créé"))
+        .then(() => alert("Compte créé avec succès"))
         .catch(err => alert("Erreur : " + err.message));
     });
 
