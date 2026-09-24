@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BOUSAN — Plateforme Éducative du Niger</title>
+    <style>
+        :root {
+            --primary-color: #0f4c81;
+            --secondary-color: #1b75bb;
+            --text-color: #2c3e50;
+            --bg-light: #f8f9fa;
+            --white: #ffffff;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        }
+
+        body {
+            color: var(--text-color);
+            background-color: var(--bg-light);
+            line-height: 1.6;
+        }
+
+        header {
+            background-color: var(--white);
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            padding: 1.5rem;
+            text-align: center;
+        }
+
+        .logo h1 {
+            color: var(--primary-color);
+            font-size: 2.2rem;
+            letter-spacing: 2px;
+        }
+
+        .hero {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: var(--white);
+            text-align: center;
+            padding: 4rem 1rem;
+        }
+
+        .hero h2 {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto 1.5rem auto;
+            opacity: 0.9;
+        }
+
+        .badge-offline {
+            display: inline-block;
+            background-color: #e74c3c;
+            color: white;
+            padding: 0.4rem 1rem;
+            border-radius: 20px;
+            font-weight: bold;
+            font-size: 0.9rem;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 3rem auto;
+            padding: 0 1rem;
+        }
+
+        .grid-cycles {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-bottom: 4rem;
+        }
+
+        .card {
+            background-color: var(--white);
+            border-radius: 8px;
+            padding: 2rem;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            border-top: 5px solid var(--primary-color);
+            transition: transform 0.2s;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+        }
+
+        .card h3 {
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+            font-size: 1.4rem;
+        }
+
+        .classes-list {
+            display: flex;
+            gap: 0.5rem;
+            margin: 1rem 0;
+            flex-wrap: wrap;
+        }
+
+        .class-tag {
+            background-color: #edf2f7;
+            padding: 0.3rem 0.7rem;
+            border-radius: 4px;
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+
+        .card ul {
+            list-style: none;
+            margin-top: 1rem;
+        }
+
+        .card ul li {
+            margin-bottom: 0.5rem;
+            padding-left: 1.2rem;
+            position: relative;
+        }
+
+        .card ul li::before {
+            content: "•";
+            color: var(--secondary-color);
+            font-weight: bold;
+            position: absolute;
+            left: 0;
+        }
+
+        .btn {
+            display: block;
+            text-align: center;
+            background-color: var(--primary-color);
+            color: var(--white);
+            text-decoration: none;
+            padding: 0.8rem;
+            border-radius: 4px;
+            margin-top: 1.5rem;
+            font-weight: bold;
+            transition: background 0.2s;
+        }
+
+        .btn:hover {
+            background-color: #0b375e;
+        }
+
+        .about-section {
+            background-color: var(--white);
+            border-radius: 8px;
+            padding: 2.5rem;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            margin-top: 3rem;
+        }
+
+        .about-section h3 {
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+
+        footer {
+            text-align: center;
+            padding: 2rem;
+            background-color: #2c3e50;
+            color: var(--white);
+            font-size: 0.9rem;
+            margin-top: 4rem;
+        }
+
+        @media (max-width: 768px) {
+            .hero h2 { font-size: 1.6rem; }
+            .grid-cycles { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="logo">
+            <h1>BOUSAN</h1>
+        </div>
+    </header>
+
+    <section class="hero">
+        <h2>L'excellence numérique pour les sciences exactes au Niger</h2>
+        <p>Accédez à des cours rigoureux, des exercices interactifs et des annales corrigées pour dompter vos examens nationaux et universitaires.</p>
+        <span class="badge-offline">Mode Offline-First disponible</span>
+    </section>
+
+    <div class="container">
+        <div class="grid-cycles">
+            
+            <!-- ESPACE COLLEGE -->
+            <div class="card">
+                <h3>🎒 Espace Collège</h3>
+                <p>Fondations académiques et préparation approfondie au BEPC.</p>
+                <div class="classes-list">
+                    <span class="class-tag">6<sup>e</sup></span>
+                    <span class="class-tag">5<sup>e</sup></span>
+                    <span class="class-tag">4<sup>e</sup></span>
+                    <span class="class-tag">3<sup>e</sup></span>
+                </div>
+                <ul>
+                    <li>Cours conformes au programme national</li>
+                    <li>Quiz d'évaluation interactifs</li>
+                    <li>Sujets officiels du BEPC corrigés</li>
+                </ul>
+                <a href="#" class="btn">Accéder au Collège</a>
+            </div>
+
+            <!-- ESPACE LYCEE -->
+            <div class="card">
+                <h3>📐 Espace Lycée</h3>
+                <p>Spécialisation scientifique et réussite absolue au Baccalauréat.</p>
+                <div class="classes-list">
+                    <span class="class-tag">2<sup>nde</sup></span>
+                    <span class="class-tag">1<sup>ère</sup></span>
+                    <span class="class-tag">Terminale</span>
+                </div>
+                <p style="font-size: 0.85rem; color: #7f8c8d; margin-top: 0.5rem;">Séries : A, C, D, E, F</p>
+                <ul>
+                    <li>Mathématiques & Sciences approfondies</li>
+                    <li>Fiches de révision de cours</li>
+                    <li>Annales officielles du BAC nigérien</li>
+                </ul>
+                <a href="#" class="btn">Accéder au Lycée</a>
+            </div>
+
+            <!-- ENSEIGNEMENT SUPERIEUR -->
+            <div class="card">
+                <h3>🏛 Enseignement Supérieur</h3>
+                <p>Modules universitaires de haut niveau pour les étudiants et chercheurs.</p>
+                <div class="classes-list">
+                    <span class="class-tag">Université</span>
+                    <span class="class-tag">Grandes Écoles</span>
+                </div>
+                <ul>
+                    <li>Mathématiques supérieures</li>
+                    <li>Statistiques appliquées</li>
+                    <li>Informatique fondamentale</li>
+                    <li>Démographie et analyse</li>
+                </ul>
+                <a href="#" class="btn">Accéder au Supérieur</a>
+            </div>
+
+        </div>
+
+        <!-- CONFIGURATION DE L'IA -->
+        <div class="card" style="border-top-color: #27ae60; margin-bottom: 3rem;">
+            <h3 style="color: #27ae60;">🤖 Votre Assistant Pédagogique IA</h3>
+            <p>Un tuteur intelligent et léger conçu pour guider votre réflexion pas à pas sans jamais vous donner la solution brute, facilitant un véritable apprentissage des sciences exactes.</p>
+        </div>
+
+        <!-- PROFIL DU FONDATEUR -->
+        <div class="about-section">
+            <h3>Conception et édition scientifique</h3>
+            <p><strong>Ing. Samri Namata Boubacar</strong> est un ingénieur mathématicien-démographe, enseignant et éditeur scientifique originaire de Niamey. Expert en typographie scientifique et passionné par la transmission des savoirs, il a fondé la <strong>Maison d'édition BOUSAN</strong> pour offrir aux élèves et étudiants nigériens des outils numériques modernes, rigoureux et adaptés aux exigences des examens nationaux.</p>
+        </div>
+    </div>
+
+    <footer>
+        <p>© 2026 BOUSAN ÉDUCATION AU NIGER — Tous droits réservés.</p>
+        <p style="font-size: 0.75rem; opacity: 0.7; margin-top: 0.5rem;">Édition scientifique par Ing. Samri Namata Boubacar</p>
+    </footer>
+
+</body>
+</html>
