@@ -1,18 +1,12 @@
 const CACHE_NAME = 'bousan-cache-v1';
 const ASSETS_TO_CACHE = [
-    './',                     // Racine du site
-    './index.html',           // Page d'accueil
-    './style.css',            // Design global
-    './images/samri.jpeg',    // Votre photo d'auteur
-    
-    // AJOUTEZ ICI VOS AUTRES PAGES AU FUR ET À MESURE :
-    './college/index.html',   
-    './lycee/index.html',     
-    './universite/index.html'
+    './',
+    './index.html',
+    './style.css',
+    './images/samri.jpeg'
 ];
 
-
-// Installation du Service Worker et mise en cache des fichiers de base
+// Installation et mise en cache des fichiers de base essentiels
 self.addEventListener('install', (event) => {
     event.waitUntil(
         caches.open(CACHE_NAME).then((cache) => {
@@ -21,7 +15,7 @@ self.addEventListener('install', (event) => {
     );
 });
 
-// Activation et nettoyage des anciens caches
+// Nettoyage des anciens caches
 self.addEventListener('activate', (event) => {
     event.waitUntil(
         caches.keys().then((keys) => {
@@ -36,7 +30,7 @@ self.addEventListener('activate', (event) => {
     );
 });
 
-// Stratégie réseau : Réseau en priorité, sinon Cache (pour économiser le forfait des élèves)
+// Stratégie : Réseau en priorité, secours sur le cache hors-ligne
 self.addEventListener('fetch', (event) => {
     event.respondWith(
         fetch(event.request).catch(() => {
