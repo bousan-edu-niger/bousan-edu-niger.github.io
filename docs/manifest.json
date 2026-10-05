@@ -1,0 +1,24 @@
+{
+  "name": "BOUSAN ÉDUCATION AU NIGER",
+  "short_name": "BOUSAN",
+  "description": "Plateforme éducative de soutien et de révision au Niger.",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#f8fafc",
+  "theme_color": "#0f4c81",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "images/samri.jpeg",
+      "sizes": "192x192",
+      "type": "image/jpeg",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "images/samri.jpeg",
+      "sizes": "512x512",
+      "type": "image/jpeg",
+      "purpose": "any maskable"
+    }
+  ]
+}
