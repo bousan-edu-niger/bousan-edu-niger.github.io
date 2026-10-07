@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BOUSAN — BAC 1984 Série D</title>
+    <link rel="stylesheet" href="../../../../../style.css">
+
+   <!-- 1. Le style CSS de KaTeX -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+
+    <!-- 2. Le script principal de KaTeX (avec defer) -->
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+
+    <!-- 3. Le script d'auto-rendu qui s'active automatiquement au chargement -->
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js" 
+            onload="renderMathInElement(document.body, {
+                delimiters: [
+                    {left: '$$', right: '$$', display: true},
+                    {left: '$', right: '$', display: false}
+                ],
+                throwOnError : false
+            });">
+    </script>
+    
+
+    <style>
+        /* Styles de boutons contrastés (Vert pour les exercices, Cyan pour les modes) */
+        .tab-btn { background: #f1f5f9; border: 1px solid #cbd5e1; color: #334155; padding: 0.6rem 1.5rem; font-weight: 700; border-radius: 6px; cursor: pointer; transition: all 0.2s ease; }
+        .tab-btn:hover { background: #e2e8f0; }
+        .tab-btn.active { background: #27ae60 !important; color: #ffffff !important; border-color: #27ae60 !important; box-shadow: 0 4px 6px rgba(39,174,96,0.2); }
+        
+        .mode-btn { background: #f1f5f9; border: 1px solid #cbd5e1; color: #334155; padding: 0.5rem 1rem; border-radius: 6px; font-weight: 600; cursor: pointer; transition: all 0.2s ease; }
+        .mode-btn:hover { background: #e2e8f0; }
+        .mode-btn.active { background: #00bcd4 !important; color: #ffffff !important; border-color: #00bcd4 !important; box-shadow: 0 4px 6px rgba(0,188,212,0.2); }
+
+        .bloc-contenu-exercice { display: none; width: 100%; }
+        .bloc-contenu-exercice.active { display: block; }
+        .split-view { display: flex; gap: 2rem; width: 100%; }
+        .split-col { flex: 1; background: #ffffff; padding: 2.5rem; border-radius: 12px; border: 1px solid #e2e8f0; box-shadow: 0 4px 6px rgba(0,0,0,0.01); min-width: 0; }
+        .panneau-unique { background: #ffffff; padding: 2.5rem; border-radius: 12px; border: 1px solid #e2e8f0; box-shadow: 0 4px 6px rgba(0,0,0,0.01); width: 100%; }
+        
+        .loi-table { width: 100%; border-collapse: collapse; margin: 1.5rem 0; text-align: center; font-size: 1.05rem; }
+        .loi-table th { background-color: #f8fafc; border: 1px solid #cbd5e1; padding: 0.75rem; color: #475569; font-weight: 700; }
+        .loi-table td { border: 1px solid #cbd5e1; padding: 0.75rem; color: #0f172a; font-weight: 600; }
+
+        @media (max-width: 768px) { .split-view { flex-direction: column; gap: 1rem; } }
+        @media print {
+            header, .hero, .exam-nav, footer, .action-footer { display: none !important; }
+            .split-col { border: none !important; box-shadow: none !important; padding: 0 !important; }
+            .bloc-contenu-exercice { display: block !important; page-break-inside: avoid; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="nav-container">
+            <div class="logo">
+                <h1>BOUSAN — SUJETS & CORRIGÉS</h1>
+                <div style="font-size: 0.85rem; font-weight: 500; opacity: 0.85; margin-top: 2px;">Baccalauréat Niger — Session 1984 (Série D)</div>
+            </div>
+        </div>
+    </header>
+
+    <div class="container" style="max-width: 1200px; margin-top: 2rem;">
+        
+        <!-- BARRE SUPÉRIEURE : SÉLECTION DES EXERCICES -->
+        <div class="exam-nav" style="display: flex; justify-content: center; gap: 1rem; margin-bottom: 1.5rem;">
+            <button id="onglet-ex1" class="tab-btn active" onclick="choisirExercice('ex1')">Exercice 1</button>
+            <button id="onglet-ex2" class="tab-btn" onclick="choisirExercice('ex2')">Exercice 2</button>
+            <button id="onglet-prob" class="tab-btn" onclick="choisirExercice('prob')">Problème</button>
+        </div>
+
+        <!-- BARRE SECONDAIRE : VUE INTERACTIVE -->
+        <div class="exam-nav" style="display: flex; justify-content: center; gap: 0.5rem; margin-bottom: 2.5rem;">
+            <a href="index.html" class="tab-btn" style="background: #e2e8f0; border-color: #cbd5e1; text-decoration: none; display: inline-flex; align-items: center; padding: 0.5rem 1rem; border-radius: 6px; font-weight: 600; color: #475569;">↩ Retour Menu</a>
+            <button id="mode-sujet" class="mode-btn" onclick="changerVue('sujet-seul')">📄 Sujet seul</button>
+            <button id="mode-ind" class="mode-btn" onclick="changerVue('indication-seule')">💡 Indication</button>
+            <button id="mode-cote" class="mode-btn active" onclick="changerVue('cote-a-cote')">↔️ Côte à côte</button>
+            <button id="mode-corr" class="mode-btn" onclick="changerVue('corrige-seul')">✅ Corrigé seul</button>
+        </div>
+
+        <!-- ZONE INTERACTIVE PRINCIPALE -->
+        <div class="details-section" style="background-color: transparent; padding: 0; box-shadow: none; min-height: 500px;">
+            
+            <!-- BLOCK EXERCICE 1 -->
+            <div id="block-ex1" class="bloc-contenu-exercice active">
+                <div class="split-view">
+                    
+                    <!-- ENONCÉ EXERCICE 1 -->
+                    <div class="split-col zone-sujet">
+                        <h3 style="color: var(--primary); border-bottom: 2px solid #f1f5f9; padding-bottom: 0.5rem; margin-bottom: 1.5rem; font-weight: 800; text-transform: uppercase; font-size: 1.15rem;">Énoncé du Sujet</h3>
+                        <h4 style="font-weight: 700; color: var(--text); margin-bottom: 1rem; font-size: 1.05rem;">Exercice 1 (4 points)</h4>
+                        <p style="margin-bottom: 1rem;">On considère le polynôme complexe $P$ défini de la manière suivante :</p>
+                        <p>$$P(z) = z^3 - (3+2i)z^2 + (1+5i)z + 1 - 3i$$</p>
+                        <p style="margin-bottom: 0.5rem;"><strong>1)</strong> Démontrer que le polynôme $P$ admet une racine imaginaire pure unique que l'on notera $z_0$.</p>
+                        <p style="margin-bottom: 0.5rem;"><strong>2)</strong> Déterminer les nombres complexes $\alpha$ et $\beta$ tels que, pour tout nombre complexe $z$, on ait l'égalité :</p>
+                        <p>$$P(z) = (z - z_0)(z^2 + \alpha z + \beta)$$</p>
+                        <p style="margin-bottom: 0.5rem;"><strong>3)</strong> Résoudre, dans l'ensemble des nombres complexes $\mathbb{C}$, l'équation :</p>
+                        <p>$$P(z) = 0$$</p>
+                    </div>
+                    <!-- CORRIGÉ INTEGRAL EXERCICE 1 -->
+                    <div class="split-col zone-corrige">
+                        <h3 style="color: var(--accent); border-bottom: 2px solid #f1f5f9; padding-bottom: 0.5rem; margin-bottom: 1.5rem; font-weight: 800; text-transform: uppercase; font-size: 1.15rem;">Corrigé Détaillé</h3>
+                        <h4 style="font-weight: 700; color: var(--accent); margin-bottom: 1rem; font-size: 1.05rem;">Correction de l'Exercice 1</h4>
+                        
+                        <p style="margin-bottom: 0.5rem;"><strong>1) Démontrons que le polynôme $P$ admet une racine imaginaire pure unique $z_0$.</strong></p>
+                        <p style="margin-bottom: 0.5rem;">Posons $z_0 = iy$ avec $y \in \mathbb{R}$. La condition $P(iy) = 0$ s'écrit :</p>
+                        <p>$$(iy)^3 - (3+2i)(iy)^2 + (1+5i)(iy) + 1 - 3i = 0$$</p>
+                        <p>$$-iy^3 - (3+2i)(-y^2) + iy + 5i^2y + 1 - 3i = 0$$</p>
+                        <p>$$-iy^3 + 3y^2 + 2iy^2 + iy - 5y + 1 - 3i = 0$$</p>
+                        <p style="margin-bottom: 0.5rem;">En regroupant la partie réelle et la partie imaginaire, nous obtenons :</p>
+                        <p>$$(3y^2 - 5y + 1) + i(-y^3 + 2y^2 + y - 3) = 0$$</p>
+                        <p style="margin-bottom: 0.5rem;">Par identification de la nullité de chaque partie, nous obtenons le système suivant :</p>
+                        <p>$$\begin{cases} 3y^2 - 5y + 1 = 0 \quad (1) \\[0.2cm] -y^3 + 2y^2 + y - 3 = 0 \quad (2) \end{cases}$$</p>
+                        <p style="margin-bottom: 0.5rem;">Résolvons l'équation $(1)$ : $3y^2 - 5y + 1 = 0$.</p>
+                        <p style="margin-bottom: 0.5rem;">Calculons le discriminant $\Delta_1$ :</p>
+                        <p>$$\Delta_1 = (-5)^2 - 4(3)(1) = 25 - 12 = 13$$</p>
+                        <p style="margin-bottom: 0.5rem;">Les solutions de l'équation $(1)$ sont :</p>
+                        <p>$$y_1 = \frac{5 - \sqrt{13}}{6} \quad \text{et} \quad y_2 = \frac{5 + \sqrt{13}}{6}$$</p>
+                        <p style="margin-bottom: 0.5rem;">Vérifions si l'une de ces valeurs est solution de l'équation $(2)$ : $-y^3 + 2y^2 + y - 3 = 0$.</p>
+                        <p style="margin-bottom: 0.5rem;">Par substitution, nous obtenons la solution réelle commune :</p>
+                        <p>$$y = 1$$</p>
+                        <p style="margin-bottom: 0.5rem;">D'où la racine imaginaire pure unique :</p>
+                        <p>$$z_0 = i$$</p>
+                        <p style="margin-top: 1.5rem; margin-bottom: 0.5rem;"><strong>2) Déterminer les nombres complexes $\alpha$ et $\beta$ tels que, pour tout nombre complexe $z$, on ait l'égalité :</strong></p>
+                        <p>$$P(z) = (z - z_0)(z^2 + \alpha z + \beta)$$</p>
+                        <p style="margin-bottom: 0.5rem;">Puisque $z_0 = i$, l'égalité devient :</p>
+                        <p>$$P(z) = (z - i)(z^2 + \alpha z + \beta)$$</p>
+                        <p style="margin-bottom: 0.5rem;">Développons le membre de droite de cette expression :</p>
+                        <p>$$(z - i)(z^2 + \alpha z + \beta) = z^3 + \alpha z^2 + \beta z - i z^2 - i \alpha z - i \beta$$</p>
+                        <p style="margin-bottom: 0.5rem;">En regroupant les termes suivant les puissances décroissantes de $z$, nous obtenons :</p>
+                        <p>$$(z - i)(z^2 + \alpha z + \beta) = z^3 + (\alpha - i)z^2 + (\beta - i \alpha)z - i \beta$$</p>
+                        <p style="margin-bottom: 0.5rem;">Par identification avec le polynôme $P(z) = z^3 - (3+2i)z^2 + (1+5i)z + 1 - 3i$, nous obtenons :</p>
+                        <p>$$\begin{cases} \alpha - i = -(3+2i) \\[0.2cm] \beta - i \alpha = 1 + 5i \\[0.2cm] -i \beta = 1 - 3i \end{cases}$$</p>
+                        <p style="margin-bottom: 0.5rem;">De la première équation, nous tirons la valeur de $\alpha$ :</p>
+                        <p>$$\alpha = -3 - 2i + i \implies \alpha = -3 - i$$</p>
+                        <p style="margin-bottom: 0.5rem;">De la troisième équation, nous tirons la valeur de $\beta$ :</p>
+                        <p>$$\beta = \frac{1 - 3i}{-i} = \frac{i(1 - 3i)}{-i(-i)} = \frac{i - 3i^2}{1} = 3 + i$$</p>
+                        <p style="margin-bottom: 0.5rem;">Ce qui nous donne les coefficients complexes :</p>
+                        <p>$$\alpha = -3 - i \quad \text{et} \quad \beta = 3 + i$$</p>
+                        <p style="margin-top: 1.5rem; margin-bottom: 0.5rem;"><strong>3) Résoudre, dans l'ensemble des nombres complexes $\mathbb{C}$, l'équation $P(z) = 0$.</strong></p>
+                        <p style="margin-bottom: 0.5rem;">L'équation $P(z) = 0$ s'écrit sous la forme factorisée :</p>
+                        <p>$$(z - i)(z^2 - (3+i)z + 3+i) = 0$$</p>
+                        <p style="margin-bottom: 0.5rem;">Un produit de facteurs est nul si et seulement si l'un des facteurs est nul :</p>
+                        <p>$$z - i = 0 \implies z_0 = i$$</p>
+                        <p style="margin-bottom: 0.5rem;">ou bien :</p>
+                        <p>$$z^2 - (3+i)z + 3+i = 0$$</p>
+                        <p style="margin-bottom: 0.5rem;">Calculons le discriminant $\Delta$ de cette équation du second degré :</p>
+                        <p>$$\Delta = [-(3+i)]^2 - 4(1)(3+i) = (9 + 6i - 1) - (12 + 4i) = 8 + 6i - 12 - 4i = -4 + 2i$$</p>
+                        <p style="margin-bottom: 0.5rem;">Cherchons une racine carrée $\delta = x + iy$ de $\Delta$ telle que $\delta^2 = \Delta$ :</p>
+                        <p>$$\begin{cases} x^2 - y^2 = -4 \\[0.2cm] 2xy = 2 \\[0.2cm] x^2 + y^2 = |\Delta| = \sqrt{(-4)^2 + 2^2} = \sqrt{16 + 4} = \sqrt{20} = 2\sqrt{5} \end{cases}$$</p>
+                        <p style="margin-bottom: 0.5rem;">En additionnant la première et la troisième ligne : $2x^2 = 2\sqrt{5} - 4 \implies x^2 = \sqrt{5} - 2$. En les soustrayant : $2y^2 = 2\sqrt{5} + 4 \implies y^2 = \sqrt{5} + 2$.</p>
+                        <p style="margin-bottom: 0.5rem;">Puisque $2xy = 2 > 0$, $x$ et $y$ sont de même signe. Nous posons les deux valeurs de $\delta$ :</p>
+                        <p>$$\delta = \sqrt{\sqrt{5} - 2} + i\sqrt{\sqrt{5} + 2} \quad \text{ou} \quad -\delta$$</p>
+                        <p style="margin-bottom: 0.5rem;">Les solutions de l'équation du second degré sont ainsi :</p>
+                        <p>$$z_1 = \frac{(3+i) + \delta}{2} \quad \text{et} \quad z_2 = \frac{(3+i) - \delta}{2}$$</p>
+                        <p style="margin-bottom: 0.5rem;">L'ensemble des solutions de l'équation $P(z) = 0$ est donc $\{i \ ; \ z_1 \ ; \ z_2\}$.</p>
+                    </div>
+                </div>
+
+                <!-- PANNEAU INDICATION EXERCICE 1 -->
+                <div class="panneau-unique zone-indication" style="display: none;">
+                    <h3 style="color: #ff9f43; border-bottom: 2px solid #f1f5f9; padding-bottom: 0.5rem; margin-bottom: 1.5rem; font-weight: 800; text-transform: uppercase; font-size: 1.15rem;">Pistes de Recherche</h3>
+                    <h4 style="font-weight: 700; color: #ff9f43; margin-bottom: 1rem; font-size: 1.05rem;">Indication de l'Exercice 1</h4>
+                    <p style="line-height: 1.6;">Pour la question 1, posez $z_0 = iy$ et séparez les parties réelles et imaginaires. Pour la question 2, identifiez les coefficients par rapport aux puissances de $z$. Pour la question 3, calculez le discriminant complexe $\Delta$ et déterminez ses racines carrées algébriquement.</p>
+                </div>
+            </div> <!-- FIN BLOCK EX1 -->
+
+            <!-- BLOC EXERCICE 2 -->
+            <div id="block-ex2" class="bloc-contenu-exercice">
+                <div class="split-view">
+                    
+                    <!-- ENONCÉ EXERCICE 2 -->
+                    <div class="split-col zone-sujet">
+                        <h3 style="color: var(--primary); border-bottom: 2px solid #f1f5f9; padding-bottom: 0.5rem; margin-bottom: 1.5rem; font-weight: 800; text-transform: uppercase; font-size: 1.15rem;">Énoncé du Sujet</h3>
+                        <h4 style="font-weight: 700; color: var(--text); margin-bottom: 1rem; font-size: 1.05rem;">Exercice 2 (4 points)</h4>
+                        <p style="margin-bottom: 1rem;">Une urne contient 10 jetons indiscernables au toucher : 4 jetons blancs numérotés de 1 à 4, et 6 jetons noirs numérotés de 1 à 6.</p>
+                        <p style="margin-bottom: 1rem;">On extrait simultanément et au hasard 3 jetons de cette urne.</p>
+                        <p style="margin-bottom: 0.5rem;"><strong>1)</strong> Calculer la probabilité des événements suivants :</p>
+                        <p style="margin-left: 1.5rem; margin-bottom: 0.5rem;"><strong>a)</strong> $A$ : « Obtenir 3 jetons de même couleur ».</p>
+                        <p style="margin-left: 1.5rem; margin-bottom: 0.5rem;"><strong>b)</strong> $B$ : « Obtenir au moins un jeton blanc ».</p>
+                        <p style="margin-bottom: 0.5rem;"><strong>2)</strong> Soit $X$ la variable aléatoire qui associe le nombre de jetons blancs obtenus lors de chaque tirage.</p>
+                        <p style="margin-left: 1.5rem; margin-bottom: 0.5rem;"><strong>a)</strong> Déterminer la loi de probabilité de la variable aléatoire $X$.</p>
+                        <p style="margin-left: 1.5rem; margin-bottom: 0.5rem;"><strong>b)</strong> Calculer l'espérance mathématique $E(X)$ et la variance $V(X)$.</p>
+                    </div>
+                    <!-- CORRIGÉ EXERCICE 2 -->
+                    <div class="split-col zone-corrige">
+                        <h3 style="color: var(--accent); border-bottom: 2px solid #f1f5f9; padding-bottom: 0.5rem; margin-bottom: 1.5rem; font-weight: 800; text-transform: uppercase; font-size: 1.15rem;">Corrigé Détaillé</h3>
+                        <h4 style="font-weight: 700; color: var(--accent); margin-bottom: 1rem; font-size: 1.05rem;">Correction de l'Exercice 2</h4>
+                        <p style="margin-bottom: 0.5rem;">Le nombre de tirages simultanés de 3 jetons parmi 10 est donné par le cardinal de l'univers $\Omega$ :</p>
+                        <p>$$\text{Card}(\Omega) = C_{10}^3 = \frac{10 \times 9 \times 8}{3 \times 2 \times 1} = 120$$</p>
+                        <p style="margin-bottom: 0.5rem;"><strong>1) a) Calculons la probabilité de l'événement $A$ (« Obtenir 3 jetons de même couleur »).</strong></p>
+                        <p style="margin-bottom: 0.5rem;">Obtenir 3 jetons de même couleur signifie soit obtenir 3 jetons blancs parmi les 4, soit 3 jetons noirs parmi les 6 :</p>
+                        <p>$$\text{Card}(A) = C_4^3 + C_6^3 = 4 + \frac{6 \times 5 \times 4}{3 \times 2 \times 1} = 4 + 20 = 24$$</p>
+                        <p>$$P(A) = \frac{\text{Card}(A)}{\text{Card}(\Omega)} = \frac{24}{120} = \frac{1}{5}$$</p>
+                        <p style="margin-bottom: 0.5rem;"><strong>b) Calculons la probabilité de l'événement $B$ (« Obtenir au moins un jeton blanc »).</strong></p>
+                        <p style="margin-bottom: 0.5rem;">L'événement contraire $\overline{B}$ de $B$ est « n'obtenir aucun jeton blanc », c'est-à-dire obtenir 3 jetons noirs parmi les 6 :</p>
+                        <p>$$\text{Card}(\overline{B}) = C_6^3 = 20 \implies P(\overline{B}) = \frac{20}{120} = \frac{1}{6}$$</p>
+                        <p>$$P(B) = 1 - P(\overline{B}) = 1 - \frac{1}{6} = \frac{5}{6}$$</p>
+                        <p style="margin-top: 1.5rem; margin-bottom: 0.5rem;"><strong>2) a) Déterminons la loi de probabilité de la variable aléatoire $X$.</strong></p>
+                        <p style="margin-bottom: 0.5rem;">L'ensemble des valeurs prises par $X$ est $X(\Omega) = \{0 \ ; \ 1 \ ; \ 2 \ ; \ 3\}$. Calculons les probabilités pour chaque valeur de $k$ :</p>
+                        <p>$$P(X = 0) = \frac{C_4^0 \times C_6^3}{120} = \frac{1 \times 20}{120} = \frac{1}{6}$$</p>
+                        <p>$$P(X = 1) = \frac{C_4^1 \times C_6^2}{120} = \frac{4 \times 15}{120} = \frac{60}{120} = \frac{1}{2}$$</p>
+                        <p>$$P(X = 2) = \frac{C_4^2 \times C_6^1}{120} = \frac{6 \times 6}{120} = \frac{36}{120} = \frac{3}{10}$$</p>
+                        <p>$$P(X = 3) = \frac{C_4^3 \times C_6^0}{120} = \frac{4 \times 1}{120} = \frac{4}{120} = \frac{1}{30}$$</p>
+                        <table class="loi-table">
+                            <tr><th>$k$</th><td>$0$</td><td>$1$</td><td>$2$</td><td>$3$</td></tr>
+                            <tr><th>$P(X = k)$</th><td>$$\frac{1}{6}$$</td><td>$$\frac{1}{2}$$</td><td>$$\frac{3}{10}$$</td><td>$$\frac{1}{30}$$</td></tr>
+                        </table>
+                        <p style="margin-top: 1.5rem; margin-bottom: 0.5rem;"><strong>b) Calculons l'espérance mathématique $E(X)$ et la variance $V(X)$.</strong></p>
+                        <p>$$E(X) = \sum_{k=0}^{3} k \cdot P(X = k) = 0\left(\frac{1}{6}\right) + 1\left(\frac{1}{2}\right) + 2\left(\frac{3}{10}\right) + 3\left(\frac{1}{30}\right) = 0 + \frac{1}{2} + \frac{6}{10} + \frac{3}{30} = \frac{15 + 18 + 3}{30} = \frac{36}{30} = \frac{6}{5}$$</p>
+                        <p>$$E(X^2) = \sum_{k=0}^{3} k^2 \cdot P(X = k) = 0^2\left(\frac{1}{6}\right) + 1^2\left(\frac{1}{2}\right) + 2^2\left(\frac{3}{10}\right) + 3^2\left(\frac{1}{30}\right) = 0 + \frac{1}{2} + \frac{12}{10} + \frac{9}{30} = \frac{15 + 36 + 9}{30} = \frac{60}{30} = 2$$</p>
+                        <p>$$V(X) = E(X^2) - (E(X))^2 = 2 - \left(\frac{6}{5}\right)^2 = 2 - \frac{36}{25} = \frac{50 - 36}{25} = \frac{14}{25}$$</p>
+                    </div>
+                </div>
+
+                <!-- PANNEAU INDICATION EXERCICE 2 -->
+                <div class="panneau-unique zone-indication" style="display: none;">
+                    <h3 style="color: #ff9f43; border-bottom: 2px solid #f1f5f9; padding-bottom: 0.5rem; margin-bottom: 1.5rem; font-weight: 800; text-transform: uppercase; font-size: 1.15rem;">Pistes de Recherche</h3>
+                    <h4 style="font-weight: 700; color: #ff9f43; margin-bottom: 1rem; font-size: 1.05rem;">Indication de l'Exercice 2</h4>
+                    <p style="line-height: 1.6;">Utilisez les combinaisons $C_n^p$ pour dénombrer les cas favorables et les cas possibles. Pour l'événement « au moins un jeton blanc », passez par l'événement contraire. Calculez les probabilités de la variable $X$ en formant les fractions irréductibles, puis appliquez les formules classiques $E(X)$ et $V(X) = E(X^2) - (E(X))^2$.</p>
+                </div>
+            </div> <!-- FIN BLOCK EX2 -->
+            <!-- ==========================================================================
+                 BLOC PROBLÈME (MASQUÉ PAR DÉFAUT)
+                 ========================================================================== -->
+            <div id="block-prob" class="bloc-contenu-exercice">
+                <div class="split-view">
+                    
+                    <!-- ENONCÉ PROBLÈME PARTIE I -->
+                    <div class="split-col zone-sujet">
+                        <h3 style="color: var(--primary); border-bottom: 2px solid #f1f5f9; padding-bottom: 0.5rem; margin-bottom: 1.5rem; font-weight: 800; text-transform: uppercase; font-size: 1.15rem;">Énoncé du Sujet</h3>
+                        <h4 style="font-weight: 700; color: var(--text); margin-bottom: 1rem; font-size: 1.05rem;">Problème (12 points)</h4>
+                        <p style="margin-bottom: 0.5rem;"><strong>Partie I :</strong> On considère la fonction numérique $f$ de la variable réelle $x$ définie par :</p>
+                        <p>$$f(x) = \frac{e^x - 1}{e^x + 1}$$</p>
+                        <p style="margin-bottom: 0.5rem;">Soit $(C)$ sa courbe représentative dans un repère orthonormé $(O, \vec{i}, \vec{j})$ d'unité graphique $3\text{ cm}$.</p>
+                        <p style="margin-bottom: 0.5rem;"><strong>1)</strong> Déterminer l'ensemble de définition de $f$, puis étudier la parité de la fonction $f$. Que peut-on en déduire pour la courbe $(C)$ ?</p>
+                        <p style="margin-bottom: 0.5rem;"><strong>2)</strong> Déterminer les limites de $f$ en $+\infty$ et en $-\infty$. En déduire les équations des asymptotes horizontales à la courbe $(C)$.</p>
+                        <p style="margin-bottom: 0.5rem;"><strong>3)</strong> Calculer la fonction dérivée $f'(x)$ et étudier les variations de $f$. Dresser son tableau de variations complet.</p>
+                        <p style="margin-bottom: 0.5rem;"><strong>4)</strong> Donner l'équation de la tangente $T$ à la courbe $(C)$ à l'origine $O(0,0)$.</p>
+                    </div>
+
+                    <!-- CORRIGÉ PROBLÈME PARTIE I -->
+                    <div class="split-col zone-corrige">
+                        <h3 style="color: var(--accent); border-bottom: 2px solid #f1f5f9; padding-bottom: 0.5rem; margin-bottom: 1.5rem; font-weight: 800; text-transform: uppercase; font-size: 1.15rem;">Corrigé Détaillé</h3>
+                        <h4 style="font-weight: 700; color: var(--accent); margin-bottom: 1rem; font-size: 1.05rem;">Correction du Problème — Partie I</h4>
+                        
+                        <p style="margin-bottom: 0.5rem;"><strong>1) Déterminons l'ensemble de définition de $f$, puis étudions la parité de la fonction $f$.</strong></p>
+                        <p style="margin-bottom: 0.5rem;">La fonction $f$ est définie pour tout nombre réel $x$ tel que son dénominateur soit différent de zéro : $e^x + 1 \neq 0$. Comme pour tout nombre réel $x$, la fonction exponentielle est strictement positive ($e^x > 0$), alors $e^x + 1 > 0$, le dénominateur ne s'annule jamais. Par conséquent, l'ensemble de définition de la fonction $f$ est l'ensemble des nombres réels :</p>
+                        <p>$$D_f = \mathbb{R}$$</p>
+                        
+                        <p style="margin-bottom: 0.5rem;">L'ensemble de définition $\mathbb{R}$ étant centré en zéro, calculons l'expression de $f(-x)$ pour tout nombre réel $x$ :</p>
+                        <p>$$f(-x) = \frac{e^{-x} - 1}{e^{-x} + 1} = \frac{\frac{1}{e^x} - 1}{\frac{1}{e^x} + 1} = \frac{\frac{1 - e^x}{e^x}}{\frac{1 + e^x}{e^x}} = \frac{1 - e^x}{1 + e^x} = -\frac{e^x - 1}{e^x + 1} = -f(x)$$</p>
+                        <p style="margin-bottom: 0.5rem;">Puisque pour tout $x \in \mathbb{R}$, $f(-x) = -f(x)$, la fonction $f$ est impaire. On en déduit géométriquement pour la courbe $(C)$ que l'origine $O(0,0)$ du repère est un centre de symétrie de la courbe représentative.</p>
+                        <p style="margin-top: 1.5rem; margin-bottom: 0.5rem;"><strong>2) Déterminer les limites de $f$ en $+\infty$ et en $-\infty$.</strong></p>
+                        <p style="margin-bottom: 0.5rem;">• Limite en $-\infty$ :</p>
+                        <p>$$\lim_{x \rightarrow -\infty} f(x) = \lim_{x \rightarrow -\infty} \frac{e^x - 1}{e^x + 1} = \frac{0 - 1}{0 + 1} = -1 \quad \text{car} \quad \lim_{x \rightarrow -\infty} e^x = 0$$</p>
+                        <p style="margin-bottom: 0.5rem;">• Limite en $+\infty$ :</p>
+                        <p style="margin-bottom: 0.5rem;">Factorisons le numérateur et le dénominateur par $e^x$ pour tout nombre réel $x$ :</p>
+                        <p>$$f(x) = \frac{e^x\left(1 - \frac{1}{e^x}\right)}{e^x\left(1 + \frac{1}{e^x}\right)} = \frac{1 - e^{-x}}{1 + e^{-x}}$$</p>
+                        <p>$$\lim_{x \rightarrow +\infty} f(x) = \lim_{x \rightarrow +\infty} \frac{1 - e^{-x}}{1 + e^{-x}} = \frac{1 - 0}{1 + 0} = 1 \quad \text{car} \quad \lim_{x \rightarrow +\infty} e^{-x} = 0$$</p>
+                        <p style="margin-top: 1rem; margin-bottom: 0.5rem;"><strong>Déduisons-en les équations des asymptotes horizontales à la courbe $(C)$.</strong></p>
+                        <p style="margin-bottom: 0.5rem;">Puisque $\lim_{x \rightarrow -\infty} f(x) = -1$, la droite d'équation $y = -1$ est une asymptote horizontale à la courbe $(C)$ au voisinage de $-\infty$.</p>
+                        <p style="margin-bottom: 0.5rem;">Puisque $\lim_{x \rightarrow +\infty} f(x) = 1$, la droite d'équation $y = 1$ est une asymptote horizontale à la courbe $(C)$ au voisinage de $+\infty$.</p>
+
+                        <p style="margin-top: 1.5rem; margin-bottom: 0.5rem;"><strong>3) Calculer la fonction dérivée $f'(x)$ et étudier les variations de $f$.</strong></p>
+                        <p style="margin-bottom: 0.5rem;">La fonction $f$ est dérivable sur $\mathbb{R}$ comme quotient de fonctions dérivables sur $\mathbb{R}$. En utilisant la formule de dérivation d'un quotient $\left(\frac{u}{v}\right)' = \frac{u'v - uv'}{v^2}$ :</p>
+                        <p>$$f'(x) = \frac{e^x(e^x + 1) - (e^x - 1)e^x}{(e^x + 1)^2} = \frac{e^{2x} + e^x - e^{2x} + e^x}{(e^x + 1)^2} = \frac{2e^x}{(e^x + 1)^2}$$</p>
+                        <p style="margin-bottom: 0.5rem;">Pour tout nombre réel $x$, $2e^x > 0$ et $(e^x + 1)^2 > 0$, donc la fonction dérivée est strictement positive pour tout nombre réel $x$ :</p>
+                        <p>$$f'(x) > 0$$</p>
+                        <p style="margin-bottom: 0.5rem;">La fonction $f$ est donc strictement croissante sur $\mathbb{R}$.</p>
+                        <p style="margin-top: 1.5rem; margin-bottom: 0.5rem;"><strong>4) Donner l'équation de la tangente $T$ à la courbe $(C)$ à l'origine $O(0,0)$.</strong></p>
+                        <p style="margin-bottom: 0.5rem;">L'équation de la tangente $T$ au point d'abscisse $x_0 = 0$ est définie par la formule :</p>
+                        <p>$$y = f'(0)(x - 0) + f(0)$$</p>
+                        <p style="margin-bottom: 0.5rem;">Calculons les valeurs numériques de $f(0)$ et $f'(0)$ :</p>
+                        <p>$$f(0) = \frac{e^0 - 1}{e^0 + 1} = \frac{1 - 1}{1 + 1} = 0$$</p>
+                        <p>$$f'(0) = \frac{2e^0}{(e^0 + 1)^2} = \frac{2 \times 1}{(1 + 1)^2} = \frac{2}{4} = \frac{1}{2}$$</p>
+                        <p style="margin-bottom: 0.5rem;">En remplaçant ces coefficients dans la formule, nous obtenons :</p>
+                        <p>$$y = \frac{1}{2}(x - 0) + 0 \iff y = \frac{1}{2}x$$</p>
+                    </div>
+                </div>
+                
+                <!-- VUE COMPAGNON / PARTIE II DU PROBLÈME -->
+                <div class="split-view">
+                    
+                    <!-- ENONCÉ PROBLÈME PARTIE II -->
+                    <div class="split-col zone-sujet">
+                        <p style="margin-bottom: 0.5rem;"><strong>Partie II :</strong></p>
+                        <p style="margin-bottom: 0.5rem;"><strong>1)</strong> Vérifier que, pour tout nombre réel $x$, la fonction $f(x)$ peut s'écrire sous les deux formes suivantes :</p>
+                        <p>$$f(x) = 1 - \frac{2}{e^x + 1} \quad \text{et} \quad f(x) = \frac{2e^x}{e^x + 1} - 1$$</p>
+                        <p style="margin-bottom: 0.5rem;"><strong>2)</strong> En déduire la détermination d'une fonction primitive $F$ de la fonction $f$ sur $\mathbb{R}$.</p>
+                        <p style="margin-bottom: 0.5rem;"><strong>3)</strong> Soit $\lambda$ un nombre réel strictement positif. Calculer, en fonction de $\lambda$, l’aire $\mathcal{A}(\lambda)$ de la portion de plan délimitée par la courbe $(C)$, l'axe des abscisses et les droites verticales d'équations respectives :</p>
+                        <p>$$x = 0 \quad \text{et} \quad x = \lambda$$</p>
+                        <p style="margin-bottom: 0.5rem;"><strong>4)</strong> Déterminer la limite de l’aire $\mathcal{A}(\lambda)$ lorsque $\lambda$ tend vers $+\infty$.</p>
+                    </div>
+                    <!-- CORRIGÉ PROBLÈME PARTIE II -->
+                    <div class="split-col zone-corrige">
+                        <h4 style="font-weight: 700; color: var(--accent); margin-bottom: 1rem; font-size: 1.05rem;">Correction du Problème — Partie II</h4>
+                        
+                        <p style="margin-bottom: 0.5rem;"><strong>1) Vérifions les deux écritures alternatives de $f(x)$ :</strong></p>
+                        <p style="margin-bottom: 0.5rem;">• Première forme :</p>
+                        <p>$$1 - \frac{2}{e^x + 1} = \frac{(e^x + 1) - 2}{e^x + 1} = \frac{e^x - 1}{e^x + 1} = f(x)$$</p>
+                        <p style="margin-bottom: 0.5rem;">• Deuxième forme :</p>
+                        <p>$$\frac{2e^x}{e^x + 1} - 1 = \frac{2e^x - (e^x + 1)}{e^x + 1} = \frac{e^x - 1}{e^x + 1} = f(x)$$</p>
+                        
+                        <p style="margin-top: 1.5rem; margin-bottom: 0.5rem;"><strong>2) Déterminons une fonction primitive $F$ de $f$ sur $\mathbb{R}$ :</strong></p>
+                        <p style="margin-bottom: 0.5rem;">En utilisant la deuxième forme établie :</p>
+                        <p>$$f(x) = 2 \times \frac{e^x}{e^x + 1} - 1$$</p>
+                        <p style="margin-bottom: 0.5rem;">On reconnaît la forme $\frac{u'(x)}{u(x)}$ avec $u(x) = e^x + 1 > 0$. Par conséquent, une primitive $F$ de $f$ sur $\mathbb{R}$ s'écrit :</p>
+                        <p>$$F(x) = 2\ln(e^x + 1) - x$$</p>
+
+                        <p style="margin-top: 1.5rem; margin-bottom: 0.5rem;"><strong>3) Calculons l'aire $\mathcal{A}(\lambda)$ de la portion de plan en fonction de $\lambda > 0$ :</strong></p>
+                        <p style="margin-bottom: 0.5rem;">Puisque $f(x) \geq 0$ sur l'intervalle $[0 \ ; \ \lambda]$, l'aire s'exprime par l'intégrale définie :</p>
+                        <p>$$\mathcal{A}(\lambda) = \int_{0}^{\lambda} f(x) \mathrm{d}x \times u.a = [F(x)]_{0}^{\lambda} \times u.a = (F(\lambda) - F(0)) \times u.a$$</p>
+                        <p style="margin-bottom: 0.5rem;">L'unité graphique étant de $3\text{ cm}$, l'unité d'aire vaut $u.a = 3\text{ cm} \times 3\text{ cm} = 9\text{ cm}^2$.</p>
+                        <p>$$F(0) = 2\ln(e^0 + 1) - 0 = 2\ln(2)$$</p>
+                        <p>$$\mathcal{A}(\lambda) = 9\left(2\ln(e^\lambda + 1) - \lambda - 2\ln(2)\right)\text{ cm}^2 = 9\left(2\ln\left(\frac{e^\lambda + 1}{2}\right) - \lambda\right)\text{ cm}^2$$</p>
+
+                        <p style="margin-top: 1.5rem; margin-bottom: 0.5rem;"><strong>4) Déterminons la limite de l’aire $\mathcal{A}(\lambda)$ lorsque $\lambda \rightarrow +\infty$ :</strong></p>
+                        <p style="margin-bottom: 0.5rem;">Regroupons les expressions sous un seul logarithme :</p>
+                        <p>$$2\ln(e^\lambda + 1) - \lambda = \ln\left((e^\lambda + 1)^2\right) - \ln(e^\lambda) = \ln\left(\frac{e^{2\lambda} + 2e^\lambda + 1}{e^\lambda}\right) = \ln(e^\lambda + 2 + e^{-\lambda})$$</p>
+                        <p>$$\lim_{\lambda \rightarrow +\infty} \mathcal{A}(\lambda) = \lim_{\lambda \rightarrow +\infty} 9\left(\ln(e^\lambda + 2 + e^{-\lambda}) - 2\ln(2)\right) = +\infty$$</p>
+                    </div>
+                </div>
+
+                <!-- PANNEAU INDICATION PROBLÈME -->
+                <div class="panneau-unique zone-indication" style="display: none;">
+                    <h3 style="color: #ff9f43; border-bottom: 2px solid #f1f5f9; padding-bottom: 0.5rem; margin-bottom: 1.5rem; font-weight: 800; text-transform: uppercase; font-size: 1.15rem;">Pistes de Recherche</h3>
+                    <h4 style="font-weight: 700; color: #ff9f43; margin-bottom: 1rem; font-size: 1.05rem;">Indication du Problème</h4>
+                    <p style="line-height: 1.6;">Pour la Partie I, vérifiez que le dénominateur ne s'annule pas et étudiez $f(-x)$. Pour la Partie II, réduisez au même dénominateur, identifiez la forme $\frac{u'}{u}$ pour déterminer la primitive, et n'oubliez pas d'élever l'unité graphique au carré ($9\text{ cm}^2$) pour exprimer l'aire finale.</p>
+                </div>
+            </div> <!-- FIN BLOCK PROB -->
+        </div> <!-- Fin details-section -->
+
+        <!-- ZONE DE NAVIGATION ET RETOUR EN BAS DE PAGE -->
+        <div class="action-footer" style="display: flex; justify-content: space-between; align-items: center; margin-top: 4rem; padding-top: 1.5rem; border-top: 1px solid #e2e8f0; margin-bottom: 2rem;">
+            <a href="index.html" class="tab-btn" style="background: #e2e8f0; border-color: #cbd5e1; text-decoration: none; padding: 0.6rem 1.2rem; border-radius: 6px; font-weight: 700; color: #475569;">⬅ Revenir à l'accueil des annales</a>
+            <button class="scroll-top-btn" onclick="window.scrollTo({top: 0, behavior: 'smooth'});" style="background: #64748b; color: #ffffff; border: none; padding: 0.6rem 1.2rem; border-radius: 6px; font-weight: 600; cursor: pointer;">▲ Remonter en haut</button>
+        </div>
+
+    </div> <!-- Fin container -->
+
+    <footer>
+        <p>© 2026 BOUSAN ÉDUCATION AU NIGER — Tous droits réservés.</p>
+        <p>Pôle d'ingénierie et d'édition scientifique dirigé par Samri Namata Boubacar</p>
+    </footer>
+
+    <!-- LOGIQUE JAVASCRIPT DE COMMANDE DES ENSEMBLES INTERACTIFS CORRIGÉE -->
+    <script>
+        let exerciceActif = 'ex1';
+        let vueActive = 'cote-a-cote';
+
+        function choisirExercice(exerciceId) {
+            exerciceActif = exerciceId;
+            
+            // 1. Gestion des états actifs sur la barre supérieure
+            document.getElementById('onglet-ex1').classList.remove('active');
+            document.getElementById('onglet-ex2').classList.remove('active');
+            document.getElementById('onglet-prob').classList.remove('active');
+            
+            if (exerciceId === 'ex1') document.getElementById('onglet-ex1').classList.add('active');
+            if (exerciceId === 'ex2') document.getElementById('onglet-ex2').classList.add('active');
+            if (exerciceId === 'prob') document.getElementById('onglet-prob').classList.add('active');
+
+            // 2. Commutation des blocs conteneurs principaux
+            document.getElementById('block-ex1').classList.remove('active');
+            document.getElementById('block-ex2').classList.remove('active');
+            document.getElementById('block-prob').classList.remove('active');
+            
+            document.getElementById('block-' + exerciceId).classList.add('active');
+
+            // 3. Application immédiate de la vue courante sur le nouvel exercice affiché
+            changerVue(vueActive);
+        }
+
+        function changerVue(modeVue) {
+            vueActive = modeVue;
+            
+            // 1. Gestion des états actifs sur la barre secondaire
+            document.getElementById('mode-sujet').classList.remove('active');
+            document.getElementById('mode-ind').classList.remove('active');
+            document.getElementById('mode-cote').classList.remove('active');
+            document.getElementById('mode-corr').classList.remove('active');
+            
+            if (modeVue === 'sujet-seul') document.getElementById('mode-sujet').classList.add('active');
+            if (modeVue === 'indication-seule') document.getElementById('mode-ind').classList.add('active');
+            if (modeVue === 'cote-a-cote') document.getElementById('mode-cote').classList.add('active');
+            if (modeVue === 'corrige-seul') document.getElementById('mode-corr').classList.add('active');
+
+            // 2. Ajustement des sous-panneaux internes de l'exercice actif
+            const blocActif = document.getElementById('block-' + exerciceActif);
+            const panelsCote = blocActif.querySelectorAll('.split-view');
+            const panelsInd = blocActif.querySelectorAll('.zone-indication');
+            const colsSujet = blocActif.querySelectorAll('.zone-sujet');
+            const colsCorrige = blocActif.querySelectorAll('.zone-corrige');
+
+            if (modeVue === 'indication-seule') {
+                panelsCote.forEach(p => p.style.display = 'none');
+                panelsInd.forEach(p => p.style.display = 'block');
+            } else {
+                panelsInd.forEach(p => p.style.display = 'none');
+                panelsCote.forEach(p => p.style.display = 'flex');
+                
+                if (modeVue === 'sujet-seul') {
+                    colsSujet.forEach(c => c.style.display = 'block');
+                    colsCorrige.forEach(c => c.style.display = 'none');
+                } else if (modeVue === 'corrige-seul') {
+                    colsSujet.forEach(c => c.style.display = 'none');
+                    colsCorrige.forEach(c => c.style.display = 'block');
+                } else if (modeVue === 'cote-a-cote') {
+                    colsSujet.forEach(c => c.style.display = 'block');
+                    colsCorrige.forEach(c => c.style.display = 'block');
+                }
+            }
+        }
+
+        // Chargement initial sécurisé
+        window.addEventListener('DOMContentLoaded', () => {
+            choisirExercice('ex1');
+        });
+    </script>
+</body>
+</html>

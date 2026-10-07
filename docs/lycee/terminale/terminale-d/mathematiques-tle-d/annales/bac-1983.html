@@ -1,0 +1,596 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>BOUSAN — BAC 1983 Série D Mathématiques</title>
+    
+    <!-- LIAISON AVEC LA FEUILLE DE STYLE EXTERNE CENTRALISÉE -->
+    <link rel="stylesheet" href="../../../../../style.css">
+
+    <!-- 1. Le style CSS de KaTeX -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+
+    <!-- 2. Le script principal de KaTeX (avec defer) -->
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+
+    <!-- 3. Le script d'auto-rendu qui s'active automatiquement au chargement -->
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js" 
+            onload="renderMathInElement(document.body, {
+                delimiters: [
+                    {left: '$$', right: '$$', display: true},
+                    {left: '$', right: '$', display: false}
+                ],
+                throwOnError : false
+            });">
+    </script>
+    
+
+    <style>
+        /* CONFIGURATION GEOMETRIQUE DU COMPOSANT D'EXAMEN UNIQUE */
+        .workspace-split { display: flex; gap: 2.5rem; margin-top: 1.5rem; width: 100%; }
+        
+        /* Les trois panneaux exclusifs avec liseré de tête émeraude Série D */
+        .pane-sujet, .pane-corrige, .pane-indication { 
+            flex: 1; 
+            background: var(--white); 
+            padding: 2.5rem; 
+            border-radius: var(--radius-premium); 
+            border: 2px solid #cbd5e1 !important; 
+            border-top: 5px solid #059669 !important; 
+            box-shadow: var(--shadow-soft); 
+            box-sizing: border-box; 
+        }
+        
+        /* Liserés verticaux sur le côté gauche pour guider l'œil des élèves */
+        .pane-sujet { border-left: 5px solid var(--secondary) !important; }      
+        .pane-indication { border-left: 5px solid var(--bousan-cyan) !important; } 
+        .pane-corrige { border-left: 5px solid var(--accent) !important; }        
+        
+        .pane-sujet h3 { color: var(--secondary); }
+        .pane-indication h3 { color: var(--bousan-cyan); }
+        .pane-corrige h3 { color: var(--accent); }
+        .pane-sujet h3, .pane-corrige h3, .pane-indication h3 { margin-bottom: 1.5rem; border-bottom: 2px solid #f1f5f9; padding-bottom: 0.5rem; font-size: 1.35rem; font-weight: 800; }
+        
+        .math-block { display: block; text-align: center; margin: 1.25rem 0; font-size: 1.15rem; overflow-x: auto; }
+        
+        /* Isolation stricte des trois grands chapitres d'exercice */
+        .content-bloc { display: none; width: 100%; }
+        .content-bloc.is-visible { display: block; }
+        
+        @media (max-width: 992px) { .workspace-split { flex-direction: column; gap: 2rem; } }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="nav-container">
+            <div class="logo">
+                <h1>BOUSAN</h1>
+            </div>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="hero-content">
+            <h2>Baccalauréat Niger — Session 1983</h2>
+            <p>Série D (Sciences Expérimentales) — Mathématiques</p>
+        </div>
+    </section>
+
+    <div class="container">
+        <!-- DEUX RANGÉES DE BOUTONS DE COMMUTATION ET PILULES DE CONTRÔLE -->
+        <div class="exercise-tabs">
+            <button id="onglet-ex1" class="btn-tab is-active" onclick="choisirExercice('ex1')">Exercice 1</button>
+            <button id="onglet-ex2" class="btn-tab" onclick="choisirExercice('ex2')">Exercice 2</button>
+            <button id="onglet-prob" class="btn-tab" onclick="choisirExercice('prob')">Problème</button>
+        </div>
+
+        <div class="exam-nav-container">
+            <a href="index.html" class="btn-exam-control">↩ Retour Menu</a>
+            <button id="mode-sujet" class="btn-exam-control" onclick="changerVue('sujet-seul')">📄 Sujet seul</button>
+            <button id="mode-ind" class="btn-exam-control" onclick="changerVue('indication-seule')">💡 Indication</button>
+            <button id="mode-cote" class="btn-exam-control is-active" onclick="changerVue('cote-a-cote')">↔️ Côte à côte</button>
+            <button id="mode-corr" class="btn-exam-control" onclick="changerVue('corrige-seul')">✅ Corrigé seul</button>
+        </div>
+
+        <!-- OUVERTURE DE LA ZONE UNIQUE DE TRAVAIL INTERACTIVE -->
+        <div class="exam-workspace-fixed">
+            <!-- ==========================================================================
+               EXERCICE 1 : BLOC UNIQUE AVEC VOTRE ÉNONCÉ ET VOS CORRIGÉS STRICTS
+               ========================================================================== -->
+            <div id="bloc-ex1" class="content-bloc is-visible">
+                <div class="workspace-split">
+                    
+                    <!-- PANNEAU 1 : ÉNONCÉ DE L'EXERCICE 1 (LISERÉ BLEU GAUCHE) -->
+                    <div id="sujet-ex1" class="pane-sujet">
+                        <h3><u> Exercice 1 </u></h3>
+                        <p>Soit $F$ la transformation du plan $\mathcal{P}$ associée à l’application $f$ définie de la manière suivante :</p>
+                        <div class="math-block">
+                            $$\begin{array}{ll}
+                            f : & \mathbb{C} \rightarrow \mathbb{C} \\[0.2cm]
+                            & z \longmapsto  \frac{1}{2}\left(1-i\right) z+\frac{1}{2}+\frac{i}{2}
+                            \end{array}$$
+                        </div>
+                        
+                        <p><strong>1)</strong> Donner la nature et les éléments caractéristiques de la transformation $F$</p>
+                        <p><strong>2)</strong> On considère une suite de points $(M_n )_{n\in \mathbb{N}}$ du plan tels que $M_n=F(M_{n-1} )$.</p>
+                        <ul>
+                            <li><strong>a)</strong> Donner une construction géométrique du point $M_2=F(M_1 )$ tel que $M_1 \left(\frac{1}{2}\right)$. Prendre pour unité $2$ cm</li>
+                            <li><strong>b)</strong> Calculer les coordonnées du point $M_0$.</li>
+                            <li><strong>c)</strong> Donner la nature de la transformation $F^4=FoFoFoF$ et en déduire les coordonnées du point $M_4$.</li>
+                        </ul>
+                    </div>
+                    <!-- PANNEAU 2 : INDICATION PÉDAGOGIQUE (LISERÉ CYAN GAUCHE) -->
+                    <div id="ind-ex1" class="pane-indication" style="display: none;">
+                        <h3>Indication Pédagogique</h3>
+                        <h4>Pour la question 1 :</h4>
+                        <p>Identifiez la forme complexe canonique $z' = az + b$. Le rapport s'obtient par le module $k = |a|$ et l'angle par son argument trigonométrique $\theta = \arg(a)$. Le centre fixe $\Omega$ a pour affixe $z_{\Omega} = \frac{b}{1-a}$.</p>
+                        
+                        <h4>Pour la question 2-a :</h4>
+                        <p>Utilisez l'angle et le rapport trouvés à la question 1 pour caractériser la nature du triangle formé par le centre $\Omega$, le point de départ et le point d'image par la similitude.</p>
+                        
+                        <h4>Pour les questions 2-b & 2-c :</h4>
+                        <p>• Pour $M_0$, utilisez la relation $z_1 = f(z_0)$ afin d'isoler algébriquement le terme $z_0$.</p>
+                        <p>• Pour la puissance quatrième $F^4$, appliquez la composition successive : le rapport de l'homothétie correspond à la valeur réelle de $a^4$.</p>
+                    </div>
+                    <!-- PANNEAU 3 : CORRIGÉ DÉTAILLÉ DE L'EXERCICE 1 — PARTIE 1 (LISERÉ VERT GAUCHE) -->
+                    <div id="corrige-ex1" class="pane-corrige">
+                        <h3> <u>Corrigé de l'exercice 1</u></h3>
+                        <p>Soit $F$ la transformation du plan $\mathcal{P}$ associée à l’application $f$ définie de la manière suivante :</p>
+                        <div class="math-block">
+                            $$\begin{array}{l l}
+                            f : & \mathbb{C} \rightarrow \mathbb{C} \\[0.2cm]
+                            & z \longmapsto \frac{1}{2}\left(1-i\right) z+\frac{1}{2}+\frac{i}{2}
+                            \end{array}$$
+                        </div>
+
+                        <p><strong>1) Donnons la nature et les éléments caractéristiques de la transformation $F$.</strong></p>
+                        <p>L'application complexe $f$ associe à $F$ est de la forme $f(z) = az+b $ avec $a =\frac{1}{2}\left(1-i\right) $ et $b =\frac{1}{2}+\frac{1}{2}i$.</p>
+                        <p>Comme $a =\frac{1}{2}\left(1-i\right) \in \mathbb{C}^{*}$, alors $F$ is une similitude plane directe.</p>
+                        <div class="math-block">$$k =|a| = \left|\frac{1}{2}\left(1-i\right)\right| = \left|\frac{1}{2}-\frac{1}{2}i \right| =\sqrt{\left(\frac{1}{2}\right)^2+\left(-\frac{1}{2}\right)^2} =\sqrt{\frac{1}{4}+\frac{1}{4} }=\sqrt{\frac{2}{4}} =\frac{\sqrt{2}}{2}$$</div>
+                        <p>Soit $\theta =arg(a)$, alors :</p>
+                        <div class="math-block">
+                            $$\begin{cases} \cos \theta =\frac{\frac{1}{2}}{\frac{\sqrt{2}}{2}} =\frac{1}{\sqrt{2}} =\frac{\sqrt{2}}{2} \\[0.2cm] \sin\theta = \frac{-\frac{1}{2}}{\frac{\sqrt{2}}{2}} =-\frac{1}{\sqrt{2}} =-\frac{\sqrt{2}}{2} \end{cases} \quad \text{donc} \quad \theta = -\frac{\pi}{4} \left[2\pi\right]$$
+                        </div>
+                        <p>Soit $\Omega$ tel que $z_\Omega = \frac{b}{1-a}$.</p>
+                        <div class="math-block">$$z_{\Omega} = \frac{b}{1-a} = \frac{\frac{1}{2}+\frac{1}{2}i}{1-\frac{1}{2}-\frac{1}{2}i} = \frac{\frac{1+i}{2}}{\frac{1}{2}+\frac{1}{2}i} = 1 \Rightarrow \Omega(1 ; \, 0).$$</div>
+                        <p>Donc les éléments caractéristiques de $F$ sont le rapport $k =\frac{\sqrt{2}}{2}$, l'angle $\theta = -\frac{\pi}{4} \left[2\pi\right]$ et le centre $\Omega(1 ; \, 0)$</p>
+
+                        <p><strong>2) On considère une suite de points $(M_n )_{n\in \mathbb{N}}$ du plan tels que $M_n=F(M_{n-1} )$.</strong></p>
+                        <p><strong>a) Donnons une construction géométrique du point $M_2=F(M_1 )$ tel que $M_1 \left(1 , \, 2 \right)$ en prenant pour unité $2cm$.</strong></p>
+                        <p>Le triangle $\Omega M_1M_2$ est un triangle rectangle et isocèle en $M_2$.</p>
+
+                        <!-- LOGEMENT DE VOTRE PREMIÈRE IMAGE EN PNG -->
+                        <div style="text-align: center; margin: 1.5rem 0;">
+                            <img src="images/image-1-1983.png" alt="Graphique 1 - Suite de points" style="max-width: 100%; height: auto; border: 1px solid #cbd5e1; border-radius: 8px;">
+                        </div>
+
+                        <p><u><strong>Autre construction géométrique:</strong></u> utilisation de la décomposition de $F$.</p>
+                        <p>On sait que $F$ est une similitude plane directe de rapport $k =\frac{\sqrt{2}}{2}$, d'angle $\theta = -\frac{\pi}{4} \left[2\pi\right]$ et de centre $\Omega(1 ; \, 0)$.</p>
+                        <p>Donc est la composée de l'homothétie de centre $\Omega$ et de rapport $k$ et de la rotation de centre $\Omega$ et de d’angle $\theta$ .</p>
+                        <p>Soit $A$ et $A^\prime$ deux points :</p>
+                        <p>$F = HoR : M_1\stackrel{R }{\longmapsto }A\stackrel{H}{\longmapsto }M_2$</p>
+
+                        <!-- LOGEMENT DE VOTRE DEUXIÈME IMAGE EN PNG -->
+                        <div style="text-align: center; margin: 1.5rem 0;">
+                            <img src="images/image-2-1983.png" alt="Graphique 2 - Décomposition de F" style="max-width: 100%; height: auto; border: 1px solid #cbd5e1; border-radius: 8px;">
+                        </div>
+	<p><strong>b) Calculons les coordonnées du point $M_0$.</strong></p> 
+	<p>$M_1 = F(M_0) \Rightarrow z_1 = \frac{1}{2}(1-i)z_0+\frac{1}{2}+\frac{i}{2} \Rightarrow (1-i)z_0+1+i = 2z_1 = 2(1+2i) = 2+4i$</p>
+	<div class="math-block">$$\Rightarrow (1-i)z_0 = 2+4i-1-i = 1+3i \Rightarrow z_0 = \frac{1+3i}{1-i} = \frac{(1+3i)(1+i)}{1^2+1^2} = \frac{1+i+3i-3}{2} = \frac{-2+4i}{2} = -1+2i.$$</div> 
+	<p>Donc $M_0(1 , \, -2)$.</p>
+
+	<p><strong>c) Donnons la nature de la transformation $F^4=FoFoFoF$ .</strong></p>
+	<p>L'application complexe associée à $F^4$ est $f^4$. $f^4$ est définie par : $\forall z \in \mathbb{C}$, $f^4(z) = f^2\left(f^2(z) \right)$.</p>  
+	<p>$f^2(z) = f(f(z))=f\left( \frac{1}{2}\left(1-i\right) z+\frac{1}{2}+\frac{i}{2}\right)= \frac{1}{2}\left(1-i\right) \left( \frac{1}{2}\left(1-i\right) z+\frac{1}{2}+\frac{i}{2}\right)   +\frac{1}{2}+\frac{i}{2}$</p>
+	<p>$\Rightarrow f^4(z) = \frac{1}{4}\left(1-2i-1\right) z+\frac{2}{4}+\frac{1}{2}+\frac{i}{2}= -\frac{1}{2}i z+1+\frac{i}{2}$.</p> 
+	<p>Donc $f^4(z) = f^2\left(-\frac{1}{2}i z+1+\frac{i}{2}\right)=-\frac{1}{2}i \left( -\frac{1}{2}i z+1+\frac{i}{2}\right)  +1+\frac{i}{2}=-\frac{1}{4} z-\frac{1}{2}i+\frac{1}{4}+1+\frac{i}{2}=-\frac{1}{4}z+\frac{5}{4}$. Ainsi $\forall \ z \in \mathbb{C}$,  $f^4(z) =-\frac{1}{4}z+\frac{5}{4}$.</p> 
+	<p>Comme $a = -\frac{1}{4} \in \mathbb{R}^*\ \{1\}$, alors $F^4$ est une homothétie de centre $\Omega( 1\: ; \: 0)$ et de rapport $k = -\frac{1}{4}$.</p>
+	
+	<p><strong>Déduisons-en les coordonnées du point $M_4$.</strong></p>
+	<p>$M_4 =F(M_3) =F(F(M_2))=F^2(F(M_1))=F^3(F(M_0)) \Rightarrow M_4 =F^4(M_0)$.</p> 
+	<p>Donc $z_4= -\frac{1}{4}z_0+\frac{5}{4} = -\frac{1}{4}\left(-1+2i\right)+\frac{5}{4} = \frac{1}{4}-\frac{2}{4}i+\frac{5}{4}=\frac{6}{4}-\frac{1}{2}i=\frac{3}{2}-\frac{1}{2} i$.</p>
+	<p>Ainsi $z_4 = \frac{3}{2}-\frac{1}{2}i$. D'où $M_4 \left(\frac{3}{2} \: ; \: -\frac{1}{2} \right)$.</p>
+                    </div> <!-- Fin pane-corrige -->
+                    
+                </div> <!-- Fin workspace-split -->
+            </div> <!-- ==================== FIN DE L'EXERCICE 1 ==================== -->
+            <!-- ==========================================================================
+               EXERCICE 2 : BLOC UNIQUE AVEC VOTRE ÉNONCÉ ET VOS CORRIGÉS STRICTS
+               ========================================================================== -->
+            <div id="id-bloc-ex2" class="content-bloc">
+                <div class="workspace-split">
+                    
+                    <!-- PANNEAU 1 : ÉNONCÉ DE L'EXERCICE 2 (LISERÉ BLEU GAUCHE) -->
+                    <div id="sujet-ex2" class="pane-sujet">
+                        <h3><u> Exercice 2</u></h3>
+                        <p>Au Niger, une conférence réunit 12 commerçants. Tous parlent haoussa, 5 parlent foulfouldé, 6 parlent zarma 3 foulfouldé et zarma.</p>
+                        <p>On choisit au hasard et simultanément 3 personnes.</p>
+                        <p>Chaque groupe de 3 personnes a la même probabilité d’être choisi.</p>
+                        
+                        <p><strong>1) a)</strong> Quelle est la probabilité pour que ces 3 personnes parlent au moins une autre langue que le haoussa ?</p>
+                        <p><strong>b)</strong> Quelle est la probabilité pour que ces 3 personnes ne parlent que le haoussa ?</p>
+                        
+                        <p><strong>2)</strong> Soit $X$ la variable aléatoire qui à chaque groupe de 3 personnes associe le nombre de personnes parlant foulfouldé et zarma.</p>
+                        
+                        <p><strong>3) a)</strong> Déterminer la loi de probabilité de $X$.</p>
+                        <p><strong>b)</strong> Calculer la probabilité pour qu’il ait au moins 2 personnes parlant foulfouldé et zarma.</p>
+                        <p><u><strong>NB :</strong></u> les résultats seront donnés sous forme de fractions irréductibles .</p>
+                    </div>
+                    <!-- PANNEAU 2 : INDICATION PÉDAGOGIQUE (LISERÉ CYAN GAUCHE) -->
+                    <div id="ind-ex2" class="pane-indication" style="display: none;">
+                        <h3>Indication Pédagogique</h3>
+                        <h4>Pour la question 1 :</h4>
+                        <p>Le choix simultané de 3 personnes parmi 12 se traduit mathématiquement par l'utilisation des combinaisons. Pensez à distribuer les effectifs des commerçants dans un diagramme de Venn à partir de l'intersection centrale (ceux qui parlent à la fois foulfouldé et zarma).</p>
+                        
+                        <h4>Pour les questions 2 & 3 :</h4>
+                        <p>Identifiez clairement le nombre total de personnes qui parlent à la fois le foulfouldé et le zarma pour définir les valeurs possibles prises par la variable aléatoire $X$. Pour chaque calcul de probabilité $P(X=k)$, combinez le choix des personnes bilingues et le choix des autres commerçants non bilingues.</p>
+                    </div>
+                    <!-- PANNEAU 3 : CORRIGÉ DÉTAILLÉ DE L'EXERCICE 2 — PARTIE 1 (LISERÉ VERT GAUCHE) -->
+                    <div id="corrige-ex2" class="pane-corrige">
+                        <h3> <u>Corrigé de l'exercice 2</u></h3>
+                        <p>Soit $\Omega$ l'univers associé à l'expérience aléatoire.</p>
+                        <p>Comme on a choisit au hasard et simultanément 3 personnes, alors $\Omega$ est l'ensemble des parties de 3 personnes parmi 12. Donc $Card\Omega = C_{12}^{3}$.</p>
+                        <p>Aussi, comme chaque groupe de 3 personnes a la même probabilité d'être choisi on est dans le cas de l'équiprobabilité.</p>
+                        <p>Soit $F$ l'ensemble des personnes qui parlent le foulfoudé; $H$ l'ensemble des personnes qui parlent le haoussa et $Z$ l'ensemble des personnes qui parlent zarma. On a le diagramme de Venn suivant.</p>
+
+                        <!-- 📷 INTEGRATION STRICTE DE VOTRE TROISIÈME IMAGE EN PNG -->
+                        <div style="text-align: center; margin: 1.5rem 0;">
+                            <img src="images/image-3-1983.png" alt="Diagramme de Venn - Exercice 2" style="max-width: 100%; height: auto; border: 1px solid #cbd5e1; border-radius: 8px;">
+                        </div>
+
+                        <p><strong>1) a) Déterminons la probabilité pour que ces 3 personnes parlent au moins une autre langue que le haoussa.</strong></p>
+                        <p>Soit $A$ l'événement : « les 3 personnes parlent au moins une autre langue que le haoussa».</p>
+                        <p>D'après le diagramme de Venn, les personnes qui parlent au moins une autre langue que le haoussa sont au nombre de $8$, donc $CardA = C_{8}^{3}$. Ainsi $P(A) = \frac{CardA}{Card\Omega} = \frac{56}{220} = \frac{14}{55}$.</p>
+
+                        <p><strong>b) Déterminons la probabilité pour que ces 3 personnes ne parlent que le haoussa.</strong></p>
+                        <p>Soit $B$ l'événement : « les 3 personnes ne parlent que le haoussa».</p>
+                        <p>D'après le diagramme de Venn, les personnes qui ne parlent que le haoussa sont au nombre de $4$, donc $CardB = C_{4}^{3}$. D'où $P(B) = \frac{CardB}{Card\Omega} = \frac{4}{220} = \frac{1}{55}$ soit $P(B) = \frac{1}{55}$.</p>
+                        <p><strong>2) Soit $X$ la variable aléatoire qui à chaque groupe de 3 personnes associe le nombre de personnes parlant foulfouldé et zarma.</strong></p>
+                        
+                        <p><strong>3) a) Déterminons la loi de probabilité de $X$.</strong></p>
+                        <p>Le nombre de personnes qui parlent à la fois le foulfouldé et le zarma sont nombres de $3$, donc l'ensemble des valeurs prises par $X$ est $X(\Omega) = \{ 0 ; \, 1; \, 2 ; 3 \: \}$. D'où :</p>
+                        <ul>
+                            <li>$P(X = 0) = \frac{\text{C}_{3}^{0} \times \text{C}_{9}^{3} }{Card\Omega} = \frac{1 \times 84 }{220}=\frac{84}{220} = \frac{21}{55}$.</li>
+                            <li>$P(X = 1) = \frac{\text{C}_{3}^{1} \times \text{C}_{9}^{2} }{Card\Omega} = \frac{3 \times 36 }{220}=\frac{108}{220} = \frac{27}{55}$.</li>
+                            <li>$P(X = 2) = \frac{\text{C}_{3}^{2} \times \text{C}_{9}^{1} }{Card\Omega} = \frac{3 \times 9 }{220}=\frac{27}{220}$.</li>
+                            <li>$P(X = 3) = \frac{\text{C}_{3}^{3} \times \text{C}_{9}^{0} }{Card\Omega} = \frac{1 \times 1 }{220} =\frac{1}{220}$.</li>
+                        </ul>
+                        
+                        <p>On résume cette loi de probabilité de $X$ dans le tableau ci-après</p>
+                        <div style="overflow-x: auto; margin: 1.5rem 0;">
+                            <table style="width: 100%; border-collapse: collapse; text-align: center; border: 2px solid #cbd5e1;">
+                                <thead>
+                                    <tr style="background-color: #f8fafc; border-bottom: 2px solid #cbd5e1;">
+                                        <th style="padding: 0.75rem; border-right: 2px solid #cbd5e1; font-weight: 700;">$k$</th>
+                                        <th style="padding: 0.75rem; border-right: 2px solid #cbd5e1; font-weight: 700;">$0$</th>
+                                        <th style="padding: 0.75rem; border-right: 2px solid #cbd5e1; font-weight: 700;">$1$</th>
+                                        <th style="padding: 0.75rem; border-right: 2px solid #cbd5e1; font-weight: 700;">$2$</th>
+                                        <th style="padding: 0.75rem; font-weight: 700;">$3$</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td style="padding: 1rem; border-right: 2px solid #cbd5e1; font-weight: 700; color: var(--primary);">$P(X = k)$</td>
+                                        <td style="padding: 1rem; border-right: 2px solid #cbd5e1;">$\frac{21}{55}$</td>
+                                        <td style="padding: 1rem; border-right: 2px solid #cbd5e1;">$\frac{27}{55}$</td>
+                                        <td style="padding: 1rem; border-right: 2px solid #cbd5e1;">$\frac{27}{220}$</td>
+                                        <td style="padding: 1rem;">$\frac{1}{220}$</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <p><strong>b) Calculons la probabilité pour qu’il ait au moins 2 personnes parlant foulfouldé et zarma.</strong></p>
+                        <p>$P(X \geq 2) = P(X=2)+P(X=3) = \frac{27}{220}+\frac{1}{220} = \frac{28}{220} = \frac{7}{55}$.</p>
+                        <p>Donc la probabilité pour qu’il ait au moins 2 personnes parlant foulfouldé et zarma est égale à $\frac{7}{55}$.</p>
+                    </div> <!-- Fin pane-corrige -->
+                    
+                </div> <!-- Fin workspace-split -->
+            </div> <!-- ==================== FIN DE L'EXERCICE 2 ==================== -->
+            <!-- ==========================================================================
+               PROBLEME : BLOC UNIQUE AVEC VOTRE ÉNONCÉ COMPLET ET VOS CORRIGÉS STRICTS
+               ========================================================================== -->
+            <div id="id-bloc-prob" class="content-bloc">
+                <div class="workspace-split">
+                    
+                    <!-- PANNEAU 1 : ÉNONCÉ DU PROBLEME COMPLET (LISERÉ BLEU GAUCHE) -->
+                    <div id="sujet-prob" class="pane-sujet">
+                        <h3><u> Problème </u></h3>
+                        <p><strong>I . </strong> Soit $f$ la fonction numérique de la variable réelle $x$ définie par :</p>
+                        <div class="math-block">
+                            $$\begin{array}{ll}
+                            \forall \ x > 0 , & f(x) = x e^{-\frac{1}{x}} \\[0.2cm]
+                            & f (0) = 0\\[0.2cm]
+                            \forall \  x < 0, & f (x) = -x \mathrm{ Log}|x|
+                            \end{array}$$
+                        </div>
+                        
+                        <p><strong>1)</strong> La fonction $f$ est-elle continue, dérivable au point $x_0=0$ ?<br>
+                        La fonction $f$ est-elle continue sur $\mathbb{R}$ ?</p>
+                        <p><strong>2)</strong> Étudier les variations de la fonction $f$</p>
+                        <p><strong>3)</strong> Soit $(C)$ le graphe de $f$ dans un repère orthonormé $\left(O, \vec{i}, \vec{j}\right)$ avec $\left\| \, \vec{i} \, \right\|=\left\|  \ \vec{j} \, \right']=2 cm$.<br>
+                        Démontrer que la droite d’équation $ y=x-1$ est asymptote à la courbe $(C)$ quand $x$ tend vers $+\infty$.<br>
+                        Que se passe-t-il quand $x$ tend vers $-\infty$ ?<br>
+                        Donner les équations de demi-tangentes à la courbe $(C)$ au point $O$ d’abscisse $x_0=0$.<br>
+                        Soit $A$ le point d’intersection de la courbe $(C)$ et de l’axe $x ' o x$ , différent du point $O$.<br>
+                        Donner l’équation de la tangente en $A$ à $(C)$.<br>
+                        Construire le graphe $(C)$ de $f$.</p>
+                        
+                        <p style="margin-top: 2rem; border-top: 1px dashed #cbd5e1; padding-top: 1rem;"><strong>II . </strong> Soit $E$ le domaine défini par :
+                        $\begin{cases} 
+                            - 1 \leq x \leq 0\\[0.2cm] 
+                            f(x) \leq y \leq 0
+                        \end{cases}$</p>
+                        <p>Nous nous proposons de calculer l’aire $A(E)$ de ce domaine.</p>
+                        <p><strong>1)</strong> Pour cela, calculer auparavant l’aire du domaine $E_\lambda$ définie par :
+                        $\begin{cases} 
+                            - 1 \leq x \leq \lambda\\[0.2cm] 
+                            f(x) \leq y \leq 0
+                        \end{cases}$     avec $-1\leq \lambda\leq 0$.</p>
+                        <p><strong>2)</strong> En déduire l’aire $A(E)$.</p>
+                        
+                        <p style="margin-top: 2rem; border-top: 1px dashed #cbd5e1; padding-top: 1rem;"><strong>III . </strong> Soit un point matériel $M$ en mouvement dans le plan rapporté à un repère $\left(O, \vec{i}, \vec{j}\right)$ dont la position à l’instant $t$ est définie par : 
+                        $\begin{cases} 
+                            x =  -\frac{1}{\mathrm{Log}(t)}\\[0.2cm] 
+                            y = -\frac{t}{\mathrm{Log}(t)}
+                        \end{cases}$     $t \in ]0 \, , \, 1[$.</p>
+                        <p><strong>1)</strong> Que fait le point $M$ lorsque $t$ tend vers $0$ ?<br>
+                        Au point $t = 0$, on suppose donc que le point $M$ est en $O(0 ,0)$.</p>
+                        <p><strong>2)</strong> Démontrer que pour tout $t \in ]0 \, , \, 1[$, la trajectoire $(\Gamma)$ du point $M$ est une partie du graphe $(C)$ que l’on précisera.</p>
+                        <p><strong>3)</strong> Déterminer le vecteur vitesse $\overrightarrow{V}(t)$ à l’instant $t$ et construire le vecteur $\overrightarrow{V_1}(t)$ au point $ t_1 =\frac{1}{e}$.</p>
+                        <p><strong>4)</strong> Donner l’équation de la tangente $D$ en $M_1$ à $(\Gamma)$ à la date $t_1$.</p>
+                    </div>
+                    <!-- PANNEAU 2 : INDICATION PÉDAGOGIQUE (LISERÉ CYAN GAUCHE) -->
+                    <div id="ind-prob" class="pane-indication" style="display: none;">
+                        <h3>Indication Pédagogique</h3>
+                        <h4>Pour la Partie I :</h4>
+                        <p>• <strong>Continuité et dérivabilité en 0 :</strong> Étudiez séparément les limites à gauche et à droite. À droite ($x \to 0^+$), utilisez le changement de variable $X = -\frac{1}{x}$. Aux croissances comparées, souvenez-vous de la limite usuelle $\lim_{X \to -\infty} X e^X = 0$.</p>
+                        <p>• <strong>Étude asymptotique :</strong> Pour l'asymptote en $+\infty$, étudiez la limite de la différence $[f(x) - (x-1)]$. Le changement de variable $X = -\frac{1}{x}$ vous amènera à la limite de référence $\lim_{X \to 0} \frac{e^X - 1}{X} = 1$.</p>
+                        
+                        <h4>Pour la Partie II :</h4>
+                        <p>• <strong>Calcul de l'aire :</strong> Sur l'intervalle $[-1 \, ; \, \lambda]$, la fonction est négative. L'aire s'exprime donc par l'intégrale opposée : $A(E_\lambda) = - \int_{-1}^{\lambda} f(x) \, dx$. Multipliez le résultat final par la valeur de l'unité d'aire ($u.a. = 2\text{ cm} \times 2\text{ cm} = 4\text{ cm}^2$).</p>
+                        <p>• <strong>Intégration par parties :</strong> Posez $u(x) = \mathrm{Log}(-x)$ et $v'(x) = -x$ pour mener à bien le calcul de la primitive.</p>
+                        
+                        <h4>Pour la Partie III :</h4>
+                        <p>• <strong>Trajectoire du point M :</strong> À partir de la coordonnée $x = -\frac{1}{\mathrm{Log}(t)}$, isolez le paramètre $t$ sous la forme $t = e^{-\frac{1}{x}}$, puis injectez cette expression directement dans l'équation de $y$ pour retrouver l'expression de la fonction $f(x)$.</p>
+                    </div>
+                    <!-- PANNEAU 3 : CORRIGÉ DÉTAILLÉ DU PROBLEME — PARTIE I - TRANCHE 1 (LISERÉ VERT GAUCHE) -->
+                    <div id="corrige-prob" class="pane-corrige">
+                        <h3><u> Corrigé du problème</u></h3>
+                        <p><strong>I. </strong> Soit $f$ la fonction numérique de la variable réelle $x$ définie par :</p>
+                        <div class="math-block">
+                            $$\begin{array}{l l}
+                            \forall \ x > 0 , & f(x) = x e^{-\frac{1}{x}} \\[0.2cm]
+                            & f (0) = 0\\[0.2cm]
+                            \forall \  x < 0, & f (x) = -x \mathrm{ Log}|x|
+                            \end{array}$$
+                        </div>
+                        <p>$D_f =\Big]0\: ; \: +\infty\Big[\cup\Big]0\: ; \: -\infty\Big[\cup\Big\{\: 0\: \Big\} = \Big]-\infty\: ; \: +\infty\Big[ = \mathbb{R}$.</p>
+
+                        <p><strong>1) ❋ Vérifions si la fonction $f$ est continue au point $x_0=0$.</strong></p>
+                        <p>$\displaystyle \lim_{ x \rightarrow 0^+}f(x) = \lim_{ x \rightarrow 0}x e^{-\frac{1}{x}}$. Posons $X=-\frac{1}{x}$. Alors $x=-\frac{1}{X}$ et quand $x$ tend vers $0^+$, $X$ tend vers $-\infty$.</p>
+                        <p>Donc $\displaystyle \lim_{ x \rightarrow 0^+}f(x) = \lim_{ x \rightarrow -\infty} -\frac{1}{X}\times e^X = 0\times 0=0$.</p>
+                        <p>$\displaystyle \lim_{ x \rightarrow 0^-}f(x) = \lim_{ x \rightarrow 0^-}\left(-x \mathrm{ Log}|x|\right)=0$.</p>
+                        <p>Ainsi $\displaystyle \lim_{ x \rightarrow 0}f(x) = \lim_{ x \rightarrow 0}f(x) = f(0) = 0$.</p>
+                        <p>D'où $f$ est continue au point $x_0 = 0$.</p>
+
+                        <p>  <strong>❋ Vérifions si la fonction $f$ est dérivable au point $x_0 = 0$.</strong></p>
+                        <p>$\displaystyle \lim_{ x \rightarrow 0^+}\left(\frac{f(x)-f(0)}{x-0}\right)= \lim_{ x \rightarrow 0^+} \left(\frac{xe^{-\frac{1}{x}}}{x} \right)=\lim_{ x \rightarrow 0^+}\left(e^{-\frac{1}{x}} \right)= 0$ car $\displaystyle \lim_{ x \rightarrow 0^+} -\frac{1}{x} = -\infty$.</p>
+                        <p>Donc la fonction $f$ est dérivable à droite en $x_0 = 0$.</p>
+                        <p>$\displaystyle \lim_{ x \rightarrow 0^-}\left(\frac{f(x)-f(0)}{x-0}\right) = \lim_{ x \rightarrow 0^-}\left(\frac{-x \mathrm{ Log}|x|-0}{x} \right)=\lim_{ x \rightarrow 0^-}\left(-\mathrm{ Log}|x|\right)=-(-\infty)=+\infty$, donc la fonction $f$ n'est pas dérivable à gauche en $x_0 = 0$.</p>
+                        <p>Comme la fonction $f$ est dérivable à droite mais n'est pas dérivable à gauche au point $x_0 = 0$, alors la fonction $f$ n'est pas dérivable au point $x_0 = 0$.</p>
+
+                        <p> <strong> ❋ Vérifions si la fonction $f$ est continue sur $\mathbb{R}$.</strong></p>
+                        <p>Pour $x \in ]0\: ; \: +\infty[$, $f(x) = x e^{-\frac{1}{x}}$. Sur cet intervalle $f$ est continue car elle est le produit et composée des fonctions qui sont continues sur $]0 ; \, +\infty[$. De même, sur $]-\infty; \, 0[$, $f(x) = -x \mathrm{ Log}|x|$ est une fonction qui y est continue car elle est le produit et composée de fonctions qui le y sont. De plus $f$ est continue en $x_0 = 0$.</p>
+                        <p>D'où $f$ est continue sur $\mathbb{R}$</p>
+
+                        <p><strong>2) Étudions les variations de la fonction $f$.</strong></p>
+                        <p> ❋ Pour $x \in ]0 \: ; \: +\infty[$, $f(x) = x e^{-\frac{1}{x}}$.</p>
+                        <p>La fonction $f$ est dérivable sur $ ]0 \: ; \:+\infty[$ et pour tout $x \in ]0 \: ; \: +\infty[$, on a: $f^\prime(x) = 1\times e^{-\frac{1}{x}}+x\times \left(-\frac{1}{x}\right)^\prime e^{-\frac{1}{x}}=e^{-\frac{1}{x}}+x \times \frac{1}{x^2}e^{-\frac{1}{x}}=e^{-\frac{1}{x}}+\frac{1}{x}e^{-\frac{1}{x}}= \left(\frac{x+1}{x} \right)e^{-\frac{1}{x}}$.</p>
+                        <p>Ainsi $f^\prime(x) = \left(\frac{x+1}{x} \right)e^{-\frac{1}{x}}>0$ car $x \in ]0 \: ; \: +\infty[$. Donc $f$ est strictement croissante sur $ ]0 \: ; \: +\infty[$.</p>
+                        <p> ❋ Si $x \in ]-\infty \: ; \: 0[$, $f(x) = -x \mathrm{ Log}|x|$.</p>
+                        <p>La fonction $f$ est dérivable sur $ ]-\infty\: ; \: 0[$ and pour tout tout $x \in ]-\infty \: ; \: 0[$, on a : $f^\prime(x) = -\mathrm{ Log}|x|+\left(-x\right)\times \frac{1}{x} =-\mathrm{ Log}|x|-1$.</p>
+                        <p>Ainsi $f^\prime(x) =-\mathrm{ Log}|x|-1$. Si $f^\prime(x) \leq 0$. Alors $-\mathrm{ Log}|x|\leq 1 \Rightarrow \mathrm{ Log}|x|\geq -1 \Rightarrow |x| \geq e^{-1} \Rightarrow -x \geq \frac{1}{e}$ car $x<0$, donc $x \leq -\frac{1}{e}$. D'où $f$ est décroissante sur $\left]-\infty; \, -\frac{1}{e}\right]$.</p>
+                        <p>Si $f^\prime(x) \geq 0$. Alors $-\mathrm{ Log}|x|\leq 1 \Rightarrow \mathrm{ Log}|x|\leq -1 \Rightarrow |x| \leq e^{-1} \Rightarrow -x \leq \frac{1}{e}$ car $x<0$, donc $x \geq -\frac{1}{e}$. D'où $f$ est croissante sur $\left]-\frac{1}{e} \: ; \: 0\right]$.</p>
+                        <p>Par suite $f$ est strictement croissante sur $ ]0 \: ; \: +\infty[$ , décroissante sur $\left]-\infty; \, -\frac{1}{e}\right]$ et croissante sur $\left]-\frac{1}{e} \: ; \: 0\right]$.</p>
+                        <p>Nous déduisons-en le tableau de variation de $f$ :</p>
+
+                        <!-- 📷 INTÉGRATION DE VOTRE IMAGE DU TABLEAU DE VARIATIONS (tableauv-1-1983.png) -->
+                        <div style="text-align: center; margin: 1.5rem 0;">
+                            <img src="images/tableauv-1-1983.png" alt="Tableau de variation - Problème I" style="max-width: 100%; height: auto; border: 1px solid #cbd5e1; border-radius: 8px;">
+                        </div>
+                        <p><strong>3) ❋ Démontrons que la droite d’équation $ y=x-1$ est asymptote à la courbe $(C)$ quand $x$ tend vers $+\infty$.</strong></p>
+                        <p>$\displaystyle \lim_{x \rightarrow +\infty}\left(f(x)-(x-1)\right)=\lim_{x \rightarrow +\infty}\left(xe^{-\frac{1}{x}}-x+1 \right)$.</p>
+                        <p>Posons $X=-\frac{1}{x}$. Alors $x=-\frac{1}{X}$ et quand $x$ tend vers $+\infty$, $X$ tend vers $0$.</p>
+                        <p>Donc $\displaystyle \lim_{x\rightarrow +\infty}\left(f(x)-(x-1)\right)=\lim_{ x \rightarrow 0}\left(-\frac{1}{X}\times e^X-\frac{1}{X}+1\right)=\lim_{ x \rightarrow 0}\left(-1\times \frac{e^X-1}{X}+1\right)=-1\times 1+1 =0$. Ainsi $\displaystyle \lim_{x\rightarrow +\infty}\left(f(x)-(x-1) \right)=0$.</p>
+                        <p>D'où la droite d’équation $ y=x-1$ est asymptote à la courbe $(C)$ quand $x$ tend vers $+\infty$.</p>
+
+                        <p> <strong> ❋ Déterminons ce qui se passe quand $x$ tend vers $-\infty$.</strong></p>
+                        <p>$\displaystyle \lim_{x \rightarrow -\infty}f(x) = \lim_{x \rightarrow -\infty}-x \mathrm{ Log}(-x) = +\infty$ \ car $\displaystyle \lim_{x\rightarrow -\infty}-x = +\infty$.</p>
+                        <p>$\displaystyle \lim_{x\rightarrow -\infty}\frac{f(x)}{x}=\lim_{x \rightarrow -\infty}\left(\frac{-x\mathrm{ Log}|x|}{x}\right) = \lim_{x \rightarrow -\infty}-\mathrm{ Log}|x|=\lim_{x \rightarrow -\infty}-\mathrm{ Log}(-x)=-\infty$ car $\displaystyle \lim_{x\rightarrow -\infty}-x = +\infty$.</p>
+                        <p>Donc la courbe $(C)$ de $f$ admet une branche parabolique de direction $(oy)$.</p>
+
+                        <p> <strong> ❋ Donnons les équations de demi-tangentes à la courbe $(C)$ au point $O$ d’abscisse $x_0=0$.</strong></p>
+                        <p>➸ Nous avons vu, d'après I. 1) que $\displaystyle \lim_{ x \rightarrow 0^+}\left(\frac{f(x)-f(0)}{x-0}\right)=0$, donc l'équation de la demi-tangente de $f$ à droite au point $O$ d’abscisse $x_0=0$ est $y = 0(x-0)+0$ et $x >0$ c'est-à-dire $y = 0$ et $x >0$.</p>
+                        <p>➸ Nous avons également vu, d'après I. 1) que $\displaystyle \lim_{ x \rightarrow 0^-}\left(\frac{f(x)-f(0)}{x-0}\right)=+\infty$, donc la demi-tangente à gauche de $f$ au point $O$ d’abscisse $x_0=0$ a pour équation $x = 0$.</p>
+
+                        <p>Soit $A$ le point d’intersection de la courbe $(C)$ et de l’axe $x ' o x$ , différent du point $O$.</p>
+                        <p> <strong> ❋ Donnons l’équation de la tangente en $A$ à $(C)$.</strong></p>
+                        <p>Considérons $f(x) = -x \mathrm{ Log}|x|$,  $x \in ]-\infty \: ; \: 0[$.</p>
+                        <p>Soit $f(x) = 0$. Alors $-x \mathrm{ Log}|x| = 0 \Rightarrow -x = 0 $ ou $ \mathrm{ Log}|x|=0 \Rightarrow x = 0$ ou $|x| = 1 \Rightarrow x = 0 $ ou $x= -1$ ou $x = 1$.</p>
+                        <p>Or $x&lt;0$, donc $x = -1$, donc $A(-1\: ; \: 0)$.</p>
+                        <p>$f^\prime(-1)=-1-\mathrm{ Log}|-1|=-1-0=-1$.</p>
+                        <p>Donc l'équation de la tangente en $A$ à $(C)$ est $T_A : y = -1\left(x-(-1)\right)+0$ c'est-à-dire $T_A : y = -x-1$.</p>
+
+                        <p>❋ <strong>Construisons le graphe $(C)$ de $f$.</strong></p>
+                        
+                        <!-- 📷 INTEGRATION STRICTE DE VOTRE QUATRIÈME IMAGE EN PNG -->
+                        <div style="text-align: center; margin: 1.5rem 0;">
+                            <img src="images/courbe-1-1983.png" alt="Graphe (C) de la fonction f" style="max-width: 100%; height: auto; border: 1px solid #cbd5e1; border-radius: 8px;">
+                        </div>
+                        <!-- ==================== CORRIGÉ PARTIE II ==================== -->
+                        <p style="margin-top: 2rem; border-top: 1px dashed #cbd5e1; padding-top: 1.5rem;"><strong>II. 1) Calculons l’aire du domaine $E_\lambda$ définie par :</strong></p>
+                        <p>$\begin{cases} 
+                            - 1 \leq x \leq \lambda\\[0.2cm] 
+                            f(x) \leq y \leq 0
+                        \end{cases}$    avec $-1\leq \lambda\leq 0$.</p>
+                        <p>$A(E_\lambda) = \displaystyle - \int_{-1}^{\lambda} f(x) dx = - \int_{-1}^{\lambda} \left(-x \mathrm{Log}\left(-x\right)\right) dx \times u.a $. $u.a = 2cm \times 2cm =4cm^2$.</p>
+                        <p>Procéderons par intégration par parties pour ce calcul intégral.</p>
+                        <p>Posons $u(x)= \mathrm{Log}\left(-x\right)$ et $v^\prime(x) = -x$. Alors $u^\prime(x) = \frac{1}{x}$ et $v(x) = -\frac{1}{2} x^2$.</p>
+                        <div class="math-block">
+                            $$\begin{aligned}
+                            \displaystyle - \int_{-1}^{\lambda} \left(-x \mathrm{Log}\left(-x\right)\right) dx &= -\bigg[-\frac{1}{2} x^2 \mathrm{Log}(-x)\bigg]_{-1}^{\lambda} + \int_{-1}^{\lambda} \left(-\frac{1}{2} x^2 \times \frac{1}{x} \right) dx  \\[0.2cm] 
+                            &\Rightarrow - \int_{-1}^{\lambda} \left(-x \mathrm{Log}\left(-x\right)\right) dx = \bigg[\frac{1}{2} x^2 \mathrm{Log}(-x)\bigg]_{-1}^{\lambda}+  \int_{-1}^{\lambda} \left(-\frac{1}{2} x \right) dx \\[0.2cm]
+                            &= \bigg[\frac{1}{2} x^2 \mathrm{Log}(-x)\bigg]_{-1}^{\lambda} + \bigg[-\frac{1}{4} x^2 \bigg]_{-1}^{\lambda} \\[0.2cm] 
+                            &\Rightarrow - \int_{-1}^{\lambda} \left(-x \mathrm{Log}\left(-x\right)\right) dx =\frac{1}{2} {\lambda}^2 \mathrm{Log}(-\lambda) -\frac{1}{2} \times 1\times  \mathrm{Log}(1)-\frac{1}{4} {\lambda}^2+\frac{1}{4} \\[0.2cm]
+                            &= \frac{1}{2} {\lambda}^2 \mathrm{Log}(-\lambda)-\frac{1}{4} {\lambda}^2+\frac{1}{4}.
+                            \end{aligned}$$
+                        </div>
+                        <p>Donc $A(E_\lambda) =\left( \frac{1}{2} {\lambda}^2 \mathrm{Log}(-\lambda)-\frac{1}{4} {\lambda}^2+\frac{1}{4}\right)\times 4 cm^2= \left(2 {\lambda}^2 \mathrm{Log}(-\lambda)-{\lambda}^2+1\right)cm^2 $.</p>
+                        <p>D'où $A(E_\lambda)= \left(2 {\lambda}^2 \mathrm{Log}(-\lambda)-{\lambda}^2+1\right)cm^2 $.</p>
+
+                        <p><strong>2) Déduisons-en l’aire $A(E)$.</strong></p>
+                        <p>$A(E)= \displaystyle \lim_{ \lambda \rightarrow 0}A(E_\lambda) = \lim_{ \lambda \rightarrow 0} \left(2 {\lambda}^2 \mathrm{Log}(-\lambda)-{\lambda}^2+1\right)= 0+0+1=1$.</p>
+                        <p>Donc $A(E) = 1 cm^2$.</p>
+                        <!-- ==================== CORRIGÉ PARTIE III - TRANCHE 1 ==================== -->
+                        <p style="margin-top: 2rem; border-top: 1px dashed #cbd5e1; padding-top: 1.5rem;"><strong>III. 1) Déterminons ce que fait le point $M$ lorsque $t$ tend vers $0$.</strong></p>
+                        <p>$\displaystyle \lim_{ t \rightarrow 0} x = \lim_{ t \rightarrow 0}\left(  -\frac{t}{\mathrm{Log}(t)}\right) = 0$ car $\displaystyle \lim_{ t \rightarrow 0} \mathrm{Log}(t) = -\infty$.</p>
+                        <p>$\displaystyle \lim_{ t \rightarrow 0} y = \lim_{ t \rightarrow 0}\left(  -\frac{1}{\mathrm{Log}(t)}\right) = 0$ car $\displaystyle \lim_{ t \rightarrow 0} \mathrm{Log}(t) = -\infty$.</p>
+                        <p>Donc le point $M$ se rapproche du point $O(0 \: ; \: 0)$ origine du repère.</p>
+
+                        <p><strong>2) Démontrons que pour tout $t \in ]0 \, , \, 1[$, la trajectoire $(\Gamma)$ du point $M$ est une partie du graphe $(C)$ que nous préciserons.</strong></p>
+                        <p>Nous avons d'une part : $x = -\frac{1}{\mathrm{Log}(t)} \Rightarrow \frac{1}{\mathrm{Log}(t)}=-x \Rightarrow \mathrm{Log}(t)=-\frac{1}{x} \Rightarrow t= e^{-\frac{1}{x}}$.</p>
+                        <p>D'autre part $t \in ]0 \: , \: 1[$ implique $\mathrm{Log}(t) <0$, donc $x = -\frac{1}{\mathrm{Log}(t)}>0$ c'est-à-dire $x \in ]0 \: ; \: +\infty[$. De plus $y = -\frac{t}{\mathrm{Log}(t)}=t\times \left(\frac{-1}{\mathrm{Log}(t)}\right) = e^{-\frac{1}{x}}\times x = x e^{-\frac{1}{x}}$. Ainsi $y =f(x)$ avec $x >0$.</p>
+                        <p>D'où pour tout $t \in ]0 \, , \, 1[$, la trajectoire $(\Gamma)$ du point $M$ est une partie du graphe $(C)$</p>
+
+                        <p><strong>3) Déterminons le vecteur vitesse $\vec{V}(t)$ à l’instant $t$ et construisons le vecteur $\overrightarrow{V_1}(t)$ au point $ t_1 =\frac{1}{e}$.</strong></p>
+                        <p>❋ <strong>Déterminons le vecteur vitesse $\vec{V}(t)$ à l’instant $t$.</strong></p>
+                        <p>Le vecteur vitesse $\vec{V}(t)$ est défini par $\vec{V}(t) = \frac{\mathrm{d} \overrightarrow{M}}{\mathrm{d}t}$ .</p>
+                        <p>$x^\prime = \frac{\left(\mathrm{Log}(t) \right)^\prime}{\left(\mathrm{Log}(t)\right)^2}=\frac{\frac{1}{t}}{\left(\mathrm{Log}(t)\right)^2} = \frac{1}{t\left(\mathrm{Log}(t)\right)^2}$, donc $x^\prime = \frac{1}{t\left(\mathrm{Log}(t)\right)^2}$ ;</p>
+                        <p>$y^\prime = \frac{-1\times \mathrm{Log}(t)+t\times \frac{1}{t}}{\left(\mathrm{Log}(t)\right)^2} = \frac{-\mathrm{Log}(t) +1}{\left(\mathrm{Log}(t)\right)^2}=\frac{1-\mathrm{Log}(t)}{\left(\mathrm{Log}(t)\right)^2}$.</p>
+                        <p>D'où le vecteur vitesse $\vec{V}(t)$ à l’instant $t$ est défini par $\vec{V}(t) \; : \: \begin{cases} x^\prime = \frac{1}{t\left(\mathrm{Log}(t)\right)^2} \\[0.2cm] y^\prime = \frac{1-\mathrm{Log}(t)}{\left(\mathrm{Log}(t)\right)^2} \end{cases}$</p>
+<!-- Suite-->
+
+<p>• <strong>Construction du vecteur $\vec{V}_1$ au point à la date $t_1 = \frac{1}{e}$ :</strong></p>
+                        <p>À la date $t_1 = \frac{1}{e}$, on a $\ln(t_1) = -1$, le mobile se trouve en $M_1\left(1\ ; \ \frac{1}{e}\right)$ et son vecteur vitesse vaut $\vec{V}_1\begin{pmatrix} e \\ 2 \end{pmatrix}$. Le tracé de $\vec{V}_1$ est visible en bleu sur la figure.</p>
+
+                        <p><strong>4) Donnons l’équation de la tangente $D$ en $M_1$ à $(\Gamma)$ à la date $t_1$ :</strong></p>
+                        <p>Soit $G(X\ ; \ Y)$ un point quelconque de la droite. $G \in (\Gamma) \iff \vec{M_1G}$ et $\vec{V}_1$ sont colinéaires :</p>
+                        <div class="math-block">$$\begin{vmatrix} X - 1 & e \\[0.2cm] Y - \frac{1}{e} & 2 \end{vmatrix} = 0 \iff 2(X - 1) - e\left(Y - \frac{1}{e}\right) = 0 \iff 2X - eY - 1 = 0$$</div>
+                        <p>La tangente $D$ en $M_1$ à la date $t_1$ a pour équation cartésienne : **$2X - eY - 1 = 0$**.</p>
+                    </div>
+                    
+                </div>
+            </div> <!-- FIN DE L'UNIQUE CONTENEUR SÉCURISÉ DU PROBLEME -->
+
+        </div> <!-- Fin globale de la grande zone de travail .exam-workspace-fixed -->
+
+        <!-- LOGISTIQUE FINALE ET NAVIGATION DE RETOUR COMMUNE AU LYCÉE -->
+        <div class="action-footer-lycee">
+            <a href="index.html" class="btn-lycee-back">↩ Revenir à la liste des sessions</a>
+            <button class="btn-lycee-back" onclick="window.scrollTo({top: 0, behavior: 'smooth'});" style="cursor: pointer;">▲ Remonter en haut</button>
+        </div>
+
+    </div> <!-- Fin du conteneur central sécurisé .container -->
+
+    <footer style="background-color: #0b1329; text-align: center; padding: 4rem 2rem; color: #94a3b8; font-size: 0.9rem;">
+        <p style="color: #f8fafc; font-weight: 600; margin-bottom: 0.5rem;">© 2026 BOUSAN ÉDUCATION AU NIGER — Tous droits réservés.</p>
+        <span style="color: #64748b; font-size: 0.88rem;">Espace éducatif conçu par Samri Namata Boubacar</span>
+    </footer>
+
+    <!-- INTERRUPTEURS JAVASCRIPT DE COMMUTATION DES COMPOSANTS (ZÉRO ERREUR) -->
+    <script>
+        window.exerciceActuel = 'ex1';
+        window.vueActuelle = 'cote-a-cote';
+
+        document.addEventListener("DOMContentLoaded", function() {
+            choisirExercice('ex1');
+            changerVue('cote-a-cote');
+            if (typeof renderMathInElement !== 'undefined') { declencherMath(); }
+        });
+
+        function choisirExercice(exId) {
+            window.exerciceActuel = exId;
+            document.querySelectorAll('.exercise-tabs .btn-tab').forEach(function(b) { b.classList.remove('is-active'); });
+            const tabActif = document.getElementById('onglet-' + exId);
+            if (tabActif) tabActif.classList.add('is-active');
+            
+            const b1 = document.getElementById('bloc-ex1');
+            const b2 = document.getElementById('id-bloc-ex2');
+            const b3 = document.getElementById('id-bloc-prob');
+            
+            if (b1) b1.style.display = 'none';
+            if (b2) b2.style.display = 'none';
+            if (b3) b3.style.display = 'none';
+            
+            if (exId === 'ex1' && b1) b1.style.display = 'block';
+            if (exId === 'ex2' && b2) b2.style.display = 'block';
+            if (exId === 'prob' && b3) b3.style.display = 'block';
+            
+            appliquerVue();
+        }
+
+        function changerVue(modeId) {
+            window.vueActuelle = modeId;
+            document.querySelectorAll('.exam-nav-container .btn-exam-control').forEach(function(b) { b.classList.remove('is-active'); });
+            
+            if (modeId === 'sujet-seul' && document.getElementById('mode-sujet')) document.getElementById('mode-sujet').classList.add('is-active');
+            if (modeId === 'indication-seule' && document.getElementById('mode-ind')) document.getElementById('mode-ind').classList.add('is-active');
+            if (modeId === 'cote-a-cote' && document.getElementById('mode-cote')) document.getElementById('mode-cote').classList.add('is-active');
+            if (modeId === 'corrige-seul' && document.getElementById('mode-corr')) document.getElementById('mode-corr').classList.add('is-active');
+            
+            appliquerVue();
+        }
+
+        function appliquerVue() {
+            const configs = [
+                { id: 'ex1', sujet: 'sujet-ex1', ind: 'ind-ex1', corrige: 'corrige-ex1' },
+                { id: 'ex2', sujet: 'sujet-ex2', ind: 'ind-ex2', corrige: 'corrige-ex2' },
+                { id: 'prob', sujet: 'sujet-prob', ind: 'ind-prob', corrige: 'corrige-prob' }
+            ];
+
+            configs.forEach(function(config) {
+                const sPane = document.getElementById(config.sujet);
+                const iPane = document.getElementById(config.ind);
+                const cPane = document.getElementById(config.corrige);
+                
+                if (config.id === window.exerciceActuel) {
+                    if (sPane) sPane.style.display = 'none';
+                    if (iPane) iPane.style.display = 'none';
+                    if (cPane) cPane.style.display = 'none';
+
+                    if (window.vueActuelle === 'sujet-seul' && sPane) {
+                        sPane.style.display = 'block';
+                        sPane.parentElement.style.flexDirection = 'row';
+                    } else if (window.vueActuelle === 'indication-seule' && iPane) {
+                        iPane.style.display = 'block';
+                        iPane.parentElement.style.flexDirection = 'row';
+                    } else if (window.vueActuelle === 'corrige-seul' && cPane) {
+                        cPane.style.display = 'block';
+                        cPane.parentElement.style.flexDirection = 'row';
+                    } else if (window.vueActuelle === 'cote-a-cote') {
+                        if (sPane) sPane.style.display = 'block';
+                        if (cPane) cPane.style.display = 'block';
+                        if (sPane) sPane.parentElement.style.flexDirection = (window.innerWidth <= 992) ? 'column' : 'row';
+                    }
+                }
+            });
+        }
+
+        function declencherMath() {
+            if (typeof renderMathInElement !== 'undefined') {
+                renderMathInElement(document.body, {
+                    delimiters: [
+                        {left: '$$', right: '$$', display: true},
+                        {left: '$', right: '$', display: false}
+                    ],
+                    throwOnError: false
+                });
+            }
+        }
+        window.addEventListener('load', function() { declencherMath(); });
+    </script>
+</body>
+</html>
