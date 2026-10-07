@@ -1,0 +1,769 @@
+/* ==========================================================================
+   1. POLICES & VARIABLES DE COULEURS DE LA CHARTE GRAPHIQUE BOUSAN
+   ========================================================================== */
+:root {
+    --primary: #0f4c81;       /* Bleu Nuit Institutionnel */
+    --secondary: #1b75bb;     /* Bleu Moyen */
+    --accent: #2e7d32;        /* Vert Émeraude adouci */
+    --bousan-cyan: #00acc1;   /* Cyan Profond */
+    --text-main: #1e293b;     /* Anthracite */
+    --text-muted: #64748b;    /* Gris Graphite */
+    --bg-light: #f8fafc;      /* Fond Glacial Lumineux */
+    --white: #ffffff; 
+    --radius-premium: 16px;
+    --shadow-soft: 0 4px 20px -2px rgba(15, 76, 129, 0.05), 0 2px 12px -3px rgba(15, 76, 129, 0.03);
+    --shadow-focus: 0 20px 40px -4px rgba(46, 125, 50, 0.12);
+    --transition-smooth: all 0.35s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+* { 
+    margin: 0; 
+    padding: 0; 
+    box-sizing: border-box; 
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; 
+}
+
+body {
+    color: var(--text-main); 
+    background-color: var(--bg-light);
+    background-image: linear-gradient(180deg, rgba(255,255,255,0.6) 0%, rgba(248,250,252,0) 100%);
+    background-attachment: fixed; 
+    line-height: 1.65;
+}
+
+/* ==========================================================================
+   2. STRUCTURE DE L'EN-TÊTE ET DU BANNEAU DE BIENVENUE (HERO)
+   ========================================================================== */
+header {
+    background-color: rgba(255, 255, 255, 0.95); 
+    padding: 1.5rem 2rem; 
+    position: sticky; 
+    top: 0; 
+    z-index: 100; 
+    border-bottom: 1px solid #e2e8f0;
+}
+
+.nav-container { 
+    max-width: 1200px; 
+    margin: 0 auto; 
+    display: flex; 
+    justify-content: center; 
+}
+
+.logo h1 { 
+    color: var(--primary); 
+    font-size: 1.5rem; 
+    letter-spacing: 4px; 
+    font-weight: 900; 
+    text-transform: uppercase;
+}
+
+.hero { 
+    text-align: center; 
+    padding: 5.5rem 1.5rem 4rem 1.5rem; 
+    max-width: 800px; 
+    margin: 0 auto; 
+}
+
+.hero h2 { 
+    font-size: 2.5rem; 
+    margin-bottom: 1rem; 
+    font-weight: 850; 
+    color: var(--primary); 
+    line-height: 1.2;
+    letter-spacing: -0.5px;
+}
+
+.hero p { 
+    font-size: 1.15rem; 
+    color: var(--text-muted); 
+}
+
+.container { 
+    max-width: 1200px; 
+    margin: 0 auto 6rem auto; 
+    padding: 0 1.5rem; 
+}
+/* ==========================================================================
+   3. GRILLE DE CARTES ET PILIERS ACADÉMIQUES (ACCUEIL RACINE)
+   ========================================================================== */
+.grid-cycles { 
+    display: flex; 
+    flex-wrap: wrap; 
+    gap: 2.5rem; 
+    justify-content: center; 
+    margin-bottom: 4rem; 
+}
+
+.card {
+    background-color: var(--white); 
+    border-radius: var(--radius-premium);
+    padding: 2.75rem 2.2rem; 
+    box-shadow: var(--shadow-soft); 
+    border: 1px solid #f1f5f9;
+    display: flex; 
+    flex-direction: column; 
+    width: calc(33.333% - 1.67rem); 
+    min-width: 310px; 
+    transition: var(--transition-smooth);
+}
+
+.card:hover { 
+    transform: translateY(-4px); 
+    box-shadow: 0 20px 35px -5px rgba(15,76,129,0.08); 
+}
+
+.card h3 { 
+    margin-bottom: 0.85rem; 
+    font-size: 1.45rem; 
+    font-weight: 800; 
+}
+
+.card > p { 
+    color: var(--text-muted); 
+    font-size: 0.95rem; 
+    margin-bottom: 1.75rem; 
+}
+
+.card ul { 
+    list-style: none; 
+    margin-bottom: 2.2rem; 
+    flex-grow: 1; 
+}
+
+.card ul li { 
+    margin-bottom: 0.85rem; 
+    padding-left: 1.6rem; 
+    position: relative; 
+    font-size: 0.95rem; 
+    color: #475569; 
+}
+
+.card ul li::before { 
+    content: "✓"; 
+    color: var(--accent); 
+    font-weight: 900; 
+    position: absolute; 
+    left: 0; 
+}
+
+/* SQUELETTE VISUEL DU BOUTON GÉNÉRIQUE */
+.btn { 
+    display: block; 
+    text-align: center; 
+    color: var(--white) !important; 
+    text-decoration: none; 
+    padding: 0.9rem; 
+    border-radius: 10px; 
+    font-weight: 700; 
+    font-size: 0.95rem; 
+    transition: var(--transition-smooth); 
+}
+
+.college-pillar { --pillar-color: #059669; } 
+.lycee-pillar { --pillar-color: #0f4c81; } 
+.universite-pillar { --pillar-color: #7c3aed; }
+
+.card.college-pillar, .card.lycee-pillar, .card.universite-pillar { border-top: 5px solid var(--pillar-color); }
+.card.college-pillar h3, .card.lycee-pillar h3, .card.universite-pillar h3 { color: var(--pillar-color); text-align: center; margin-bottom: 2rem; }
+.card.college-pillar .btn, .card.lycee-pillar .btn, .card.universite-pillar .btn { background-color: var(--pillar-color); margin-top: auto; }
+
+/* ==========================================================================
+   4. IDENTITÉS VISUELLES DES SÉRIES (CONTOURS ÉPAISSIS & APPLICATION COULEUR)
+   ========================================================================== */
+.serie-a { --serie-color: #ef4444; }
+.serie-c { --serie-color: #0284c7; }
+.serie-d { --serie-color: #059669; } /* Vert émeraude Série D */
+.serie-e { --serie-color: #ea580c; }
+.serie-f { --serie-color: #7c3aed; }
+
+/* Application des bordures de 2px et 5px en tête pour les cartes de Séries */
+.card.serie-a, .card.serie-c, .card.serie-d, .card.serie-e, .card.serie-f { 
+    border: 2px solid #cbd5e1;
+    border-top: 5px solid var(--serie-color); 
+}
+
+.card.serie-a h3, .card.serie-c h3, .card.serie-d h3, .card.serie-e h3, .card.serie-f h3 { 
+    color: var(--serie-color); 
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+/* APPLICATION DE LA COULEUR DE FOND SUR LES BOUTONS DES CARTES ET DES MATIÈRES */
+.card.serie-a .btn, .discipline-card.serie-a .btn { background-color: #ef4444 !important; }
+.card.serie-c .btn, .discipline-card.serie-c .btn { background-color: #0284c7 !important; }
+.card.serie-d .btn, .discipline-card.serie-d .btn { background-color: #059669 !important; }
+.card.serie-e .btn, .discipline-card.serie-e .btn { background-color: #ea580c !important; }
+.card.serie-f .btn, .discipline-card.serie-f .btn { background-color: #7c3aed !important; }
+
+.card.serie-a .btn:hover, .discipline-card.serie-a .btn:hover,
+.card.serie-c .btn:hover, .discipline-card.serie-c .btn:hover,
+.card.serie-d .btn:hover, .discipline-card.serie-d .btn:hover,
+.card.serie-e .btn:hover, .discipline-card.serie-e .btn:hover,
+.card.serie-f .btn:hover, .discipline-card.serie-f .btn:hover { 
+    opacity: 0.92; 
+    transform: translateY(-1px); 
+}
+
+/* ==========================================================================
+   5. BLOC BIOGRAPHIQUE DE L'AUTEUR REVISÉ (DESIGN PREMIUM)
+   ========================================================================== */
+.details-section, .about-section { 
+    background-color: var(--white); 
+    border-radius: var(--radius-premium); 
+    padding: 3.5rem 3rem; 
+    border: 1px solid #cbd5e1; 
+    box-shadow: var(--shadow-soft); 
+    margin-bottom: 3.5rem; 
+}
+
+.details-section h3, .about-section h3 { color: var(--primary); margin-bottom: 1.5rem; font-size: 1.4rem; font-weight: 850; letter-spacing: -0.3px; }
+.details-section p, .about-section p { color: #475569; font-size: 1rem; line-height: 1.75; }
+
+.about-section { 
+    display: flex; 
+    align-items: center; 
+    gap: 3.5rem; 
+    transition: var(--transition-smooth);
+}
+
+.about-section:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 15px 35px -5px rgba(15, 76, 129, 0.07);
+    border-color: var(--primary);
+}
+
+.author-img { 
+    width: 130px; 
+    height: 130px; 
+    border-radius: 50%; 
+    object-fit: cover; 
+    object-position: top center; 
+    border: 3px solid var(--white); 
+    outline: 2px solid var(--primary); 
+    box-shadow: 0 8px 20px rgba(15, 76, 129, 0.12); 
+    flex-shrink: 0; 
+}
+/* ==========================================================================
+   6. ZONE PIED DE PAGE ET LIENS TECHNIQUES (BLEU NUIT INTERACTIF)
+   ========================================================================== */
+footer { 
+    text-align: center; 
+    padding: 5rem 2rem; 
+    background-color: #0b1329; /* Vrai Bleu Nuit Profond Sombre */
+    color: #94a3b8; 
+    font-size: 0.9rem; 
+    margin-top: 6rem; 
+}
+
+footer p { 
+    color: #f8fafc; 
+    font-weight: 600; 
+    margin-bottom: 0.6rem; 
+}
+
+.footer-engineering-link {
+    display: inline-block;
+    margin-bottom: 2.2rem;
+    color: var(--bousan-cyan);
+    font-weight: 700;
+    text-decoration: none;
+    border: 1px solid var(--bousan-cyan);
+    padding: 0.65rem 1.5rem;
+    border-radius: 8px;
+    transition: var(--transition-smooth);
+}
+
+.footer-engineering-link:hover {
+    background-color: var(--bousan-cyan);
+    color: #0b1329;
+    box-shadow: 0 4px 15px rgba(0, 172, 193, 0.25);
+}
+
+.footer-subtext {
+    color: #94a3b8; /* Gris perle lumineux textuel */
+    font-size: 0.88rem;
+    display: block;
+    margin-bottom: 1.75rem;
+}
+
+.footer-subtext a { 
+    color: var(--bousan-cyan); 
+    text-decoration: none; 
+    font-weight: 600; 
+}
+
+.footer-subtext a:hover { 
+    text-decoration: underline; 
+}
+
+.legal-triggers { 
+    display: flex; 
+    justify-content: center; 
+    gap: 2.5rem; 
+    flex-wrap: wrap; 
+}
+
+.legal-triggers button { 
+    background: none; 
+    border: none; 
+    color: #94a3b8; /* Gris perle pour boutons */
+    cursor: pointer; 
+    font-size: 0.9rem; 
+    font-weight: 600; 
+    transition: var(--transition-smooth); 
+    padding: 0.25rem 0.5rem;
+}
+
+.legal-triggers button:hover { 
+    color: var(--bousan-cyan); /* Survol cyan lumineux */
+    text-decoration: underline; 
+}
+
+/* ==========================================================================
+   7. INTERFACES MODALES SURGISSANTES 100% ACADÉMIQUES (CORRIGÉES POUR MOBILE)
+   ========================================================================== */
+.bousan-modal { 
+    display: none; 
+    position: fixed; 
+    top: 0; left: 0; 
+    width: 100%; height: 100%; 
+    background-color: rgba(15, 23, 42, 0.75); /* Assombri pour compenser la perte du flou */
+    z-index: 2000; 
+    align-items: center; 
+    justify-content: center; 
+    padding: 1.5rem; 
+}
+
+.bousan-modal.is-open { 
+    display: flex; 
+}
+
+.bousan-modal-content { 
+    background-color: var(--white); 
+    padding: 3rem 2.5rem; 
+    border-radius: var(--radius-premium); 
+    max-width: 650px; 
+    width: 100%; 
+    max-height: 80vh; 
+    overflow-y: auto; 
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25); 
+    border: 1px solid #e2e8f0; 
+    position: relative; 
+    text-align: left; 
+}
+
+.bousan-modal-content h4 { 
+    color: var(--primary); 
+    font-size: 1.5rem; 
+    margin-bottom: 1.25rem; 
+    font-weight: 800; 
+}
+
+.bousan-modal-content h5 { 
+    color: var(--text-main); 
+    font-size: 1.05rem; 
+    margin: 1.5rem 0 0.5rem 0; 
+    font-weight: 700; 
+}
+
+.bousan-modal-content p { 
+    color: #475569; 
+    font-size: 0.98rem; 
+    line-height: 1.65; 
+    margin-bottom: 1rem; 
+}
+
+.btn-close-modal { 
+    display: inline-block; 
+    margin-top: 1.5rem; 
+    background-color: #f1f5f9; 
+    color: #475569; 
+    border: 1px solid #cbd5e1; 
+    padding: 0.6rem 1.4rem; 
+    border-radius: 8px; 
+    font-weight: 700; 
+    font-size: 0.92rem; 
+    cursor: pointer; 
+    transition: var(--transition-smooth); 
+}
+
+.btn-close-modal:hover { 
+    background-color: #e2e8f0; 
+    color: var(--text-main); 
+}
+/* ==========================================================================
+   8. COMPOSANTS SPÉCIFIQUES DE L'ESPACE LYCÉE (DOCS/LYCEE/INDEX.HTML)
+   ========================================================================== */
+.levels-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2.5rem;
+    margin-bottom: 5rem;
+}
+
+.level-card {
+    background-color: var(--white);
+    border: 1px solid #f1f5f9;
+    border-radius: var(--radius-premium);
+    padding: 3.5rem 2rem;
+    box-shadow: var(--shadow-soft);
+    text-decoration: none;
+    display: flex;
+    align-items: center;      
+    justify-content: center;   
+    transition: var(--transition-smooth);
+    cursor: pointer;
+    box-sizing: border-box;
+}
+
+.level-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 20px 35px -8px rgba(15, 76, 129, 0.08);
+    border-color: #cbd5e1;
+}
+
+.level-header {
+    display: flex;
+    align-items: center;      
+    gap: 1.25rem;
+    width: auto;
+}
+
+.level-indicator {
+    width: 18px;
+    height: 18px;
+    border-radius: 4px;
+    flex-shrink: 0;
+}
+
+.level-card.lvl-seconde { border-top: 4px solid #3a9edb; }
+.level-card.lvl-premiere { border-top: 4px solid #ff9f43; }
+.level-card.lvl-terminale { border-top: 4px solid #ff6b6b; }
+
+.level-card.lvl-seconde .level-indicator { background-color: #3a9edb; }
+.level-card.lvl-premiere .level-indicator { background-color: #ff9f43; }
+.level-card.lvl-terminale .level-indicator { background-color: #ff6b6b; }
+
+.level-card h3 {
+    font-size: 1.45rem;
+    font-weight: 800;
+    color: var(--text-main);
+    margin: 0;
+    letter-spacing: -0.3px;
+    line-height: 1.2;
+}
+
+.action-footer-lycee {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 5rem;
+    padding-top: 2rem;
+    border-top: 1px solid #e2e8f0;
+    margin-bottom: 3rem;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+.btn-lycee-back {
+    display: inline-block;
+    background: var(--white);
+    border: 1px solid #cbd5e1;
+    color: #475569;
+    padding: 0.7rem 1.6rem;
+    font-weight: 700;
+    font-size: 0.92rem;
+    border-radius: 8px;
+    text-decoration: none;
+    transition: var(--transition-smooth);
+    text-align: center;
+    box-sizing: border-box;
+}
+.btn-lycee-back:hover {
+    border-color: var(--primary);
+    color: var(--primary);
+}
+
+/* ==========================================================================
+   10. DISPOSITION DES MATIÈRES PAR SÉRIES (CONTOURS ÉPAIS ET DESIGN MAT)
+   ========================================================================== */
+.disciplines-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2.5rem;
+    margin-bottom: 5rem;
+}
+
+.discipline-card {
+    background-color: var(--white);
+    border: 2px solid #cbd5e1 !important; 
+    border-radius: var(--radius-premium);
+    padding: 2.5rem 2rem;
+    box-shadow: var(--shadow-soft);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    min-height: 200px;
+    transition: var(--transition-smooth);
+    box-sizing: border-box;
+}
+
+.discipline-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 15px 35px -5px rgba(15, 76, 129, 0.08);
+}
+
+.discipline-card.serie-a { border-top: 5px solid #ef4444 !important; }
+.discipline-card.serie-c { border-top: 5px solid #0284c7 !important; }
+.discipline-card.serie-d { border-top: 5px solid #059669 !important; } 
+.discipline-card.serie-e { border-top: 5px solid #ea580c !important; }
+.discipline-card.serie-f { border-top: 5px solid #7c3aed !important; }
+
+.discipline-card h3 {
+    font-size: 1.35rem;
+    font-weight: 800;
+    color: var(--text-main);
+    text-align: center;
+    margin: 0 0 1.5rem 0;
+    line-height: 1.3;
+}
+
+.discipline-card .btn {
+    width: 100%;
+    margin-top: auto; 
+}
+
+/* ==========================================================================
+   11. SÉCURISATION GRID POUR L'ESPACE MODULES (MATHS-TLE-D)
+   ========================================================================== */
+#maths-modules-container {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr); 
+    gap: 2.5rem;
+    margin-bottom: 5rem;
+}
+
+@media (min-width: 1025px) {
+    #maths-modules-container .card {
+        grid-column: span 2; 
+        width: 100% !important;
+        min-width: 0 !important; 
+    }
+    
+    #maths-modules-container .card:nth-child(4) {
+        grid-column: 3 / span 2; 
+    }
+}
+
+@media (max-width: 1024px) and (min-width: 769px) {
+    #maths-modules-container {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    #maths-modules-container .card {
+        width: 100% !important;
+        min-width: 0 !important;
+    }
+}
+
+@media (max-width: 768px) {
+    #maths-modules-container {
+        grid-template-columns: 1fr;
+        gap: 1.75rem;
+    }
+    #maths-modules-container .card {
+        width: 100% !important;
+        min-width: 0 !important;
+    }
+}
+
+/* ==========================================================================
+   12. GRILLE CHRONOLOGIQUE DES ANNALES (DESIGN RECTIFIÉ COMPACT FINE-TAIL)
+   ========================================================================== */
+.sessions-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(130px, 1fr)); /* Tuiles de 130px minces */
+    gap: 1.25rem;
+    margin: 2.5rem auto 4rem auto;
+}
+
+.session-tile {
+    background-color: var(--white);
+    border: 2px solid #cbd5e1;
+    border-top: 4px solid #059669; /* Filet émeraude Série D */
+    border-radius: 10px;
+    padding: 1rem 0.75rem; /* Boutons aplatis */
+    text-align: center;
+    text-decoration: none;
+    color: var(--text-main);
+    font-weight: 800;
+    font-size: 1.1rem;
+    box-shadow: var(--shadow-soft);
+    transition: var(--transition-smooth);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
+    min-height: 75px; /* Hauteur mince élégante */
+}
+
+.session-tile span {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    font-weight: 600;
+    margin-top: 0.15rem;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+}
+
+.session-tile:hover {
+    transform: translateY(-2px);
+    border-color: #059669;
+    box-shadow: 0 8px 16px -4px rgba(5, 150, 105, 0.15);
+    background-color: #f0fdf4;
+}
+
+/* ==========================================================================
+   13. MEDIA QUERIES GLOBALES (RESPONSIVE OPTIMISÉ ANDROID & IPHONE)
+   ========================================================================== */
+@media (max-width: 1024px) { 
+    .card { width: calc(50% - 1.25rem); } 
+}
+
+@media (max-width: 768px) { 
+    .hero h2 { font-size: 2rem; } 
+    .card { width: 100%; padding: 2.2rem 1.75rem; } 
+    .about-section { flex-direction: column; text-align: center; gap: 1.5rem; } 
+    .details-section, .about-section { padding: 2.5rem 1.75rem; } 
+    .levels-grid { display: flex; flex-direction: column; gap: 1.5rem; }
+    .level-card { padding: 2.5rem 2rem; }
+}
+
+@media (max-width: 480px) {
+    .sessions-grid {
+        grid-template-columns: repeat(3, 1fr); /* 3 colonnes ultra-compactes sur smartphone */
+        gap: 0.75rem;
+    }
+    .session-tile {
+        font-size: 0.95rem;
+        padding: 0.85rem 0.5rem;
+    }
+}
+
+/* ==========================================================================
+   14. INTERFACES D'EXAMENS DYNAMIQUES (BOUTONS CENTRÉS ET ARRONDIS)
+   ========================================================================== */
+.exam-nav-container, .exercise-tabs {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    justify-content: center; /* 🟢 Centre harmonieusement les lignes de boutons sur grand écran */
+    margin: 1.5rem 0 2.5rem 0;
+}
+
+.exercise-tabs { margin-bottom: 0.5rem; }
+
+/* Redimensionnement et arrondi style pilule du BEPC */
+.btn-exam-control, .btn-tab {
+    background-color: var(--white);
+    border: 2px solid #cbd5e1;
+    color: #475569;
+    cursor: pointer;
+    font-weight: 700;
+    transition: var(--transition-smooth);
+    text-decoration: none !important; /* 🟢 Supprime le soulignement pour le bouton Retour Menu */
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.btn-exam-control {
+    padding: 0.55rem 1.1rem;
+    font-size: 0.9rem;
+    border-radius: 30px;
+}
+
+.btn-tab {
+    padding: 0.65rem 1.25rem;
+    font-size: 0.95rem;
+    border-radius: 10px;
+    color: var(--text-main);
+}
+
+/* ÉTAT ACTIF ET SURVOL AUX COULEURS DE LA SÉRIE D */
+.btn-exam-control:hover, .btn-exam-control.is-active,
+.btn-tab:hover, .btn-tab.is-active {
+    border-color: #059669 !important; /* Vert de la Série D */
+    color: #059669 !important;
+    background-color: #f0fdf4;
+}
+
+.btn-tab.is-active {
+    background-color: #059669 !important;
+    color: var(--white) !important;
+}
+
+/* ==========================================================================
+   15. ZONE DE TRAVAIL DE L'EXAMEN (FINITIONS CONTOURS PREMIUM SÉRIE D)
+   ========================================================================== */
+.workspace-split { 
+    display: flex; 
+    gap: 2.5rem; 
+    margin-top: 1.5rem; 
+    width: 100%; 
+}
+
+/* Squelette de base des trois panneaux d'étude */
+.pane-sujet, .pane-corrige, .pane-indication { 
+    flex: 1; 
+    background: var(--white); 
+    padding: 2.5rem; 
+    border-radius: var(--radius-premium); 
+    border: 2px solid #cbd5e1 !important; 
+    border-top: 5px solid #059669 !important; /* Filet émeraude commun de la Série D */
+    box-shadow: var(--shadow-soft); 
+    box-sizing: border-box; 
+    transition: var(--transition-smooth);
+}
+
+/* 🟢 APPLICATION DES BORDURES VERTICALES ÉPAISSES (5PX) SUR LE CÔTÉ GAUCHE */
+.pane-sujet { border-left: 5px solid var(--secondary) !important; }      /* Bleu pour la théorie */
+.pane-indication { border-left: 5px solid var(--bousan-cyan) !important; } /* Cyan pour la recherche */
+.pane-corrige { border-left: 5px solid var(--accent) !important; }        /* Vert pour la résolution */
+
+/* Customisation des couleurs de titres par blocs */
+.pane-sujet h3 { color: var(--secondary); }
+.pane-indication h3 { color: var(--bousan-cyan); }
+.pane-corrige h3 { color: var(--accent); }
+
+.pane-sujet h4, .pane-indication h4, .pane-corrige h4 {
+    font-size: 1.1rem;
+    color: var(--text-main);
+    margin-top: 1.25rem;
+    margin-bottom: 0.5rem;
+    font-weight: 700;
+}
+
+.pane-sujet h3, .pane-corrige h3, .pane-indication h3 { 
+    margin-bottom: 1.5rem; 
+    border-bottom: 2px solid #f1f5f9; 
+    padding-bottom: 0.5rem; 
+    font-size: 1.35rem; 
+    font-weight: 800;
+}
+
+.exam-workspace-fixed {
+    background-color: transparent;
+    padding: 0;
+    box-shadow: none;
+    min-height: 500px;
+    margin-top: 2rem;
+    box-sizing: border-box;
+}
+
+@media (max-width: 992px) { 
+    .workspace-split { flex-direction: column; gap: 2rem; } 
+}
+
